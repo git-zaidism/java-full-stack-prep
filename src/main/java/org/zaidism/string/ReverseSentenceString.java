@@ -1,4 +1,4 @@
-package org.zaidism.interview;
+package org.zaidism.string;
 
 public class ReverseSentenceString {
     public static void main(String[] args) {
