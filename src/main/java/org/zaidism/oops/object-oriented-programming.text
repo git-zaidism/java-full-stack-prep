@@ -1,0 +1,47 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Real-life Illustration of Polymorphism in Java: A person at the same time can have different characteristics. Like a man at the same time is a father, a husband,
+and an employee. So the same person possesses different behaviors in different situations. This is called polymorphism.
+
+Types of Java Polymorphism
+    1. Compile-time Polymorphism (Method Overloading)
+    2. Runtime Polymorphism also know as Dynamic Method Dispatch (Method Overriding)
+
+
+1. Compile-time/Static Polymorphism (Method Overloading):
+
+If a class has multiple methods having same name but different in parameters, it is known as Method Overloading.
+
+Refer code: MethodOverloadingDemo
+Scenario 1 demonstrates overloading with different parameter types.
+Scenario 2 shows overloading with a different number of parameters.
+Scenario 3 illustrates overloading with a different order of parameters.
+Scenario 4 overloading with different return types compilation error.
+Scenario 5 demonstrates overloading static methods.
+
+- Overloaded methods must have the same name.
+
+- Overloaded methods must have different parameter lists (number, order, or types of parameters).
+
+- An attempt to overload the main method shows that only the standard main(String[] args) method is recognized as the entry point for the program.
+
+- Multiple main methods can be declared and overloaded, but only the standard main(String[] args) is recognized as the entry point for the program.
+
+- Jvm checks for only main method which has signature like this (String[] args) an method name as main so only that method can be considered as entry
+  point of program not the overloaded methods
+
+- We can overload static methods but we need to use class name to call static methods
+
+
+2. Runtime Polymorphism/Dynamic Method Dispatch (Method Overriding):
+
+It is a process in which a function call to the overridden method is resolved at Runtime. This type of polymorphism is achieved by Method Overriding.
+If a method name in base class is same it's child classes but with same arguments types, order of arguments & number of arguments then it is called method
+overloading.
+
+Rules for overriding a method in Java
+- There must be inheritance between classes.
+- The method between the classes must be the same(name of the class, number, and type of arguments must be the same).
+- Static methods can't be overridden
+
+Refer code: MethodOverridingDemo.java & StaticMethodOverrideDemo.java
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

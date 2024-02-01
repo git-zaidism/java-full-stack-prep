@@ -1,0 +1,68 @@
+What is market interface and it's significance?
+
+In Java, a marker interface is an interface with no methods, also known as a tag or flag interface. The purpose of a marker interface is to mark a class as
+having a particular property or special characteristic to JVM. This marking is done implicitly by implementing the marker interface.
+
+Marker interfaces are used to indicate certain behavior or capabilities of classes without specifying the details.
+
+Two well-known marker interfaces in Java are Serializable and Cloneable.
+
+Example: SerializableExample.java and CloneableExample.java
+
+Let's break down why `private static final long serialVersionUID = 1L;` is used in `Serializable` and why `clone` method is used in:
+
+1. serialVersionUID` for Serializable:
+   - When a class implements `Serializable`, Java automatically generates a unique identifier for the class known as the `serialVersionUID`.
+     This identifier is used during the serialization and deserialization process to verify that the sender and receiver of a serialized object have
+     loaded classes for that object that are compatible with respect to serialization.
+
+   - If you don't explicitly declare a `serialVersionUID`, the Java runtime system will generate one based on the class structure. However, it's considered
+     good practice to provide an explicit `serialVersionUID` to have control over the versioning of your classes.
+
+   - Here, `1L` is an arbitrary value, and you may choose different values based on your versioning strategy.
+     If you don't add new fields/variables to the class, you might keep the `serialVersionUID` unchanged. If you add new fields/variable to the class,
+     you can increment the `serialVersionUID` from 1L to 2L as per the good practice.
+
+   - If you keep the serialVersionUID unchanged (e.g., serialVersionUID = 1L) even after adding new fields to the class, it can lead to versioning issues
+     during the process of serialization and deserialization.
+
+   - If you keep the serialVersionUID unchanged then you might face issues like Deserialization failure, after deserialization you might not get new fields added
+     in class in scr file.
+
+   - In summary, keeping the serialVersionUID unchanged while making incompatible changes to the class (such as adding new fields) is generally not recommended.
+     It's essential to increment the serialVersionUID whenever there are structural changes to the class to indicate versioning and maintain compatibility. By doing so,
+     you have better control over the serialization and deserialization process, ensuring that the class versions are recognized as compatible.
+
+2. Clone method:
+   - The `clone` method is declared in the `Object` class, and when you override it in your class, using `@Override` ensures that you are correctly overriding the method. It's a good practice to include this annotation to make your code more robust and easier to maintain.
+   - The `clone` method is declared in the `Cloneable` interface, and it's used to create a copy of the object.
+      By convention, the `clone` method in your class should call `super.clone()` to leverage the default implementation provided by the `Object` class.
+      However, it's important to note that proper cloning may involve more considerations, especially for deep cloning of objects with complex structures.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+hashCode() and equals() method
+
+- hashCode() and equals() methods have been defined in Object class which is the parent of all java objects. For this reason all java objects inherits the default implementation of these
+  methods, but obviously we can override the implementation of these methods.
+
+- When you create two object with same content refer example HashCodeAndEquals.java, and print them default value (class name+ hexadecimal value) of them will be different as those two objects
+  are created at different place in the memory.
+
+- equals() method is checking internally if both the objects are referring to the same object so by default both == and equals will give false result for equality of object in our example.
+
+- So in order to define our own logic to determine when objects are equal or not we need to override the equals method inside pen class. After overriding equals method still there is a problem
+  i can still add these two similar objects or non-similar objects in hashset for similar object ideally it should not happen as set always contain unique value. Same identical object
+  can be used as a hashmap key.
+
+- To resolve this, Java documentation recommends overriding the hashCode() method whenever equals() is overridden. Additionally, both methods should utilize the same fields
+   (e.g., price and color).
+
+- Once you override the hashcode method there will only one entry getting added in hash set and without hashcode there will be two entries for identical objects. Because while
+  creating hashcode we are using same values for the both the objects for generating hashcode which mean generated hashcode will be always same for two identical objects. You
+  can verify this by running code without tostring method.
+
+
+hashCode() and equals() Contract:
+
+- If two objects are equals they must have same hashcode
+- If two objects have same hashcode, they may or may not be equal.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

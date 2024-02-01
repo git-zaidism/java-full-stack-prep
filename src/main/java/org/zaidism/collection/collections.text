@@ -1,0 +1,49 @@
+Internal working of HashMap: HashMapExample.java
+
+Note: Average case complexity of Insert, Update, Delete in hashmap take O(1) and worst case due to collisions leading to long linked lists, degrade to O(n)
+      Hash map try to convert all of the data of your entries into compressed form using hashcode by applying hashing algorithm.
+
+
+How put method works in hashmap?
+
+When you create a HashMap shown as below
+
+HashMap<String, Integer> map = new HashMap<>();
+map.put("Jahid", 1);
+
+- Once you put element in Hashmap initially 16 buckets gets formed (0-15) in hash table, once you reach the threshold index value which is more than 12 in hashmap, bucket size increases.
+  Buckets increases based on some formula to resize map in debug it just doubled the size from 16 to 32.
+
+- Every index is this bucket act as of linked lists/nodes which has this kind of structure [Hashcode|Key|Value|Next]
+
+- Once put method of hashmap is called hash function gets called on key object it will give the hashcode, On the basis of that hashcode, index for this first entry gets calculated
+  using index in bucket determined by using this function/formula hashCode&(n-1).
+
+- Let's assume it has return index 4 so at index in the bucket one node gets created with value like this [12342|Jahid|1|null]
+
+- If i add 2nd entry to the map as map.put("Amina", 2); [12342|Amina|2|null] and if hash function calculates the same hashcode on the key then the index would be again 4 for this
+  hash map entry as well this situation is called as hash collision.
+
+- In hash collision situation, equals function gets applied on both the keys to check if they are not equal then in the existing entry will have Next address for the 2nd entry in hashmap
+  [12342|Jahid|1|1213x]-------------->[12342|Amina|2|null] at index 4th of bucket.
+
+- On equals function application if both the keys are equal then in the existing entry will be replaced by new entry in the map
+
+- If multiple linked list gets formed within the same index then JVM has to traverse through the linked list which is not in O(1) so in java 8 to address this issue hashmap replaces
+  linked list with a balanced tree (red-black tree) to improve performance when a number of element in the bucket reached to certain threshold.
+
+- If you provide null keys on hashmap then that entry in the form of node always gets stored at 0th index in the bucket pf hashtable. HashMaps allow one null key.
+
+- While keys can have a null value, values in a HashMap can also be null
+
+- When we put same key in the hashmap it will replace the existing entry in the hash map with the latest one
+
+
+How get method works in hashmap?
+
+- When you use `hashMap.get("Amina")`, the hash function calculates the hashcode for the key "Amina."
+- Using the hashcode, an index is determined within the HashMap's internal array of buckets. This index is calculated as `index = hashCode & (n-1)`.
+- In the bucket at the calculated index, the HashMap checks if there are one or more entries (nodes) with matching hashcodes.
+- If a matching hashcode is found, the `equals` method is used to check which node's key matches the provided key ("Amina").
+- If a matching key is found within a node, the `get` method returns the corresponding value associated with that key.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

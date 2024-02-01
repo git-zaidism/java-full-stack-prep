@@ -1,0 +1,40 @@
+https://www.geeksforgeeks.org/comparable-vs-comparator-in-java/
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Default and Static methods in functional interface:
+
+- Until java 1.7 only public abstract method were allowed inside the interface which basically means method without body.
+- Since java 8 we can have concrete methods inside the interface
+- Any method inside interface which is having body must be either static or default otherwise compiler will giver an compile time error
+- Static methods can be only called by interfaceName.staticMethodName();
+- Default methods can't  be called by interfaceName.staticMethodName();
+- In order to provide backward compatibility defaults methods are being introduced
+- In order to call default methods in your class it is mandatory to implement functional interface in your class
+- We can't override static methods of functional interface but we can override default methods of FI
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Explanation about Optional: Example class OptionalDemo.java
+
+- Optional Usage:
+  - `Optional` is a container class that may or may not contain a non-null value.
+  - It helps in avoiding null pointer exceptions by providing methods to handle the presence or absence of a value.
+
+- Handling Null Values:
+  - `Optional.of(value)` creates an `Optional` containing a non-null value.
+  - `Optional.ofNullable(value)` creates an `Optional` that may contain a null value.
+
+- Handling Absence of Value:
+  - `isPresent()` checks if a value is present.
+  - `ifPresent(Consumer)` executes a block of code only if a value is present.
+
+- Handling Default Values:
+  - `orElse(defaultValue)` returns the value if present, otherwise the provided default value.
+  - `orElseGet(Supplier)` returns the value if present, otherwise evaluates and returns a default value.
+
+- Handling Exceptions:
+  - `orElseThrow(ExceptionSupplier)` returns the value if present, otherwise throws a specified exception.
+
+- Mapping Values:
+  - `map(Function)` transforms the value inside `Optional` if present.
+
+Remember, `Optional` is not meant to be used everywhere and should be used judiciously, especially when dealing with methods that may return `null`.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,98 @@
+What is thread?
+
+Thread is nothing but the small part of a program/process. Threads share data and address space in a multi-threaded environment hence they are light weight.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Why we use multi-threading?
+
+In order utilize maximum time of CPU and reduce the Ideal time we use multi-threading. Example sending data in kinesis can be your multi-threaded process and you can return the
+response and don't wait to complete the sending data part through kinesis.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+main() thread:
+
+- When any java program starts its execution it runs under main() thread. All of the other threads runs under main() are child thread of main()
+- main() is a user thread
+- main() thread can complete it's execution & other user threads can complete their execution.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Daemon Thread:
+In Java, daemon threads are threads that run in the background and provide services to user threads and application components. The JVM terminates when all user threads finish their execution,
+but it doesn't wait for daemon threads to complete. If there are only daemon threads remaining in the program, the JVM exits immediately, regardless of their state.
+
+   - They are designed to provide background services and are not critical to the main application.
+   - Daemon threads do not prevent the JVM from exiting, even if they are still running.
+
+   **Use Cases:**
+     - Garbage Collection (GC): The JVMs garbage collector is often implemented as a daemon thread. It runs in the background to clean up unreferenced objects without blocking
+                                the execution of the main program.
+     - Automatic Resource Management: Daemon threads can be used for tasks like automatic resource cleanup, periodic maintenance tasks, or background monitoring.
+
+     Example: DaemonThreadExample.java here you can remove setDaemon to false and see the output difference.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Which way is the better for implementing thread?
+
+- With Java 8 version we can avoid both and directly use functional interface to implement run method.
+- But if i have two choose between above two i will go with Runnable interface This is because Java doesn't support multiple class inheritance,
+  and I want to avoid restricting my class from extending other classes
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+In Java, threads are primarily used for the following functionalities:
+
+1. Executing a single task using a single thread.
+2. Executing a single task using multiple threads.
+3. Executing multiple tasks using a single thread. (Note: This is not possible;
+   consider the example of a VLC video player where executing only audio, video, and timer on a single thread can lead to inconsistent user experience.)
+4. Executing multiple tasks using multiple threads.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How to implement deadlock?
+
+Create two lock objects
+Create two thread use nested synchronized block in both of the thread put some delay between the synchronized block using sleep
+Sequence of Lock should be match for both the threads.
+
+Example: DeadlockExample.java and NoDeadlockExample.java
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is synchronization & How to achieve synchronization?
+
+- There could be a situation where it is desirable that only one thread can access to shared resources (also called as critical section) at a time.
+- If more than one thread try to access a thread at a time then the situation is called as Race condition.
+- Example: If we create two threads and one thread add elements in the list and one thread remove elements from the list then it provide inconsistent result or we might get
+           an exception.
+- In order to achieve synchronization among multiple threads we need to use synchronized keyword on our shared resources/critical section.
+
+Types of synchronization:
+
+1. Synchronized Method
+2. Synchronized Block
+3. Static synchronization
+
+Synchronized Block and Method:
+
+Refer example : Synchronization.java
+
+When applying synchronization at method level, will allow only one thread t1 to execute completely at a time & till the time thread t2 will be waiting.
+
+Consider a scenario like this
+
+    synchronized bookSeats(int noOfSeats) {
+       // 200 lines of code
+       code to be synchronized or critical section
+       //200 lines like sending something to kinesis
+       return response;
+      }
+
+In this case thread t1 will complete its execution and thread t2 has to wait until thread 1 completes it's execution
+This is not the ideal way to utilize CPU so in order to tackle the situation we should use synchronized block on critical section or shared resources
+
+Static Synchronization:
+
+If a static method of a static or non static class needs to be synchronized, now in this situation if we want to use synchronized block we can't use "this" keyword to
+put the lock on critical section/shared resource, so we need to modify lock with ClassName.class see comments on this code Synchronization.java
+
+Example: Singleton.java
+
+We can also apply synchronized keyword at method level as well for static method.
+
+If we try to Put new String() and new Object() a lock on static method you will not get compilation error but block will not be synchronized and output will be
+inconsistent/wrong.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Which is the best way to use synchronized keyword at method level vs at block level?
+- If we want whole method to be synchronized then synchronized make sense else synchronized block is the better way to go with.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
