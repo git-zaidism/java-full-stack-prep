@@ -130,5 +130,3 @@ What is AOP ?
 What is pointcut & join Points in AOP ?
 What are different type of advice ?
 use case — can I use AOP to evaluate performance of a method or is this possible to design a logging framework to capture request and response body of a method ?
-
-test
