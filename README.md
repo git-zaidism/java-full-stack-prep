@@ -1,1 +1,1 @@
-# java-practice
+Personal Java Practice Repository
