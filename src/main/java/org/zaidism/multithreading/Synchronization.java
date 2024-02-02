@@ -3,9 +3,11 @@ package org.zaidism.multithreading;
 class SeatBooking {
   static int totalSeats = 10;
 
-  public static void bookSeats(int noOfSeats) { // synchronized can be applied here as well at method
-    synchronized (new String()) { // can add any object to put lock like new Integer or Object() or anything
-                         // in case of static class you need to use ClassName.class
+  // synchronized can be applied here as well at method
+  // can add any object to put lock like new Integer or Object() or anything
+  // in case of static class you need to use ClassName.class
+  public static void bookSeats(int noOfSeats) {
+    synchronized (SeatBooking.class) {
       if (noOfSeats <= totalSeats) {
         System.out.println(noOfSeats + " Seats booked successfully..");
         totalSeats = totalSeats - noOfSeats;
