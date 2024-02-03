@@ -11,6 +11,7 @@ How can you disable a specific auto-configuration class in Spring Boot ?
 How can you customize the default configuration in Spring Boot like port no?
 How Spring boot run() method works internally ?
 What is Command line runner in spring boot ?
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Can you explain the purpose of Stereotype annotations in the Spring Framework ?
 
@@ -84,7 +85,6 @@ and managed by the Spring container. In a Spring application, you can define bea
 Here, the `MyService` class uses constructor injection to receive the `MyBean` instance, which is provided by the Spring container.
 Note: The `@ComponentScan` annotation or XML configuration is typically used to enable component scanning and discover `@Configuration` classes and `@Component`-annotated classes.
 This allows Spring to automatically detect and register beans in the application context.
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What is dependency injection ?
 How many ways we can perform dependency injection in spring or spring boot ? (fields, contractor, setter)
@@ -98,6 +98,7 @@ How to load External Properties in Spring Boot ? (spring.config.import)
 How to map or bind config properties to java Object ? (@ConfigurationProerteis(prefix=""),.. var name as key)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How will you resolve bean dependency ambiguity ? //@Qualifier("classname in camelcase") if one interface orderrepo implemented by two orderrepoimpl1 & orderrepoimpl2 class and you @autowired interface name like orderrepo run tim give error
+
 Can we avoid this dependency ambiguity without using @Qualifier ? //yes we can use @Resource(name="classname in camelcase")//byname instead of @Qualifier//by type
 What is bean scope & Can you explain different type of bean scope ? // singleton, prototype, request, session, webscoket(per websocket), application (entire webapp)
 How to define custom bean scope ?//scerio where i need to create bean for every thread then existing scope will not help. Implmenet scope interface override get and remove method

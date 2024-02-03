@@ -1,4 +1,60 @@
-https://www.geeksforgeeks.org/comparable-vs-comparator-in-java/
+Functional Interface: Refer FunctionalInterface.java
+
+A functional interface is an interface that contains only one abstract method, and it can have multiple default or static methods. The introduction of functional
+ interfaces played a crucial role in enabling the use of lambda expressions and functional programming concepts in Java.
+
+The @FunctionalInterface annotation can be used to explicitly declare an interface as a functional interface, though it's not mandatory. The primary purpose
+of the annotation is to ensure that the interface follows the single abstract method (SAM) contract.
+
+Some Functional Interfaces in Java are Runnable, Callable, Comparator, Function, Predicate, Supplier, Consumer
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Lambda Expression: 
+
+- Anonymous Functions: Lambda expressions provide a way to create short, anonymous functions (also known as function literals or lambda functions).
+
+- Simplified Syntax:
+  - Syntax: `(parameters) -> expression` or `(parameters) -> { statements; }`
+  - Parameters: Input parameters specified within parentheses.
+  - Arrow (`->`): Separates parameters from the body of the lambda expression.
+  - Expression/Statements: Code that represents the implementation.
+
+- Functional Interfaces:
+  - Lambda expressions are often used to implement single-method interfaces, known as functional interfaces.
+  - Functional interfaces have only one abstract method, but they can have multiple default or static methods.
+
+- Example:
+    @FunctionalInterface
+    interface ReturnCalculator {
+        double calculateReturn(double amount);
+    }
+
+    public class ReturnCalculatorExample {
+        public static void main(String[] args) {
+            // Using a lambda expression to implement the calculateReturn method
+            ReturnCalculator simpleReturnCalculator = amount -> amount * 0.05; // 5% return
+
+            // Example usage
+            double investmentAmount = 1000.0;
+            double calculatedReturn = simpleReturnCalculator.calculateReturn(investmentAmount);
+
+            System.out.println("Investment Amount: $" + investmentAmount);
+            System.out.println("Calculated Return: $" + calculatedReturn);
+        }
+}
+
+
+- Conciseness and Readability:
+  - Lambda expressions reduce boilerplate code, making the code more concise and readable.
+  - Especially beneficial when working with functional interfaces in the context of streams, java.util.function package, etc.
+
+- Common Use Cases:
+  - Used extensively with the Streams API for functional-style operations on collections.
+  - Facilitates functional programming features by enabling the use of higher-order functions.
+
+- Functional Programming Concepts:
+  - Lambda expressions enable the adoption of functional programming concepts, allowing Java to express functional-style programming patterns.
+
+In essence, lambda expressions in Java 8 provide a shorter and more expressive way to implement single-method interfaces, promoting cleaner and more functional programming practices.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Default and Static methods in functional interface:
@@ -37,4 +93,20 @@ Explanation about Optional: Example class OptionalDemo.java
   - `map(Function)` transforms the value inside `Optional` if present.
 
 Remember, `Optional` is not meant to be used everywhere and should be used judiciously, especially when dealing with methods that may return `null`.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+https://www.geeksforgeeks.org/comparable-vs-comparator-in-java/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Intermediate Operations are those which returns another stream as a result.
+ - Example: filter, map, distinct, sorted, limit, skip etc
+
+filter: Based on condition (takes Predicate as input)
+map: Used to perform operation on elements in the stream takes Function as input
+skip: In order to skip nth element from the stream
+limit: limit the number of element
+sorted: takes comparator as input
+max: takes comparator as input
+
+Terminal Operations are those which returns non stream values as a result like primitive, object, collection, or return nothing.
+ - Example: forEach, toArray, reduce, collect, min, max, count, findFirst, findAny, allMatch
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
