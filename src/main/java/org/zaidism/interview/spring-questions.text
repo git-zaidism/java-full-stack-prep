@@ -1,0 +1,142 @@
+Spring boot interview questions (Source: https://www.youtube.com/playlist?list=PLVz2XdJiJQxwS8FyWnWyKyfILxHPLsiro)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What all spring boot starter you have used or what all module you have worked on ?
+How will you run your Spring Boot application ?
+What is the purpose of the @SpringBootApplication annotation in a Spring Boot application ?
+can I directly use @EnableAutoConfiguration ,@ComponentScan & @Configuration annotation in my main class , instead of using
+@SpringBootApplication annotation , if yes will my application work as expected ?
+What is Auto configuration in spring boot ?
+How can you disable a specific auto-configuration class in Spring Boot ?
+How can you customize the default configuration in Spring Boot like port no?
+How Spring boot run() method works internally ?
+What is Command line runner in spring boot ?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Can you explain the purpose of Stereotype annotations in the Spring Framework ?
+
+Stereotype annotations in the Spring Framework are used to indicate the roles of annotated classes in the application.
+These annotations help the Spring container to understand and manage these classes appropriately.
+
+Here are five commonly used Stereotype annotations in Spring:
+    1. @Controller:
+       - Purpose: Marks a class as a Spring MVC controller.
+       - Usage: Used in the presentation layer to handle HTTP requests and generate responses.
+    2. @RestController:
+       - Purpose: Specialization of `@Controller` for RESTful web services. It combines `@Controller` and `@ResponseBody`.
+       - Usage: Used to create RESTful web services that return JSON or XML responses.
+    3. @Service:
+       - Purpose: Marks a class as a service bean in the business layer.
+       - Usage: Used to define business logic and transactional methods.
+    4. @Repository:
+       - Purpose: Marks a class as a Data Access Object (DAO) component, typically for database operations.
+       - Usage: Used in the persistence layer to interact with databases or other data sources.
+    5. @Component:
+       - Purpose: Generic stereotype annotation for any Spring-managed component.
+       - Usage: Used when no more specific stereotype annotation (e.g., `@Controller`, `@Service`) is suitable.
+
+These Stereotype annotations help the Spring container identify and manage different types of components within the application, facilitating dependency injection
+and overall application structure. They play a crucial role in achieving a well-organized and modular Spring-based application architecture.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How can you define bean in spring framework ?
+
+In Spring Framework, a bean is an object that is managed by the Spring IoC (Inversion of Control) container. Beans are typically Java objects that are instantiated, assembled,
+and managed by the Spring container. In a Spring application, you can define beans using the `@Bean` annotation within a configuration class annotated with `@Configuration`.
+
+    Here's an example of defining a bean using `@Bean` in a Spring configuration class:
+
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Configuration;
+
+    @Configuration
+    public class AppConfig {
+
+        @Bean
+        public MyBean myBean() {
+            return new MyBean();
+        }
+    }
+
+
+    In this example:
+
+    - `@Configuration` indicates that the class contains bean definitions.
+    - `@Bean` is used on a method (`myBean()` in this case) to declare a bean. The method name (`myBean`) serves as the bean identifier.
+    - The method returns the type of the bean (`MyBean`), and the instance returned by the method becomes the bean managed by the Spring container.
+
+    You can then use this bean in other parts of your application by injecting it through constructor injection, method injection, or field injection. For example:
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+
+    @Service
+    public class MyService {
+
+        private final MyBean myBean;
+
+        @Autowired
+        public MyService(MyBean myBean) {
+            this.myBean = myBean;
+        }
+
+        // Rest of the service logic using myBean
+    }
+
+Here, the `MyService` class uses constructor injection to receive the `MyBean` instance, which is provided by the Spring container.
+Note: The `@ComponentScan` annotation or XML configuration is typically used to enable component scanning and discover `@Configuration` classes and `@Component`-annotated classes.
+This allows Spring to automatically detect and register beans in the application context.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is dependency injection ?
+How many ways we can perform dependency injection in spring or spring boot ? (fields, contractor, setter)
+where you would choose to use setter injection over constructor injection, and vice versa ? (immutable, partial injection)
+Can you provide an example of a real-world use case where @PostConstruct is particularly useful? (preprocessing)
+How can we dynamically load values in a Spring Boot application? //@Value Environment class
+Can you explain the key differences between YML and properties files, and in what scenarios you might prefer one format over the other?
+What is the difference between yml & YAML ?
+If I will configure same values in both properties then which value will be load in spring boot OR Who will load first properties or yml file ?
+How to load External Properties in Spring Boot ? (spring.config.import)
+How to map or bind config properties to java Object ? (@ConfigurationProerteis(prefix=""),.. var name as key)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How will you resolve bean dependency ambiguity ? //@Qualifier("classname in camelcase") if one interface orderrepo implemented by two orderrepoimpl1 & orderrepoimpl2 class and you @autowired interface name like orderrepo run tim give error
+Can we avoid this dependency ambiguity without using @Qualifier ? //yes we can use @Resource(name="classname in camelcase")//byname instead of @Qualifier//by type
+What is bean scope & Can you explain different type of bean scope ? // singleton, prototype, request, session, webscoket(per websocket), application (entire webapp)
+How to define custom bean scope ?//scerio where i need to create bean for every thread then existing scope will not help. Implmenet scope interface override get and remove method
+Can you provide a few real-time use cases for when to choose Singleton scope and Prototype scope ? //singl: caching, db connection pool & db config, appn config like shared resourc across appn & prot: thread safety as it will return new instance each time can be use in builder, mapper class
+can we inject prototype bean in singleton bean ? if yes what will happen if we inject prototype bean in singleton bean ? // yes we can do it. but the bean with prototype will looese its own scope and behave as singleton scope inherting from the singleton bean. to overcome this instead of autowired prototype of bean you can autowrire application context and get bean from there not recommended way as we are manuling managing life cycle of bean two ways again you can solve this by @Lookup and  ObjectFactory<PrototypeBean>
+What is the difference between spring singleton and plain singleton ? //within the jvm singleton for java singleton & scope within the application context for spring singleton
+What is the purpose of the BeanPostProcessor interface in Spring, and how can you use it to customize bean initialization and destruction? // implememtn BeanPostProcessor interface and override its two method postprocessbeforeintialization & postprocessafterintialization. example while returing user brean if i want to validate password there we can use it
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Have you worked on Restful webservices ? If yes What all HTTP methods have you used in your project ?
+How can you specify the HTTP method type for your REST endpoint?
+Scenario : Can you design a rest endpoint , Assume that you have a Product database, and your task is to create an API to filter a list of products by productType ?
+Scenario : Design endpoints in a way that takes “productType” as input. If the user provides this input, the endpoint should filter products based on the specified condition. If “productType” is not provided, the endpoint should return all the products. ?
+What is the difference between @PathVariable & @RequestParam ?
+Why did you use @RestController why not @Controller ?
+How can we deserialize a JSON request payload into an object within a Spring MVC controller ?
+Can we perform update operation in POST http method if yes then why do we need Put Mapping or put http method?
+Can we pass Request Body in GET HTTP Method ?
+How can we perform content negotiation (XML/JSON) in Rest endpoint ?
+What all status code you have observed in your application ?
+How can you customize the status code for your endpoint ? // @ResponseStatus
+How can you enable cross origin ?
+How can you upload a file in spring ?
+How do you maintain versioning for your REST API?
+How will you document your rest API ?
+How can you hide certain REST endpoints to prevent them from being exposed externally? //@HIde
+How will you consume restful API ?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How will you handle exceptions in your project ?
+How can you avoid defining handlers for multiple exceptions, or what is the best practice for handling exceptions ?
+How will you validate or sanitise your input payload ?
+How can you populate validation error message to the end users ?
+How can you define custom bean validation ?
+use case : let’s say you find a bug in production environment and now you want to debug that scenario ,How can you do that from your local ?
+How can you enable a specific environment without using profiles? OR what is the alternative to profiles to achieving same use case ?
+What is the difference between @Profile & @ConditioOnXXX ?
+What is AOP ?
+What is pointcut & join Points in AOP ?
+What are different type of advice ?
+use case — can I use AOP to evaluate performance of a method or is this possible to design a logging framework to capture request and response body of a method ?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+JPA and Microservice interview questions needs to be added

@@ -1,4 +1,4 @@
-package org.zaidism.functional;
+package org.zaidism.functionalprogramming;
 
 import java.time.LocalDate;
 import java.util.Arrays;

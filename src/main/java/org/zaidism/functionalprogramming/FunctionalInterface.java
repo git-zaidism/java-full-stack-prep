@@ -1,4 +1,4 @@
-package org.zaidism.functional;
+package org.zaidism.functionalprogramming;
 
 @java.lang.FunctionalInterface
 public interface FunctionalInterface {
