@@ -14,15 +14,18 @@ public class HashMapExample {
     hashMap.put("David", 5);
 
     // Adding a null key
-    hashMap.put(null, 6);
+    //hashMap.put(null, 6);
+
+    hashMap.entrySet().forEach((entry)-> {
+      if (entry.getKey().contains("Jahid"))
+        entry.setValue(4);
+    });
 
     displayHashMapContents(hashMap);
     displayKeys(hashMap);
     displayValues(hashMap);
 
     System.out.println("Value for Key Amina is: "+hashMap.get("Amina"));
-
-    hashMap.entrySet().forEach(System.out::println);
   }
 
   private static void displayHashMapContents(HashMap<String, Integer> hashMap) {

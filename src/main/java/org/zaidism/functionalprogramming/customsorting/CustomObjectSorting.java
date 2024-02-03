@@ -1,11 +1,15 @@
-package org.zaidism.functionalprogramming;
+package org.zaidism.functionalprogramming.customsorting;
+
+import org.zaidism.model.Employee;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import org.zaidism.model.Employee;
+
+import static org.zaidism.model.EmployeeProvider.getEmployeeList;
+import static org.zaidism.model.EmployeeProvider.printEmployees;
 
 public class CustomObjectSorting {
 
@@ -16,7 +20,7 @@ public class CustomObjectSorting {
 
       // Using comparable
     Collections.sort(employees);
-    printEmployees(employees);
+    printEmployees(employees, "Using comparable");
 
     // using comparator
     Comparator<Employee> nameComparator =
@@ -28,7 +32,7 @@ public class CustomObjectSorting {
         };
 
     Collections.sort(employees, nameComparator);
-    printEmployees(employees);
+    printEmployees(employees, "Using comparator");
 
     Comparator<Employee> birthDateComparator =
         new Comparator<Employee>() {
@@ -38,37 +42,19 @@ public class CustomObjectSorting {
         };
 
     Collections.sort(employees, birthDateComparator);
-    printEmployees(employees);
+    printEmployees(employees, "Using comparator");
 
     // id comparator through lambda
     Comparator<Employee> IdComparator = (e1, e2) -> e1.getId() > e2.getId() ? 1 : -1;
     Collections.sort(employees, IdComparator);
-    printEmployees(employees);
+    printEmployees(employees, "Using comparator with lambda");
 
     // name comparator through lambda
     Comparator<Employee> dateComparator = (e1, e2) -> e1.getBirthDate().compareTo(e2.getBirthDate()); // java 8
      // dateComparator = Comparator.comparing(Employee::getBirthDate); //java 11 onwards
     Collections.sort(employees, dateComparator);
-    printEmployees(employees);
+    printEmployees(employees, "Using comparator with lambda");
   }
 
-     public static List<Employee> getEmployeeList() {
-        List<Employee> employees =
-            Arrays.asList(
-                new Employee(10, "Alice", LocalDate.of(1990, 5, 15), 50000.0),
-                new Employee(2, "Ella", LocalDate.of(1985, 8, 22), 60000.0),
-                new Employee(33, "Zahid", LocalDate.of(1992, 3, 7), 55000.0),
-                new Employee(14, "David", LocalDate.of(1988, 11, 30), 70000.0),
-                new Employee(2, "Eva", LocalDate.of(1995, 2, 18), 48000.0),
-                new Employee(10, "Rahul", LocalDate.of(1990, 5, 15), 50000.0));
-        return employees;
-    }
 
-    static void printEmployees(List<Employee> employees) {
-    for (Employee employee : employees) {
-      System.out.println(employee);
-    }
-    System.out.println(
-        "----------------------------------------------------------------------------------------");
-  }
 }

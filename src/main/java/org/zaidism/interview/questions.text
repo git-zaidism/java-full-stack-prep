@@ -26,7 +26,7 @@
 26. Provide a detailed explanation of lambda expressions in Java.
 27. Elaborate on the usage of `super` and `this` keywords in Java.
 28. Explain @Qualifier in spring boot
-29. Create a reusable predicate
+29. Create a reusable predicate (refer: MyCustomPredicate.java)
 30. Elaborate functional interface introduced in java 8 with their use in real time.
 31. How to achieve Inter-thread communication why notify and wait methods are in object class
 32. Explain Static member/function/classes when to use these
