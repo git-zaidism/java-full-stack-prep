@@ -1,4 +1,4 @@
-package org.zaidism.algorithms;
+package org.zaidism.algorithms.searching;
 
 public class BinarySearch {
 

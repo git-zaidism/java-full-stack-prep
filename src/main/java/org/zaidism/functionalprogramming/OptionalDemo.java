@@ -1,4 +1,4 @@
-package org.zaidism.functional;
+package org.zaidism.functionalprogramming;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;

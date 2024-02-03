@@ -1,4 +1,4 @@
-package org.zaidism.functional;
+package org.zaidism.functionalprogramming;
 
 public class MethodReference {
   public static void main(String[] args) {
