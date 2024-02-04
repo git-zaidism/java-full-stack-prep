@@ -47,7 +47,7 @@ hashCode() and equals() method
 - When you create two object with same content refer example HashCodeAndEquals.java, and print them default value (class name+ hexadecimal value) of them will be different as those two objects
   are created at different place in the memory.
 
-- equals() method is checking internally if both the objects are referring to the same object so by default both == and equals will give false result for equality of object in our example.
+- equals() method is checking internally if both the objects are re     ferring to the same object so by default both == and equals will give false result for equality of object in our example.
 
 - So in order to define our own logic to determine when objects are equal or not we need to override the equals method inside pen class. After overriding equals method still there is a problem
   i can still add these two similar objects or non-similar objects in hashset for similar object ideally it should not happen as set always contain unique value. Same identical object

@@ -2,8 +2,6 @@ package org.zaidism.functionalprogramming.customsorting;
 
 import org.zaidism.model.Employee;
 
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
