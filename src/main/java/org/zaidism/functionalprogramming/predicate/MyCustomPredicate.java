@@ -11,5 +11,6 @@ public class MyCustomPredicate implements Predicate<String> {
   public static void main(String[] args) {
     System.out.println(new MyCustomPredicate().test("Jahid"));
     System.out.println(new MyCustomPredicate().test("Chinna Swami Muttu Swami VenGopal Ayyer"));
+
   }
 }

@@ -182,6 +182,7 @@ How can you customize the default configuration in Spring Boot like port no?
 How Spring boot run() method works internally ?
 
  - Creates ApplicationContext
+ - Load env and properties from properties file
  - Register Bean into Context
  - Start up embedded tomcat container to run the jar/war
 

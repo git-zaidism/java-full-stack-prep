@@ -1,15 +1,14 @@
-package org.zaidism.functionalprogramming.groupby;
+package org.zaidism.interviewprograms;
 
-import org.zaidism.model.Employee;
+import static java.util.stream.Collectors.counting;
+import static org.zaidism.model.EmployeeProvider.getEmployeeList;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.counting;
-import static org.zaidism.model.EmployeeProvider.getEmployeeList;
+import org.zaidism.model.Employee;
 
 // Group by and occurrence of every char in string
 public class GroupingBy {

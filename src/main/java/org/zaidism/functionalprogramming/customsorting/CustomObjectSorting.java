@@ -43,13 +43,13 @@ public class CustomObjectSorting {
     printEmployees(employees, "Using comparator");
 
     // id comparator through lambda
-    Comparator<Employee> IdComparator = (e1, e2) -> e1.getId() > e2.getId() ? 1 : -1;
+    Comparator<Employee> IdComparator = (e1, e2) -> e1.getId() - e2.getId() ;
     Collections.sort(employees, IdComparator);
     printEmployees(employees, "Using comparator with lambda");
 
     // name comparator through lambda
     Comparator<Employee> dateComparator = (e1, e2) -> e1.getBirthDate().compareTo(e2.getBirthDate()); // java 8
-     // dateComparator = Comparator.comparing(Employee::getBirthDate); //java 11 onwards
+     dateComparator = Comparator.comparing(Employee::getBirthDate); //java 11 onwards
     Collections.sort(employees, dateComparator);
     printEmployees(employees, "Using comparator with lambda");
   }

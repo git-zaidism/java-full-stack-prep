@@ -14,15 +14,17 @@ public class FlatMap {
     String techStacks =
         employees.stream()
             .map(emp -> emp.getTechStack())
-            .flatMap(strings -> strings.stream())
+            .flatMap(techStack -> techStack.stream())
             .distinct()
             .collect(Collectors.joining(", "));
 
     System.out.println("All tech stacks of employees: " + techStacks);
 
-    // without flat map
-    List<List<String>> techStacksListOfList =
-        employees.stream().distinct().map(emp -> emp.getTechStack()).collect(Collectors.toList());
+    // without flat map it will print steam of list<list<string>>
+    List<List<String>> techStacksListOfList = employees.stream()
+            .distinct()
+            .map(emp -> emp.getTechStack())
+            .toList();
     System.out.println(techStacksListOfList);
   }
 }

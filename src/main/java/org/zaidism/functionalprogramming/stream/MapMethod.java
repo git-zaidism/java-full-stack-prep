@@ -26,7 +26,7 @@ public class MapMethod {
 
     printEmployees(employeesAfterSalaryIncrement, "Employees after salary increment");
 
-    // Employee with max salary
+    // Employee with max salary refer Aggregation.java for better approach
     System.out.println("Employee with max salary: ");
     double maxSalary = employees.stream().mapToDouble(emp -> emp.getSalary()).summaryStatistics().getMax();
     employees.stream()
@@ -35,15 +35,9 @@ public class MapMethod {
         .forEach(System.out::println);
 
 
-    // find first
+    // find first whose salary is greater than 60k
     Employee firstEmpInList = employees.stream()
             .filter(e -> e.getSalary() > 60000.0)
-            .map(e -> new Employee(
-                    e.getId(),
-                    e.getName(),
-                    e.getBirthDate(),
-                    e.getSalary() / 2,
-                    e.getTechStack()))
             .findFirst()
             .orElse(employees.get(0));
 
