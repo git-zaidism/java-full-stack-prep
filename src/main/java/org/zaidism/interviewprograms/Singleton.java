@@ -1,4 +1,4 @@
-package org.zaidism.designpattern;
+package org.zaidism.interviewprograms;
 
 public class Singleton {
   private static volatile Singleton singletonInstance = null;

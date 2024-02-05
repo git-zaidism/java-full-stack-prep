@@ -1,4 +1,4 @@
-package org.zaidism.exception;
+package org.zaidism.interviewprograms;
 
 public class ExceptionInterviewQuestion {
   public static void main(String[] args) {
