@@ -123,9 +123,9 @@ dependencies and classpath. It follows the convention over configuration princip
 
  Steps:
    - Add the `spring-boot-starter-web` dependency to the project.
-   - Enable debug mode in the `application.properties` file by adding `debug=true`.
+   - Enable debug mode in the `application.properties` file by adding `debug=true`. (#################)
 
- Execution:
+ Execution:d
    - Start the application.
    - During startup, Spring Boot evaluates conditions and identifies positive and negative matches for auto-configuration.
 
@@ -452,7 +452,7 @@ spring:
     import: classpath:custom-config.yml,file:/path/to/another-config.properties
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How to map or bind config properties to java Object ? (@ConfigurationProerteis(prefix="")
+How to map or bind config properties to java Object ? (@ConfigurationProperties(prefix="")
 
 - For instance, let’s assume we want to send emails using the Gmail SMTP server:
       gmail:

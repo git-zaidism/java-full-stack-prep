@@ -35,7 +35,7 @@
 35. Spring bean life cycle in detail
 36. What is IOC, DI and why it used.
 37. @Controller vs @RestController. ResponseEntity, RequestBody
-38. @QueryParam vs @PathParam vs @PathVariable when to use these?
+38. @QueryParam vs @RequestParam vs @PathVariable when to use these?
 39. PATCH VS PUT vs POST what is different where can we use these
 40. Dispatcher servlet it's functionality
 41. Actuators what is the use
@@ -58,10 +58,11 @@
 56. What is flatmap()/flattering where can we use it
 57. Can we extend one functional interface into another functional interface
 58. Lazy & eager loading in spring boot
-59. @Valid method
+59. @Valid annotation
 60. Difference between stream and collections
 61. Terminal and Intermediate operations in java
 62. How to create object in java other than new keyword
 62. Exception Hierarchy
+63. How to write join queries
 
 

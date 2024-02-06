@@ -12,3 +12,10 @@ Key points:
 
     • Since String is immutable, its hashcode is cached at the time of creation and it doesn't need to be calculated again. This makes it a great candidate for the key in a Map and
      its processing is faster than other HashMap key objects. This is why String is the most widely used as HashMap keys.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ - StringBuffer and StringBuilder classes are mutable this can be used if want to achieve mutability from string.
+ - StringBuffer is thread-safe whereas as StringBuilder is not thread-safe.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+intern() method:
+join() method:

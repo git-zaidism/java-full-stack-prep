@@ -1,6 +1,6 @@
 package org.zaidism.corejava;
 
-class CloneableExample implements Cloneable {
+class CloneableExample implements Cloneable { // if we remove this market interface from here it will give run time exception
   private final String data;
 
   public CloneableExample(String data) {
