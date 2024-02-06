@@ -34,7 +34,6 @@ public class MethodOverloadingDemo {
         return a + b;
     }
 
-    // Uncommenting the next method will result in a compilation error
     public double add(int a, int b) {
         return a + b;
     } */
@@ -52,6 +51,15 @@ public class MethodOverloadingDemo {
     }
 
     // Attempt to overload the main method (won't be recognized as an entry point)
+    public static void main() {
+        System.out.println("Main method without parameter");
+    }
+
+
+    public static void main(String[] args, int additionalParam) {
+        System.out.println("Main method with String[] and int parameters");
+    }
+
     public static void main(String[] args) {
         System.out.println("Main method with String[] parameter");
         MethodOverloadingDemo methodOverloadingDemo = new MethodOverloadingDemo();
@@ -68,13 +76,5 @@ public class MethodOverloadingDemo {
         methodOverloadingDemo.main(argsTemp, 2);
         MethodOverloadingDemo.main();
 
-    }
-
-    public static void main() {
-        System.out.println("Main method without parameter");
-    }
-
-    public static void main(String[] args, int additionalParam) {
-        System.out.println("Main method with String[] and int parameters");
     }
 }

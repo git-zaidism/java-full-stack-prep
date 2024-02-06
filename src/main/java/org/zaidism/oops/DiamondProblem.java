@@ -14,7 +14,7 @@ interface Carnivore {
 
 class DiamondProblem implements Herbivore, Carnivore {
 
-  @Override
+  @Override // commenting this entire method will give compilation error
   public void eat() {
     Carnivore.super.eat();
     Herbivore.super.eat();
