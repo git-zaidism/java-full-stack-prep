@@ -1,16 +1,15 @@
 package org.zaidism.temp;
 
-import org.zaidism.model.Employee;
 
-import java.util.List;
+import java.util.Stack;
 
-import static org.zaidism.model.EmployeeProvider.getEmployeeList;
+//Delete middle element of a stack
+
 
 public class Main {
   public static void main(String[] args) {
+    Stack<Integer> stackInteger = new Stack<>();
 
-    List<Employee> employees = getEmployeeList();
-
-    System.out.println("");
+    System.out.println("Stack after removing the elements: " + stackInteger);
   }
 }

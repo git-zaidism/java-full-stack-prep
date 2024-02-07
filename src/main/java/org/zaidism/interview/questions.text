@@ -64,5 +64,14 @@
 62. How to create object in java other than new keyword
 62. Exception Hierarchy
 63. How to write join queries
+64. What are the distinctions between inner queries and joins?
+65. What are the methods for transferring data between parent-child components and non-parent-child components in Angular?
+66. What are the variances between indexes and primary keys?
+67. Can we apply an index to a primary key, or is it applied by default?
+68. Discuss the lifecycle hooks in Angular.
+69. Explain the differences between Node.js and npm.
+70. Can multiple objects be created due to serializability?
+71. Compare promises and observables in Angular.
+72. Clarify the differences between ngOnInit and the constructor in Angular.
 
 
