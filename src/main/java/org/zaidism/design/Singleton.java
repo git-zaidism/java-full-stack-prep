@@ -1,4 +1,4 @@
-package org.zaidism.designpattern;
+package org.zaidism.design;
 
 public class Singleton {
   private static volatile Singleton singletonInstance = null;
