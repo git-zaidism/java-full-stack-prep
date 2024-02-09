@@ -3,7 +3,7 @@
 3. When should you use an abstract class, and when should you use an interface?
 4. Discuss the potential issues if HashMap generates the same hashcode for different keys. Provide insights into the internal workings of HashMap.
 5. Elaborate on the roles of `hashCode` and `equals` methods in Java.
-6. Create a thread-safe Singleton class and explain its implementation. When do we use a Singleton class?
+6. Create a thread-safe Singleton class and explain its implementation. When do we use a Singleton class? How to prevent singleton design from reflection, serialization and clone?
 7. Can static methods be overloaded? Can they be overridden?
 8. Explain the Diamond Problem in inheritance.
 9. Discuss the Saga Design pattern and compare orchestration versus choreography.
