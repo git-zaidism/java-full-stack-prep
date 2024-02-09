@@ -1,4 +1,4 @@
-package org.zaidism.designpattern;
+package org.zaidism.design;
 
 import java.util.ArrayList;
 import java.util.List;

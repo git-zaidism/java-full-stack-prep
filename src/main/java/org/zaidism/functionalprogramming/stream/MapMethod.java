@@ -1,6 +1,5 @@
 package org.zaidism.functionalprogramming.stream;
 
-import org.zaidism.functionalprogramming.customsorting.CustomObjectSorting;
 import org.zaidism.model.Employee;
 
 import java.util.Arrays;
