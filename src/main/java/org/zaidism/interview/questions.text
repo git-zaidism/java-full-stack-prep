@@ -73,5 +73,5 @@
 70. Can multiple objects be created due to serializability?
 71. Compare promises and observables in Angular.
 72. Clarify the differences between ngOnInit and the constructor in Angular.
-
+73. fail safe and fail fast iterator
 
