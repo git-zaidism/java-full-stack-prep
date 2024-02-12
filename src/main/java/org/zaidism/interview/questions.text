@@ -6,32 +6,32 @@
 6. Create a thread-safe Singleton class and explain its implementation. When do we use a Singleton class? How to prevent singleton design from reflection, serialization and clone?
 7. Can static methods be overloaded? Can they be overridden?
 8. Explain the Diamond Problem in inheritance.
-9. Discuss the Saga Design pattern and compare orchestration versus choreography.
-10. Explain the SOLID principles in software design.
+9. Discuss the Saga Design pattern and compare orchestration versus choreography.  //////////
+10. Explain the SOLID principles in software design. //////////
 11. Provide a real-time example while explaining a design pattern.
 12. Comment on the differences between JPA queries and native queries. //@Query(native = true)
-13. Describe the use of `@Transactional` in Java.//
-14. Elaborate on Hibernate cache, its types, and benefits.
+13. Describe the use of `@Transactional` in Java.
+14. Elaborate on Hibernate cache, its types, and benefits.  //////////
 15. Explain the concepts related to access specifiers in Java.
 16. Compare `Comparator` and `Comparable` and discuss which is preferable.
-17. Explain the usage and benefits of the `AtomicInteger` class.
-18. Define Service registry/discovery and discuss its advantages.
+17. Explain the usage and benefits of the `AtomicInteger` class.  //////////
+18. Define Service registry/discovery and discuss its advantages.  //////////
 19. What is an API gateway, and how does it provide benefits?
 20. Provide a detailed explanation of synchronization in Java.
-21. Compare ArrayList and LinkedList in terms of initial capacity and dynamic resizing.
+21. Compare ArrayList and LinkedList in terms of initial capacity and dynamic resizing.  //////////
 22. Perform a complexity analysis of any given code.
 23. Explain the Optional class in Java 8, its uses, and how it helps avoid null pointer exceptions.
 24. In what situations can we use static and default methods of a functional interface, and what is their purpose?
-25. Why do we use method reference in Java?
+25. Why do we use method reference in Java?  //////////
 26. Provide a detailed explanation of lambda expressions in Java.
 27. Elaborate on the usage of `super` and `this` keywords in Java.
 28. Explain @Qualifier in spring boot
 29. Create a reusable predicate (refer: MyCustomPredicate.java)
 30. Elaborate functional interface introduced in java 8 with their use in real time.
-31. How to achieve Inter-thread communication why notify and wait methods are in object class
+31. How to achieve Inter-thread communication why notify and wait methods are in object class  //////////
 32. Explain Static member/function/classes when to use these
 33. Which way of implementing thread is better and why?
-34. CompletableFuture, ExecutorService, Atomic Integer
+34. CompletableFuture, ExecutorService, Atomic Integer  //////////
 35. Spring bean life cycle in detail
 36. What is IOC, DI and why it used.
 37. @Controller vs @RestController. ResponseEntity, RequestBody
@@ -40,16 +40,16 @@
 40. Dispatcher servlet it's functionality
 41. Actuators what is the use
 42. @SpringBootApplication annotation explain
-43. Some status code with their meaning 404 (path not found or resource not found), 400, 500, 201, 200 etc etc..
+43. Some status code with their meaning 404 (path not found or resource not found), 400, 500, 201, 200, 204 etc etc..
 44. JPA Mapping one to one, one to many, many to one, many to many in detail
 45. Caching in spring boot through in memory and redis explain and also explain @Cacheable and @CacheEvict..
-46. Caching in hibernate or internal implementation
-47. How to implement Spring security, Explain JWT
+46. Caching in hibernate or internal implementation  //////////
+47. How to implement Spring security, Explain JWT  //////////
 48. OAuth explain (Key clock)
-49. why wait and notify methods are in object class?
+49. why wait and notify methods are in object class?  //////////
 50. Can we overload main method in java?
 51. what is an Immutable class how to create it? when do we use it?
-52. Pagination in spring for performance.
+52. Pagination in spring for performance.  //////////
 52. What are the ways to handle exception in spring and which is better?
 52. What transient keyword what is it's use?
 53. capacity method of hashmap vs size method
@@ -65,13 +65,13 @@
 62. Exception Hierarchy
 63. How to write join queries
 64. What are the distinctions between inner queries and joins?
-65. What are the methods for transferring data between parent-child components and non-parent-child components in Angular?
+65. What are the methods for transferring data between parent-child components and non-parent-child components in Angular?  //////////
 66. What are the variances between indexes and primary keys?
-67. Can we apply an index to a primary key, or is it applied by default?
-68. Discuss the lifecycle hooks in Angular.
+67. Can we apply an index to a primary key, or is it applied by default?  //////////
+68. Discuss the lifecycle hooks in Angular.  //////////
 69. Explain the differences between Node.js and npm.
 70. Can multiple objects be created due to serializability?
-71. Compare promises and observables in Angular.
+71. Compare promises and observables in Angular.  //////////
 72. Clarify the differences between ngOnInit and the constructor in Angular.
 73. fail safe and fail fast iterator
 
