@@ -40,3 +40,12 @@ Rules for overriding a method in Java
 
 Refer code: MethodOverridingDemo.java & StaticMethodOverrideDemo.java
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- Abstraction: Interface defines a contract for behavior, abstract classes provide partial implementation; both hide implementation details.
+- Inheritance: Establishes a parent-child relationship where child classes inherit attributes and behaviors from parent classes.
+- Encapsulation: Wrapping data and methods within a single unit; Java classes or POJOs with getter and setter methods provide controlled access to data.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Access Modifiers in java:
+- Private: Accessible only within the class.
+- Public: Accessible from anywhere in the Java program.
+- Protected: Accessible within the same package and by subclasses.
+- Default (Package-private): Accessible only within the same package.

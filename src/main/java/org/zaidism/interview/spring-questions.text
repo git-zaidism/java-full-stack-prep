@@ -181,8 +181,8 @@ How can you customize the default configuration in Spring Boot like port no?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How Spring boot run() method works internally ?
 
- - Creates ApplicationContext
  - Load env and properties from properties file
+ - Creates ApplicationContext
  - Register Bean into Context
  - Start up embedded tomcat container to run the jar/war
 
@@ -202,12 +202,6 @@ Here's a concise breakdown of how the `run()` method works internally in Spring 
   - If the application is a web application, Spring Boot starts an embedded Tomcat container.
   - This container is responsible for handling HTTP requests and serving the application.
 
-- Application Execution:
-  - The application logic, including user-defined `@SpringBootApplication` annotated classes, is executed.
-  - This is where the core functionality of the application is implemented.
-
-- Graceful Shutdown Setup:
-  - A shutdown hook is set up to ensure a graceful shutdown when the application is terminated.
 
 In summary, the `run()` method in Spring Boot performs the essential steps of setting up the ApplicationContext, registering beans, starting an embedded Tomcat container
 (if it's a web application), executing the application logic, and preparing for a graceful shutdown.
@@ -370,14 +364,12 @@ where you would choose to use setter injection over constructor injection, and v
 - Constructor Injection:
   - Preferred for mandatory dependencies.
   - Better for creating immutable objects.
-  - Encourages dependencies to be set once during object creation.
   - Promotes better encapsulation.
-  - When you want to avoid forming circular dependencies error (Example: Two bean autowired in each other's classes with constructor injection will give error during run time)
+  - circular dependencies error (Example: Two bean autowired in each other's classes with constructor injection will give error during run time)
 
 - Setter Injection:
   - Suitable for optional or mutable dependencies.
   - Allows for partial injection or changing dependencies after object creation.
-  - Useful when you want to inject dependencies dynamically at different points in the object's lifecycle.
   - Circular dependencies error can be bypass/resolved (Example: Two bean autowired lazily using @Lazy each other's classes with setter injection will not give error during run time)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Can you provide an example of a real-world use case where @PostConstruct is particularly useful? (preprocessing)
@@ -475,18 +467,9 @@ How to map or bind config properties to java Object ? (@ConfigurationProperties(
           }
 
 As we can see, @ConfigurationProperties provides the prefix attribute. It denotes the starting point of the properties binding.
-
 For example, Spring Boot will map app.gmail.smtp.host property to host variable.
-
 Spring Boot relies on setters to do the all the heavy lifting of the mapping. This is why we define them for each field using @Data.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
 How will you resolve bean dependency ambiguity ? //@Qualifier("classname in camelcase") if one interface orderrepo implemented by two orderrepoimpl1 & orderrepoimpl2 class and you @autowired interface name like orderrepo run tim give error
 Can we avoid this dependency ambiguity without using @Qualifier ? //yes we can use (from java) @Resource(name="classname in camelcase")//byname...instead of @Qualifier//by type
 What is bean scope & Can you explain different type of bean scope ? // singleton*, prototype*, request*, session*, webscoket(per websocket), application (entire webapp)

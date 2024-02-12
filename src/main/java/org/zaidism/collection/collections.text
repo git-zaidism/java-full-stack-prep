@@ -47,3 +47,34 @@ How get method works in hashmap?
 - If a matching hashcode is found, the `equals` method is used to check which node's key matches the provided key ("Amina").
 - If a matching key is found within a node, the `get` method returns the corresponding value associated with that key.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+• A iterator which will fail fast when we do any modification while iterating a collection is called fail fast iterator
+  Ex : (ArrayList ,HashMap and Vector)
+• Iterator who allow us to modify in middle while iterating a collection is called Non-Fail Fast (Fail Safe) Iterator
+  Ex: (CopyOnWriteArrayList, CopyOnWriteArraySet, ConcurrentHashMap)
+
+Fail-Safe:
+- Fail-safe iterators operate on a copy of the collection instead of the original collection.
+- Changes made to the original collection during iteration do not affect the iterator.
+- Fail-safe iterators do not throw `ConcurrentModificationException`.
+
+Fail-Fast:
+- Fail-fast iterators operate directly on the original collection.
+- If the collection is modified structurally while iterating (adding, removing), `ConcurrentModificationException` is thrown.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+              ConcurrentHashMap                            Hashtable
+ _________________________________________    _________________________________________
+|                                         |  |                                         |
+|  Multiple Segments for Concurrency     |  |  Single Global Lock for Synchronization |
+|  (Divides Map into Segments, Each       |  |                                         |
+|  with Independent Lock)                 |  |                                         |
+|                                         |  |                                         |
+|        Segment 1      Segment 2         |  |                                         |
+|         |  |  |         |  |  |          |  |                                         |
+|        Entry 1       Entry 2            |  |                Entry                   |
+|         |             |                |  |                 |                     |
+|       Entry 3       Entry 4             |  |                Entry                   |
+|_________________________________________|  |_________________________________________|
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+We Can Synchronize a HashMap using Collections then why can't we use that instead using ConcurrentHashMap ?
+Ans : if we used Collections.synchronizedMap(map) it will act as a synchronized Hashtable only where again locking mechanism is different
