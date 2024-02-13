@@ -23,7 +23,7 @@ select e. emp_name, d. dept_name from employee e left join department d on e. de
 
 select e. emp_name, d. dept_name from employee e left join department d on e. dept_id = d.dept_id;
 
--- left join = inner join + any additional records in the left table.
+-- right join = inner join + any additional records in the right table.
 ------------------------------------------------------------------------------------------------------------------
 // data from all using all of 3 joins
 Fetch details of ALL emp, their manager, their department and the projects they work on.
