@@ -17,5 +17,38 @@ Key points:
  - StringBuffer and StringBuilder classes are mutable this can be used if want to achieve mutability from string.
  - StringBuffer is thread-safe whereas as StringBuilder is not thread-safe.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-intern() method:
-join() method:
+1. `intern()` method:
+   - The `intern()` method is a method of the `String` class in Java. It returns the canonical representation of the string.
+   - It searches the pool for the string with the same content. If the string is found, it returns the reference to that string.
+     If not found, it adds the string to the pool and returns its reference.
+   - Usage example:
+     String s1 = new String("hello").intern(); // Returns the reference to the string "hello" in the string pool
+
+2. `join()` method:
+   - The `join()` method is a method of the `String` class in Java introduced in Java 8. It concatenates the elements of an array, or any `Iterable` object,
+     into a single string with a specified delimiter between each element.
+   - Usage example:
+     String[] words = {"Java", "is", "awesome"};
+     String result = String.join(" ", words); // Returns "Java is awesome"
+
+These are the basic usages of the `intern()` and `join()` methods in Java.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+char[] array vs String which on you prefer for storing password? and why?
+
+For storing passwords, it's generally recommended to use char[] array over String. Here's why:
+
+- String will always be present in string constant pool until garbage collector clean up
+- This increases the risk of exposing the password to unauthorized access via memory dumps or string interning.
+- String values can be directly viewed or printed.
+- When accessing a `char[]` array directly, it typically prints the hash code representation of the array object.
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+How many objects gets created with below statements?
+
+String s1 = new String("Jahid");
+String s2 = "Jahid";
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How many objects gets created with below statements?
+String s2 = "Jahid";
+String s1 = new String("Jahid");

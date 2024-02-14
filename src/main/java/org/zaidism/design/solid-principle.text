@@ -1,8 +1,26 @@
-1. Single Responsibility Principle (SRP):
+1. Single Responsibility Principle
 
 The Single Responsibility Principle states that a class should have only one reason to change, meaning it should have only one responsibility.
 
 Example:
 Suppose we have a class `Employee` that manages employee data and also handles email notifications. This violates the SRP because it has two responsibilities: managing data
 and sending notifications.
+
+2. Open-Closed Principle
+
+Software components should be open for extension, but closed for modification.
+
+3. Liskov’s Substitution Principle
+
+The Liskov Substitution Principle essentially states that objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
+
+4. Interface Segregation Principle
+
+The Interface Segregation Principle is like the Single Responsibility Principle for interfaces. It focuses on keeping interfaces small and focused on specific tasks.
+In simple terms, it says: "Don't make anyone use an interface with stuff they don't need."
+
+5. Dependency Inversion Principle
+
+The Dependency Inversion Principle asserts that rather than real implementations, we should rely on abstractions (interfaces and abstract classes) (classes).
+Details should not be dependent on abstractions; rather, abstractions should be dependent on details.
 
