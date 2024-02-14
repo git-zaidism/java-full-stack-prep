@@ -56,10 +56,15 @@ Fail-Safe:
 - Fail-safe iterators operate on a copy of the collection instead of the original collection.
 - Changes made to the original collection during iteration do not affect the iterator.
 - Fail-safe iterators do not throw `ConcurrentModificationException`.
+- Instead of relying on mod counts, fail-safe iterators often use mechanisms such as snapshotting (creating a copy of the collection when iteration begins) or
+  maintaining a separate data structure for tracking modifications, ensuring that the iterator can continue iterating over the original collection without interference
+  from concurrent modifications.
 
 Fail-Fast:
 - Fail-fast iterators operate directly on the original collection.
 - If the collection is modified structurally while iterating (adding, removing), `ConcurrentModificationException` is thrown.
+- During iteration, the iterator checks this modification count. If it detects that the count has changed since the iteration began, it indicates that the collection
+  has been modified concurrently, and it throws a ConcurrentModificationException.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
               ConcurrentHashMap                            Hashtable
  _________________________________________    _________________________________________
@@ -78,3 +83,26 @@ Fail-Fast:
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 We Can Synchronize a HashMap using Collections then why can't we use that instead using ConcurrentHashMap ?
 Ans : if we used Collections.synchronizedMap(map) it will act as a synchronized Hashtable only where again locking mechanism is different
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Why Set doesn't allow duplicate values?
+
+- In Java, for example, the HashSet implementation of the Set interface uses a HashMap internally to store its elements. When you add an element to a HashSet,
+  it is added as a key in the HashMap, with a dummy value. The uniqueness of keys in a HashMap is enforced by the hashing and equality comparison mechanisms.
+
+- Set can contains duplicate elements for custom objects if hashCode and equals methods are not override as per their contract.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Can I add element in final ArrayList?
+
+- Yes but we can't re-assign it as show below it will give completion error
+      final List<Integer> nums= new ArrayList<>();
+        nums = new ArrayList<>();
+- To achieve immutability in array list we can use Collections.unmodifiableList method
+       // Creating a regular ArrayList
+        List<String> mutableList = new ArrayList<>();
+        mutableList.add("apple");
+        mutableList.add("banana");
+        mutableList.add("orange");
+
+        // Creating an immutable view of the ArrayList
+        List<String> immutableList = Collections.unmodifiableList(mutableList);
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
