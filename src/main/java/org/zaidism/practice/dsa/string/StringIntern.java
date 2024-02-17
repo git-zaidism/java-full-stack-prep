@@ -1,4 +1,4 @@
-package org.zaidism.string;
+package org.zaidism.practice.dsa.string;
 
 public class StringIntern {
   public static void main(String[] args) {
