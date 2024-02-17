@@ -42,12 +42,12 @@ For storing passwords, it's generally recommended to use char[] array over Strin
 - This increases the risk of exposing the password to unauthorized access via memory dumps or string interning.
 - String values can be directly viewed or printed.
 - When accessing a `char[]` array directly, it typically prints the hash code representation of the array object.
---------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How many objects gets created with below statements?
 
 String s1 = new String("Jahid");
 String s2 = "Jahid";
---------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 How many objects gets created with below statements?
 String s2 = "Jahid";

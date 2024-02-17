@@ -1,4 +1,4 @@
-package org.zaidism.string;
+package org.zaidism.practice.dsa.string;
 
 import java.util.Arrays;
 import java.util.Map;

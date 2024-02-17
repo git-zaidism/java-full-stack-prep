@@ -1,4 +1,4 @@
-package org.zaidism.arrays;
+package org.zaidism.practice.dsa.array;
 
 import java.util.Arrays;
 

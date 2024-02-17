@@ -50,12 +50,14 @@ public final class ImmutableClass {
 
 class ImmutableTest {
   public static void main(String[] args) {
+    // trying to modify collections inside immutable class
     List<String> subject = new ArrayList<>();
     subject.add("subject1");
     ImmutableClass immutableClass1 = new ImmutableClass(1, subject);
     immutableClass1.getSubject().add("rr");
     System.out.println(immutableClass1);
 
+    // trying to modify custom object inside immutable class
     Employee employee = new Employee(21, "Jahid", LocalDate.now(), 600000L, List.of("Java"));
     ImmutableClass immutableClass2 = new ImmutableClass(1, subject, employee);
     immutableClass2.getEmployee().setId(2000);
