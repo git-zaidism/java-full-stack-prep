@@ -4,6 +4,10 @@ class Animal {
   void makeSound() {
     System.out.println("Animal makes a sound");
   }
+
+  Animal() {
+    System.out.println("Animal constructor called");
+  }
 }
 
 class Dog extends Animal {
@@ -11,10 +15,18 @@ class Dog extends Animal {
   void makeSound() {
     System.out.println("Dog barks");
   }
+
+  Dog() {
+    System.out.println("Dog constructor called");
+  }
 }
 
 class Cat extends Animal {
-  @Override
+  Cat() {
+    System.out.println("Cat constructor called");
+  }
+
+  @Override // if we comment anyone of override method from dog and cat class it will not give any compilation error instead it will call parent class makeSound method
   void makeSound() {
     System.out.println("Cat meows");
   }

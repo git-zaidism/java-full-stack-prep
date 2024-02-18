@@ -52,6 +52,8 @@ How get method works in hashmap?
 • Iterator who allow us to modify in middle while iterating a collection is called Non-Fail Fast (Fail Safe) Iterator
   Ex: (CopyOnWriteArrayList, CopyOnWriteArraySet, ConcurrentHashMap)
 
+FailFastFailSafeExample.java
+
 Fail-Safe:
 - Fail-safe iterators operate on a copy of the collection instead of the original collection.
 - Changes made to the original collection during iteration do not affect the iterator.
@@ -66,6 +68,8 @@ Fail-Fast:
 - During iteration, the iterator checks this modification count. If it detects that the count has changed since the iteration began, it indicates that the collection
   has been modified concurrently, and it throws a ConcurrentModificationException.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Refer: ConcurrentHashMapvsHashTable.jpg
+
               ConcurrentHashMap                            Hashtable
  _________________________________________    _________________________________________
 |                                         |  |                                         |
@@ -93,6 +97,8 @@ Why Set doesn't allow duplicate values?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Can I add element in final ArrayList?
 
+refer: FinalArrayList.java
+
 - Yes but we can't re-assign it as show below it will give completion error
       final List<Integer> nums= new ArrayList<>();
         nums = new ArrayList<>();
@@ -106,3 +112,15 @@ Can I add element in final ArrayList?
         // Creating an immutable view of the ArrayList
         List<String> immutableList = Collections.unmodifiableList(mutableList);
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ArrayList for storing and accessing data as it works on indexed based search like array so these operation are faster.
+LinkedList is better suitable for manipulating data.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HashMap vs ConcurrentHashMap
+
+HashMap: not thread safe, fail fast, allow storing null keys and values, faster than ConcurrentHashMap
+ConcurrentHashMap: thread safe, fail safe, doesn't allow storing null keys and values, slower than HashMap
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+We Can Synchronize a HashMap using Collections then why can't we use
+that instead using ConcurrentHashMap?
+Ans : if we used Collections.synchronizedMap(map) it will act as a synchronized Hashtable only where again locking mechanism is different
+Refer: ConcurrentHashMapvsHashTable.jpg
