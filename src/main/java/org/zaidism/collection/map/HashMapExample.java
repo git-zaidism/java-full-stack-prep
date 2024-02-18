@@ -1,4 +1,4 @@
-package org.zaidism.collection;
+package org.zaidism.collection.map;
 
 import java.util.HashMap;
 
