@@ -1,0 +1,133 @@
+@Entity: This annotation marks a Java class as a table in the database. By default, it creates a table name based on the class name in camel case.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@Table: If you want to use a custom name as the table name, you can use @Table(name="tbl_name").
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@Column: Similarly, if you want custom column names for the fields in your entity, you can use @Column(name="col_name").
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@Id: This annotation marks a field in your class/entity as a primary key. To implement auto-incrementation of the primary key, you can use a sequence generator or
+specify a default generation strategy.
+
+Sequence generator:
+
+    @Id
+    @SequenceGenerator(
+        name = "student_sequence"
+        sequenceName = "student_sequence",
+        allocationSize = 1)
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "student_sequence")
+    @Column(name = "id")
+    private Long studentId;
+
+Generation type as identity:
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long studentId;
+
+
+@GeneratedValue: This annotation is used to specify the primary key generation strategy to use. i.e Instructs database to generate a value for this field automatically.
+If the strategy is not specified by default AUTO will be used.
+
+GenerationType enum defines four strategies:
+
+GenerationType.SEQUENCE: With this strategy, underlying persistence provider must use a database sequence to get the next unique primary key for the entities.
+
+GenerationType.TABLE: With this strategy, the underlying persistence provider must use a database table to generate/keep the next unique primary key for the entities.
+
+GenerationType.IDENTITY: This GenerationType indicates that the persistence provider must assign primary keys for the entity using a database identity column.
+IDENTITY column is typically used in SQL Server. This special type column is populated internally by the table itself without using a separate sequence.
+If underlying database doesn't support IDENTITY column or some similar variant then the persistence provider can choose an alternative appropriate strategy.
+
+GenerationType.AUTO: This GenerationType indicates that the persistence provider should automatically pick an appropriate strategy for the particular database.
+This is the default GenerationType, i.e. if we just use @GeneratedValue annotation then this value of GenerationType will be used.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Constraints: If we want to apply constraints on multiple columns we can use below approach to apply unique and not null constraints.
+
+    @Entity
+    @Table(uniqueConstraints={@UniqueConstraint(columnNames={"username"})}) //unique constraint
+    public class SomeEntity {
+        @Column(name = "username")
+        public String username;
+    }
+
+we can also use below approach:
+
+    @Entity
+    @Table(name="subject")
+    public class SubjectDO {
+
+        @Column(name="name", unique=true, nullable = false) // not null & unique constraint
+        String name;
+    }
+
+unique in @Column is used only if you let your JPA provider create the database for you - it will create the unique constraint on the specified column.
+But if you already have the database, or you alter it once created, then unique doesn't have any effect.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@Query: We can extend our repository interface using JPA repository which internally has many functionality like paging sorting etc etc
+        But let's say if want to write custom query we can use @Query to write custom and JPQL both type of query.
+
+Available type of method from JPA repository: findStudentById(int id);
+
+By default, the query definition uses JPQL. In this case we need to write queries keeping in mind that we should use Object/entity name and field name of column in order to
+write JPQL query and in case of native queries we must use table name and column name.
+
+Let’s look at a simple repository method that returns active User entities from the database:
+
+    @Query("SELECT u FROM User u WHERE u.status = 1")
+    Collection<User> findAllActiveUsers();
+
+We can use also native SQL to define our query. All we have to do is set the value of the nativeQuery attribute to true and define the native SQL query in the
+value attribute of the annotation:
+
+    @Query(
+      value = "SELECT * FROM USERS u WHERE u.status = 1",
+      nativeQuery = true)
+    Collection<User> findAllActiveUsersNative();
+
+It's  better to use JPQL query instead of native query because in future if we migrate from one db to another db we don't need to re-write queries.
+
+This is how we can write parameterized queries using JPQL and Native syntax will be same for both
+
+    @Query(value = "SELECT * FROM Users u WHERE u.status = :status and u.name = :name",  nativeQuery = true)
+    User findUserByStatusAndNameNamedParamsNative(@Param("status") Integer status, @Param("name") String name);
+
+    Collection Queries:
+    @Query(value = "SELECT u FROM User u WHERE u.name IN :names")
+    List<User> findUserByNameList(@Param("names") Collection<String> names);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@Modifying
+
+We can use the @Query annotation to modify the state of the database by also adding the @Modifying annotation to the repository method.
+
+    @Modifying
+    @Query("update User u set u.status = :status where u.name = :name")
+    int updateUserSetStatusForName(@Param("status") Integer status, @Param("name") String name);
+
+To perform an insert operation, we have to both apply @Modifying and use a native query since INSERT is not a part of the JPA interface:
+In JPA, every entity going from a transient to managed state is automatically handled by the EntityManager.
+
+The EntityManager checks whether a given entity already exists and then decides if it should be inserted or updated. Because of this automatic management,
+the only statements allowed by JPA are SELECT, UPDATE and DELETE.
+
+   JPA Update:
+
+   @Modifying
+   @Query(value = "update Users u set u.status = ? where u.name = ?",
+     nativeQuery = true)
+   int updateUserSetStatusForNameNative(Integer status, String name);
+
+
+    Native Insert:
+
+    @Modifying
+    @Query(
+      value = "insert into Users (name, age, email, status) values (:name, :age, :email, :status)",
+      nativeQuery = true)
+    void insertUser(@Param("name") String name, @Param("age") Integer age, @Param("status") Integer status, @Param("email") String email);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Cascade type : all in mapping annotation
+Fetch type: eager or lazy in mapping annotation
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
