@@ -1,4 +1,4 @@
-What is market interface and it's significance?
+What is marker interface and it's significance?
 
 In Java, a marker interface is an interface with no methods, also known as a tag or flag interface. The purpose of a marker interface is to mark a class as
 having a particular property or special characteristic to JVM. This marking is done implicitly by implementing the marker interface.
