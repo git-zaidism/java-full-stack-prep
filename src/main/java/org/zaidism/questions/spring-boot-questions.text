@@ -960,37 +960,472 @@ Can we pass Request Body in GET HTTP Method ?
 Yes, but no recommended as per REST principle.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can we perform content negotiation (XML/JSON) in Rest endpoint ?
+
+Let's consider a practical example of content negotiation in a Spring Boot RESTful API for a simple bookstore.
+
+Suppose we have a `Book` entity with attributes like `id`, `title`, `author`, and `isbn`. We want our API to support both JSON and XML representations
+of `Book` objects based on client preferences.
+
+Here's how you can implement content negotiation in such an API:
+
+Add dependency in pom.xml:
+
+<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-xml</artifactId>
+</dependency>
+
+
+1. Define the Book entity:
+
+public class Book {
+    private Long id;
+    private String title;
+    private String author;
+    private String isbn;
+    
+    // Getters and setters
+}
+
+
+2. Create a REST controller:
+
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+@RequestMapping("/books")
+public class BookController {
+
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public List<Book> getAllBooks() {
+        // Assume books are fetched from a service or repository
+        return Arrays.asList(
+            new Book(1L, "Java Programming", "John Doe", "1234567890"),
+            new Book(2L, "Spring Boot in Action", "Jane Smith", "0987654321")
+        );
+    }
+}
+
+In this controller, we use the `@GetMapping` annotation with the `produces` attribute to specify that this endpoint can produce both JSON and XML responses.
+
+3. Configure content negotiation in application properties:
+
+properties
+# application.properties
+spring.mvc.contentnegotiation.favor-path-extension=false
+spring.mvc.contentnegotiation.favor-parameter=true
+spring.mvc.contentnegotiation.defaultContentType=application/json
+spring.mvc.converters.preferred-json-mapper=jackson
+spring.jackson.serialization.indent_output=true
+
+
+Here, we configure Spring Boot to prefer content negotiation based on the request parameter (`favor-parameter=true`) and set the default content type to JSON
+(`defaultContentType=application/json`).
+
+4. Testing the API:
+Now, clients can request books in either JSON or XML format by specifying the `Accept` header in their requests. For example:
+
+- To get JSON representation: `curl -H "Accept: application/json" http://localhost:8080/books`
+- To get XML representation: `curl -H "Accept: application/xml" http://localhost:8080/books`
+
+By using content negotiation, our API can seamlessly support multiple formats, allowing clients to choose the representation that best suits their needs.
+This enhances interoperability and flexibility in consuming the API.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What all status code you have observed in your application ?
+
+- 400: Bad Request (The server cannot process the request due to a client error)
+- 404: Not Found (The requested resource could not be found on the server)
+- 401: Unauthorized (The request lacks valid authentication credentials for the target resource)
+- 403: Forbidden (The server understood the request, but refuses to authorize it)
+- 405: Method Not Allowed (The method specified in the request is not allowed for the resource identified by the request URI)
+- 415: Unsupported Media Type (The server refuses to accept the request because the payload format is in an unsupported format)
+- 500: Internal Server Error (A generic error message indicating that something went wrong on the server)
+- 502: Bad Gateway (The server received an invalid response from an upstream server while acting as a gateway or proxy)
+- 200: OK (The request was successful)
+- 201: Created (The request has been fulfilled, resulting in the creation of a new resource)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How can you customize the status code for your endpoint ? // @ResponseStatus
+How can you customize the status code for your endpoint ?
+
+To customize the status code for your endpoint in Spring, you can use the `@ResponseStatus` annotation.
+This annotation allows you to specify the HTTP status code that should be returned when the method is invoked.
+
+Here's how you can use it:
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api")
+public class MyController {
+
+    @GetMapping("/example")
+    @ResponseStatus(HttpStatus.ACCEPTED) // Customize the status code
+    public String exampleEndpoint() {
+        return "Custom status code example";
+    }
+}
+
+In this example, the `exampleEndpoint()` method is annotated with `@ResponseStatus(HttpStatus.ACCEPTED)`, which sets the HTTP status code to 202 (Accepted) for
+the `/api/example` endpoint. You can replace `HttpStatus.ACCEPTED` with any other HTTP status code that suits your requirements.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can you enable cross origin ?
+
+
+Cross-origin resource sharing (CORS) is a browser security feature that stops websites from making requests to different websites, which helps prevent certain types of cyber attacks.
+Enabling CORS is necessary when you're building a web application that needs to talk to other websites. For example, if your website wants to fetch data from another website's API,
+you need to enable CORS to make that work.
+
+In Spring Boot , you can enable CORS by using the `@CrossOrigin` annotation. Here's how it works:
+
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api")
+public class MyController {
+
+    @GetMapping("/example")
+    @CrossOrigin(origins = "http://example.com")
+    public String exampleEndpoint() {
+        return "Response from example endpoint";
+    }
+}
+
+In this example:
+- We have a controller method (`exampleEndpoint()`) that handles requests to `/api/example`.
+- We add `@CrossOrigin(origins = "http://example.com")` to allow requests from `http://example.com` to access this endpoint.
+
+You can also set up CORS globally for your entire Spring Boot application by creating a configuration class like this:
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.*;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/")
+                .allowedOrigins("http://example.com") // for all @CrossOrigin("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                •allowedHeaders("Origin", "Content-Type", "Accept", "Authorization")
+                .allowCredentials(true);
+    }
+}
+
+In this configuration:
+- `addCorsMappings()` method enables CORS for all endpoints (`"/"`) in your app.
+- It allows requests from `http://example.com`.
+- You can specify other origins and HTTP methods as needed.
+
+To allow all type of request to your controller you can add @CrossOrigin("*") at controller itself.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can you upload a file in spring ?
+
+In Spring Boot, you can upload files using the `multipart/form-data` content type (MultipartFile). Here's a basic example of how to do it:
+
+1. Controller Endpoint: Create a controller endpoint to handle the file upload.
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+
+@RestController
+@RequestMapping("/api")
+public class FileUploadController {
+
+    @PostMapping("/upload")
+    public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        // Process the uploaded file
+        byte[] bytes = file.getBytes();
+        // Save the file or perform any other operation
+        // For simplicity, we'll just return the file name
+        return "File " + file.getOriginalFilename() + " uploaded successfully";
+    }
+}
+
+
+2. Spring Boot Configuration: Ensure that your Spring Boot application is configured to handle multipart requests.
+ This is usually done automatically, but you can customize it if needed.
+
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
+import org.springframework.context.annotation.Bean;
+import javax.servlet.MultipartConfigElement;
+
+@SpringBootApplication
+public class FileUploadApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(FileUploadApplication.class, args);
+    }
+
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        // Set the maximum file size allowed (optional)
+        factory.setMaxFileSize("10MB");
+        // Set the maximum request size allowed (optional)
+        factory.setMaxRequestSize("10MB");
+        return factory.createMultipartConfig();
+    }
+}
+
+
+With these components in place, your Spring Boot application should be able to handle file uploads. When a file is uploaded via the form, it will be sent to the `/api/upload` endpoint,
+where you can process it as needed.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How do you maintain versioning for your REST API?
+
+
+When you're building a web service with Spring Boot, you might want to update or add new features to it over time. But what happens if you need to make changes to 
+your existing API without breaking the apps that are already using it? That's where versioning comes in.
+
+Versioning is a way to manage changes to your API while ensuring that existing users can still access the old version if they need to.
+
+Here are two common ways to version your API:
+
+1. URI Versioning: You include the version number directly in the URL of your API endpoints.
+For example, you might have `/api/v1/endpoint` for version 1 and `/api/v2/endpoint` for version 2.
+
+@RestController
+@RequestMapping("/api/v1")
+public class MyController {
+    // API endpoints
+}
+
+We can apply same thing as above at method level as well
+
+2. Request Parameter or Header Versioning: Instead of putting the version number in the URL, you include it as a parameter or header in the request.
+For example, you could have a parameter like `?version=1` or a header like `X-API-Version: 1`.
+
+@RestController
+   @RequestMapping("/api")
+   public class MyController {
+
+       @GetMapping(value = "/endpoint", params = "version=1")
+       public String getEndpointV1() {
+           // Logic for version 1
+       }
+
+       @GetMapping(value = "/endpoint", params = "version=2")
+       public String getEndpointV2() {
+           // Logic for version 2
+       }
+   }
+
+or
+
+ @RestController
+   @RequestMapping("/api")
+   public class MyController {
+
+       @GetMapping(value = "/endpoint", headers = "X-API-Version=1")
+       public String getEndpointV1() {
+           // Logic for version 1
+       }
+
+       @GetMapping(value = "/endpoint", headers = "X-API-Version=2")
+       public String getEndpointV2() {
+           // Logic for version 2
+       }
+   }
+
+Both methods have their pros and cons, so you'll need to choose the one that works best for your project.
+But the main idea is to make sure that your API changes don't cause problems for the apps that rely on it.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How will you document your rest API ?
+Swagger, OPEN API
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How can you hide certain REST endpoints to prevent them from being exposed externally in swagger document? //@Hidden
+How can you hide certain REST endpoints to prevent them from being exposed externally in swagger document?
+@Hidden
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How will you consume restful API ?
+- RestTemplate: RestTemplate is a synchronous HTTP client for making RESTful API calls in Spring Boot. It allows you to send HTTP requests and receive responses synchronously.
+
+    // Using RestTemplate to fetch weather data
+    RestTemplate restTemplate = new RestTemplate();
+    String weatherData = restTemplate.getForObject("http://weather-api.com/data", String.class);
+    System.out.println("Weather data: " + weatherData);
+
+- FeignClient:  Feign is a declarative HTTP client developed by Netflix, and FeignClient is a Spring Boot annotation that allows you to create RESTful clients with ease.
+                FeignClient simplifies the process of making HTTP requests by generating proxy implementations of your interfaces. It allows you to write cleaner and more
+                concise code by abstracting away the details of HTTP communication. For example, if your microservice needs to call another microservice's API, you can use
+                FeignClient to define an interface with the API endpoints and let Spring Boot handle the rest.
+
+    // Using FeignClient to fetch weather data
+    @FeignClient(name = "weather-service")
+    public interface WeatherClient {
+        @GetMapping("/data")
+        String getWeatherData();
+    }
+
+    // In your service
+    @Autowired
+    private WeatherClient weatherClient;
+
+    public void fetchWeatherData() {
+        String weatherData = weatherClient.getWeatherData();
+        System.out.println("Weather data: " + weatherData);
+    }
+
+- WebClient: Now, let's say you're building a real-time sports score app, and you want to show live updates. WebClient is like having a team of people constantly checking
+             for updates and bringing them to you as soon as they're available. It's fast and efficient because it doesn't wait around for one request to finish before moving
+             on to the next one.
+
+             WebClient is a non-blocking, reactive HTTP client introduced in Spring WebFlux. It provides a more functional and asynchronous way of making HTTP requests compared
+             to RestTemplate. WebClient is ideal for building reactive applications that require high concurrency and scalability.
+
+       // Using WebClient to fetch sports scores
+       WebClient webClient = WebClient.create("http://sports-api.com");
+       Mono<String> scoreMono = webClient.get()
+               .uri("/live-scores")
+               .retrieve()
+               .bodyToMono(String.class);
+
+       scoreMono.subscribe(score -> System.out.println("Live score: " + score));
+
+- Advance Rest Client: from spring 3.2
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How will you handle exceptions in your project ?
+
+`@RestControllerAdvice` in Spring Boot allows you to globally handle exceptions thrown by your RESTful endpoints. 
+
+
+1. Create Custom Exception Class:
+
+   public class CustomException extends RuntimeException {
+       public CustomException(String message) {
+           super(message);
+       }
+   }
+
+2. Create Exception Handler:
+
+   @RestControllerAdvice
+   public class GlobalExceptionHandler {
+
+       @ExceptionHandler(CustomException.class)
+       @ResponseStatus(HttpStatus.BAD_REQUEST)
+       public ErrorResponse handleCustomException(CustomException ex) {
+           return new ErrorResponse("Custom exception occurred: " + ex.getMessage());
+       }
+
+       // Other exception handlers can be added here
+   }
+   
+
+3. Create ErrorResponse Class:
+
+   public class ErrorResponse {
+       private String message;
+
+       public ErrorResponse(String message) {
+           this.message = message;
+       }
+
+       public String getMessage() {
+           return message;
+       }
+
+       public void setMessage(String message) {
+           this.message = message;
+       }
+   }
+   
+
+4. Usage in Controller:
+
+   @RestController
+   public class MyController {
+
+       @GetMapping("/hello")
+       public String sayHello() {
+           // Simulate throwing custom exception
+           throw new CustomException("Something went wrong!");
+       }
+   }
+   
+
+With this setup, whenever a `CustomException` is thrown from any controller method, it will be intercepted by the `GlobalExceptionHandler`, which will then return an error
+response with a status code of 400 (Bad Request).
+
+This setup ensures that your application gracefully handles exceptions and returns appropriate error responses to the client.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can you avoid defining handlers for multiple exceptions, or what is the best practice for handling exceptions ?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How will you validate or sanitise your input payload ?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How can you populate validation error message to the end users ?
+How will you validate or sanitise your input payload ? How can you populate validation error message to the end users
+
+
+To validate or sanitize input payload in a Spring Boot application using Jakarta Bean Validation (`@Valid`), you can follow these steps:
+
+1. Add Jakarta Bean Validation Dependency:
+   Make sure you have the necessary dependencies in your `pom.xml` or `build.gradle` file to enable Jakarta Bean Validation.
+
+2. Annotate Your DTO or Entity Class with Validation Annotations:
+   Add validation annotations from the `javax.validation.constraints` package to your DTO or entity class fields to specify validation rules.
+
+   public class UserDTO {
+
+       @NotBlank(message = "Username is required")
+       private String username;
+
+       @Email(message = "Invalid email format")
+       private String email;
+
+       // Other fields and methods
+   }
+
+3. Use `@Valid` Annotation in Controller Method:
+   Annotate your controller method parameter with `@Valid` to trigger validation.
+
+   @RestController
+   public class UserController {
+
+       @PostMapping("/users")
+       public ResponseEntity<String> createUser(@Valid @RequestBody UserDTO userDTO) {
+           // Handle valid user DTO
+           return ResponseEntity.ok("User created successfully");
+       }
+   }
+
+4. Handle Validation Errors:
+   If validation fails, Spring Boot will automatically throw a `MethodArgumentNotValidException`. You can handle this exception using `@ExceptionHandler` in a
+   global exception handler or within the controller itself.
+
+   @RestControllerAdvice
+   public class GlobalExceptionHandler {
+
+       @ExceptionHandler(MethodArgumentNotValidException.class)
+       @ResponseStatus(HttpStatus.BAD_REQUEST)
+       public ErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
+           BindingResult result = ex.getBindingResult();
+           List<String> errorMessages = result.getAllErrors().stream()
+                                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                                        .collect(Collectors.toList());
+           return new ErrorResponse("Validation error: " + errorMessages);
+       }
+   }
+
+With this setup, when a request is made to the `/users` endpoint with an invalid user payload, Spring Boot will automatically validate the input against
+the defined validation annotations. If validation fails, a `MethodArgumentNotValidException` will be thrown, and the global exception handler (`GlobalExceptionHandler`)
+will catch the exception and return an appropriate error response.
+
+This approach helps ensure that only valid input data is accepted by your API endpoints, improving the overall reliability and security of your application.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can you define custom bean validation ?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 use case : let’s say you find a bug in production environment and now you want to debug that scenario ,How can you do that from your local ?
-// spring.profiles.active = dev in appn.prop file
+spring.profiles.active = dev in application.prop file
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can you enable a specific environment without using profiles? OR what is the alternative to profiles to achieving same use case ?
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What is the difference between @Profile & @ConditioOnXXX ?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
