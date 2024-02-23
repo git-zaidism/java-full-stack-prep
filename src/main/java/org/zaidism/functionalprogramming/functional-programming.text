@@ -63,7 +63,7 @@ Default and Static methods in functional interface:
 - Since java 8 we can have concrete methods inside the interface
 - Any method inside interface which is having body must be either static or default otherwise compiler will giver an compile time error
 - Static methods can be only called by interfaceName.staticMethodName();
-- Default methods can't  be called by interfaceName.staticMethodName();
+- Default methods can't  be called by interfaceName.defaultMethodName();
 - In order to provide backward compatibility defaults methods are being introduced
 - In order to call default methods in your class it is mandatory to implement functional interface in your class
 - We can't override static methods of functional interface but we can override default methods of FI

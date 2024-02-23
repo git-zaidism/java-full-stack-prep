@@ -20,5 +20,13 @@ public class Sorting {
     System.out.println("*************************************************");
 
     employees2.forEach(System.out::println);
+    System.out.println("*************************************************");
+
+    // emp sorted based on their length of their name asc
+    employees.stream().map(emp -> emp.getName()).sorted(Comparator.comparingInt(String::length).reversed()).toList().forEach(System.out::println);
+    System.out.println("*************************************************");
+    // emp sorted based on their length of their name desc
+    employees.stream().map(emp -> emp.getName()).sorted(Comparator.comparingInt(String::length)).toList().forEach(System.out::println);
+
   }
 }

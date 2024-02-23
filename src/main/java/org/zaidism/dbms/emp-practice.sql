@@ -4,9 +4,10 @@ Find 3rd highest salary from the table
 
 SELECT salary FROM employee ORDER BY salary DESC LIMIT 2,1
 
--- Fetch ALL the employee name and their department name they belong to.
-.
+
 ----------------------------------------------------------------------------------------------------
+-- Fetch ALL the employee name and their department name they belong to.
+
  // inner join or join
 
 Select e.emp_name, d.dept_name FROM employee e JOIN department d ON e.dept_id = d.dept_id;

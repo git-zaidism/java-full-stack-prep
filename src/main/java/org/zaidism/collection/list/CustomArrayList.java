@@ -7,8 +7,10 @@ public class CustomArrayList extends ArrayList {
 
   @Override
   public boolean add(Object object) {
-    if (this.contains(object)) return true;
-    else return super.add(object);
+    if (!this.contains(object))
+      return super.add(object);
+
+    return false;
   }
 
   public static void main(String[] args) {

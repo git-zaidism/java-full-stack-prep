@@ -24,23 +24,5 @@ public class MapMethod {
     )).toList();
 
     printEmployees(employeesAfterSalaryIncrement, "Employees after salary increment");
-
-    // Employee with max salary refer Aggregation.java for better approach
-    System.out.println("Employee with max salary: ");
-    double maxSalary = employees.stream().mapToDouble(emp -> emp.getSalary()).summaryStatistics().getMax();
-    employees.stream()
-        .filter(emp -> emp.getSalary() == maxSalary)
-        .toList()
-        .forEach(System.out::println);
-
-
-    // find first whose salary is greater than 60k
-    Employee firstEmpInList = employees.stream()
-            .filter(e -> e.getSalary() > 60000.0)
-            .findFirst()
-            .orElse(employees.get(0));
-
-    printEmployees(Arrays.asList(firstEmpInList), "First Employee in the list is");
-
   }
 }

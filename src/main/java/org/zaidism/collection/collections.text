@@ -81,9 +81,6 @@ Fail-Fast:
 |_________________________________________|  |_________________________________________|
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-We Can Synchronize a HashMap using Collections then why can't we use that instead using ConcurrentHashMap ?
-Ans : if we used Collections.synchronizedMap(map) it will act as a synchronized Hashtable only where again locking mechanism is different
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Why Set doesn't allow duplicate values?
 
 - In Java, for example, the HashSet implementation of the Set interface uses a HashMap internally to store its elements. When you add an element to a HashSet,
@@ -107,6 +104,8 @@ refer: FinalArrayList.java
 
         // Creating an immutable view of the ArrayList
         List<String> immutableList = Collections.unmodifiableList(mutableList);
+
+        List.Of method also create unmodifiable List
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ArrayList for storing and accessing data as it works on indexed based search like array so these operation are faster.
 LinkedList is better suitable for manipulating data.
