@@ -1,6 +1,6 @@
 - Single .java file can always have maximum only one public class, and name of public class will be always same as file name.
 - We can have multiple class in the .java file which are not public
-- Class is blueprint of object which has some properties (variables) and behaviour (methods)
+- Class is blueprint of object which has some properties (variables) and behaviour (methods). Object is an instance of a class.
 - (Example: Human is template/blueprint/class, Child, Boy, Men, Women can be it's Objects. Their behaviour could be walk, eat etc...)
 - We can access properties and behaviour of a class using objects
 - If you have two constructor one is parameterized constructor and one is default constructor in your class you can class default constructor in your parameterized constructor using this().

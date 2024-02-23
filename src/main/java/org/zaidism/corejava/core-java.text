@@ -34,7 +34,8 @@ Let's break down why `private static final long serialVersionUID = 1L;` is used 
      you have better control over the serialization and deserialization process, ensuring that the class versions are recognized as compatible.
 
 2. Clone method:
-   - The `clone` method is declared in the `Object` class, and when you override it in your class, using `@Override` ensures that you are correctly overriding the method. It's a good practice to include this annotation to make your code more robust and easier to maintain.
+   - The `clone` method is declared in the `Object` class, and when you override it in your class, using `@Override` ensures that you are correctly overriding the method.
+     It's a good practice to include this annotation to make your code more robust and easier to maintain.
    - The `clone` method is declared in the `Cloneable` interface, and it's used to create a copy of the object.
       By convention, the `clone` method in your class should call `super.clone()` to leverage the default implementation provided by the `Object` class.
       However, it's important to note that proper cloning may involve more considerations, especially for deep cloning of objects with complex structures.

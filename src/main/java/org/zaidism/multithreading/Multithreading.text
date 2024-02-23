@@ -1,6 +1,6 @@
 What is thread?
 
-Thread is nothing but the small part of a program/process. Threads share data and address space in a multi-threaded environment hence they are light weight.
+Thread is small part of a program/process. Threads share data and address space in a multi-threaded environment hence they are light weight.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Why we use multi-threading?
 
@@ -51,8 +51,8 @@ Example: DeadlockExample.java and NoDeadlockExample.java
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What is synchronization & How to achieve synchronization?
 
-- There could be a situation where it is desirable that only one thread can access to shared resources (also called as critical section) at a time.
-- If more than one thread try to access a thread at a time then the situation is called as Race condition.
+- There could be a situation where it is desirable that only one thread can access to shared resource (also called as critical section) at a time.
+- If more than one thread try to access a shared resource at a time then the situation is called as Race condition.
 - Example: If we create two threads and one thread add elements in the list and one thread remove elements from the list then it provide inconsistent result or we might get
            an exception.
 - In order to achieve synchronization among multiple threads we need to use synchronized keyword on our shared resources/critical section.

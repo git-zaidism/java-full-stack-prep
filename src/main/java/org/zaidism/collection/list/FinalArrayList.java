@@ -12,8 +12,11 @@ public class FinalArrayList {
       numList.add(62);
       numList.add(21);
       numList.add(20);
-
       System.out.println(numList);
      // numList = List.of(2); // reassignment is not allowed with final collection
+
+      List<String> alphabets = List.of("a", "b", "c");
+      alphabets.add("d"); // exception here
+      System.out.println(alphabets);
   }
 }
