@@ -1,6 +1,7 @@
 package org.zaidism.practice.dsa.string;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -15,12 +16,23 @@ public class DuplicateChars {
         Arrays.stream(name.split(""))
             .collect(Collectors.groupingBy(Function.identity(), counting()));
 
-    occrenceMap.entrySet().forEach(System.out::println);
-
-    //another way
+    System.out.println(occrenceMap);
+    // another way
     Map<Character, Long> occurrenceCharMap =
         Arrays.stream(name.split("")).collect(Collectors.groupingBy(s -> s.charAt(0), counting()));
 
-    occurrenceCharMap.entrySet().forEach(System.out::println);
+    System.out.println(occurrenceCharMap);
+
+    // custom logic by me
+    Map<Character, Integer> charSequence = new HashMap<>();
+    for (Character c : name.toCharArray()) {
+      int count = 1;
+      if (charSequence.containsKey(c)) {
+        charSequence.put(c, charSequence.get(c) + 1);
+      } else {
+        charSequence.put(c, count);
+      }
+    }
+    System.out.println(charSequence);
   }
 }
