@@ -20,7 +20,7 @@ class CloneableExample implements Cloneable { // if we remove this market interf
     try {
       CloneableExample originalObj = new CloneableExample("Hello, Cloneable!");
 
-      // Cloning
+      // Cloningv
       CloneableExample clonedObj = (CloneableExample) originalObj.clone();
 
       // Output
