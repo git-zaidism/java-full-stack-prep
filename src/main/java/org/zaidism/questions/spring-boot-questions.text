@@ -537,7 +537,8 @@ Implement Scope interface in your custom scope class override all the methods im
 After that we can use custom scope on any spring bean line @Scope("threadScope").
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Can you provide a few real-time use cases for when to choose Singleton scope and Prototype scope ?
-//single: caching an instance, Thread safety db connection pool & db config, appn config like shared resourc across appn & prot: For database repository components that manage a connection to a database and need a new instance per transaction or request. Example: JPA Repositories.
+//single: caching an instance, Thread safety db connection pool & db config, appn config like shared resourc across appn & prot: For database repository components that manage a
+connection to a database and need a new instance per transaction or request. Example: JPA Repositories.
 
 Singleton Scope:
 

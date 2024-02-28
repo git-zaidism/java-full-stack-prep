@@ -2,6 +2,7 @@ package org.zaidism.algorithms.sorting;
 
 import java.util.Arrays;
 
+
 public class BubbleSort {
   public static void main(String[] args) {
     int[] arr = {3, 1, 5, 4, 2}; // debug the code with sorted array in order to understand swapped flag as wel as 3 1 5 4 2 in order to understand j < arr.length - i

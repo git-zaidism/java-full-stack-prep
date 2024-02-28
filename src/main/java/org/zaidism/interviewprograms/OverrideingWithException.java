@@ -1,3 +1,4 @@
+/*
 package org.zaidism.interviewprograms;//package org.zaidism.interview;
 //
 //class P {
@@ -20,3 +21,4 @@ package org.zaidism.interviewprograms;//package org.zaidism.interview;
 //    obj.add();
 //  }
 //}
+*/

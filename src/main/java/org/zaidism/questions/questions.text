@@ -1,6 +1,6 @@
 1. What is a marker interface in Java, and why is it used? Provide examples like Serializable and Cloneable.
 2. Explain Object-Oriented Programming (OOP) concepts with real-world examples.
-3. When should you use an abstract class, and when should you use an interface?
+3. When should you use an abstract class, and when should you use an interface? // abstract classes can have constructors
 4. Discuss the potential issues if HashMap generates the same hashcode for different keys. Provide insights into the internal workings of HashMap.
 5. Elaborate on the roles of `hashCode` and `equals` methods in Java.
 6. Create a thread-safe Singleton class and explain its implementation. When do we use a Singleton class? How to prevent singleton design from reflection, serialization and clone?
@@ -8,7 +8,7 @@
 8. Explain the Diamond Problem in inheritance.
 9. Discuss the Saga Design pattern and compare orchestration versus choreography.  //////////
 10. Explain the SOLID principles in software design. //////////
-11. Provide a real-time example while explaining a design pattern.
+11. Provide a real-time example while explaining a design pattern. ///
 12. Comment on the differences between JPA queries and native queries. //@Query(native = true)
 13. Describe the use of `@Transactional` in Java.
 14. Elaborate on Hibernate cache, its types, and benefits.  //////////
@@ -74,4 +74,6 @@
 71. Compare promises and observables in Angular.  //////////
 72. Clarify the differences between ngOnInit and the constructor in Angular.
 73. fail safe and fail fast iterator
+74. Closure in java // https://stackoverflow.com/questions/3805474/what-is-a-closure-does-java-have-closures
+75. Java garbage collection: https://www.youtube.com/watch?v=XXOaCV5xm9s
 

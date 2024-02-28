@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 public class MyCustomPredicate implements Predicate<String> {
   @Override
-  public boolean test(String name) {
+  public  boolean test(String name) {
     return name.length() <= 10;
   }
 

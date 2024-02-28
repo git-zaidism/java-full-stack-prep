@@ -22,7 +22,7 @@ select e. emp_name, d. dept_name from employee e left join department d on e. de
 ------------------------------------------------------------------------------------------------------------------
 //right join
 
-select e. emp_name, d. dept_name from employee e left join department d on e. dept_id = d.dept_id;
+select e. emp_name, d. dept_name from employee e right join department d on e. dept_id = d.dept_id;
 
 -- right join = inner join + any additional records in the right table.
 ------------------------------------------------------------------------------------------------------------------

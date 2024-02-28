@@ -29,7 +29,10 @@ public class Filter {
 
     // count occurrence of specific character in a string
     String firstName = "Jahid Quraishi";
-    System.out.println("Occurrence: "+firstName.chars().filter(ch -> ch == 'a').count());
+    System.out.println("Occurrence: "+firstName
+            .chars()
+            .filter(ch -> ch == 'a')
+            .count());
 
     // Employee with max salary refer Aggregation.java for better approach
     System.out.println("Employee with max salary: ");

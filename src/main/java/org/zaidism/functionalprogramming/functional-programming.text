@@ -97,7 +97,7 @@ Remember, `Optional` is not meant to be used everywhere and should be used judic
 https://www.geeksforgeeks.org/comparable-vs-comparator-in-java/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Intermediate Operations are those which returns another stream as a result.
- - Example: filter, map, distinct, sorted, limit, skip etc
+ - Example: filter, map, flatmap, distinct, sorted, limit, skip etc
 
 filter: Based on condition (takes Predicate as input)
 map: Used to perform operation on elements in the stream takes Function as input
