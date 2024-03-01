@@ -76,4 +76,21 @@
 73. fail safe and fail fast iterator
 74. Closure in java // https://stackoverflow.com/questions/3805474/what-is-a-closure-does-java-have-closures
 75. Java garbage collection: https://www.youtube.com/watch?v=XXOaCV5xm9s
-
+76. Life cycle of a bean
+77. Dialect
+78. Components of MS
+79. Runnable vs Callable in Java MultiThreading
+80. Generics
+81. Dependency Inversion principle
+82. AtomicInteger
+83. ACID
+84. CAP theorem
+85. Garbage collection
+86. JIT compiler
+87. Covariance vs invariance in Java
+88. Closure
+89. REST APIs
+90. TDD
+91. SOLID and OOPS
+92. Instant class Java
+93. Method reference

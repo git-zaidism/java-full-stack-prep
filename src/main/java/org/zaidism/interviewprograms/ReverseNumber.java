@@ -3,7 +3,7 @@ package org.zaidism.interviewprograms;
 public class ReverseNumber {
 
   public static void main(String[] args) {
-    int num = 1299;
+    int num = 2356;
     int reversedNum = reverseNumber(num);
     System.out.println(num + " revered to " + reversedNum);
 
