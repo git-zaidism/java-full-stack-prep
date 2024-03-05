@@ -14,6 +14,8 @@ public class Employee implements Comparable<Employee> {
 
   List<String> techStack = new ArrayList<>();
 
+  public Employee(){}
+
   public Employee(int id, String name, LocalDate birthDate, double salary, List<String> techStack) {
     this.id = id;
     this.name = name;
