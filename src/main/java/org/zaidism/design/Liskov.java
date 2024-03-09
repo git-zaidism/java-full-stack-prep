@@ -1,6 +1,11 @@
 package org.zaidism.design;
 
 abstract class Shape {
+
+    Shape() {
+        System.out.println("hey");
+    }
+
     public abstract int calculateArea();
 }
 
