@@ -498,17 +498,17 @@ Here's an example:
     }
 
 Now, when you autowire the OrderRepo interface in another class, you can use @Qualifier to specify which implementation to inject:
-    
+
     @Component
     public class SomeService {
-    
+
         private final OrderRepo orderRepo;
-    
+
         @Autowired
         public SomeService(@Qualifier("orderRepoImpl1") OrderRepo orderRepo) {
             this.orderRepo = orderRepo;
         }
-    
+
         // Other methods using orderRepo
     }
 
@@ -517,8 +517,8 @@ Can we avoid this dependency ambiguity without using @Qualifier ?
 
 - @Resource(name="classname in camelcase"): Dependency injection by name. Part of Java EE specification. Can be used for injecting resources and Spring-managed beans.
                                             Can be applied to fields, setter methods, and constructors.
-  
-- @Qualifier: Dependency injection by type and qualifier. Specific to Spring. Used to resolve ambiguity when multiple beans of the same type are present. Works with @Autowired or @Inject annotations. 
+
+- @Qualifier: Dependency injection by type and qualifier. Specific to Spring. Used to resolve ambiguity when multiple beans of the same type are present. Works with @Autowired or @Inject annotations.
               Provides more control over bean injection.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What is bean scope & Can you explain different type of bean scope ? // singleton*, prototype*, request*, session*, webscoket(per websocket), application (entire webapp)
@@ -625,7 +625,10 @@ What is the difference between spring singleton and plain singleton ?
 Java singleton: Ensures that only one instance of a class exists per JVM instance, typically implemented within the class itself.
 Spring singleton: Ensures that only one instance of a bean exists per Spring application context, managed by the Spring IoC container.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-What is the purpose of the BeanPostProcessor interface in Spring, and how can you use it to customize bean initialization and destruction? //  this is used for performing operation before and after bean intialization...implememtn BeanPostProcessor interface and override its two method postprocessbeforeintialization & postprocessafterintialization. example while returing user brean if i want to validate password at the the of initialization itself there we can use it
+What is the purpose of the BeanPostProcessor interface in Spring, and how can you use it to customize bean initialization and destruction?
+ //  this is used for performing operation before and after bean intialization...implememtn BeanPostProcessor interface and override its two method
+ // postprocessbeforeintialization & postprocessafterintialization. example while returing user brean if i want to validate password at the the of initialization itself
+ // there we can use it
 
 The `BeanPostProcessor` interface in Spring is used to customize the initialization and destruction of beans managed by the Spring IoC container.
 It provides hooks that allow you to intervene in the bean instantiation process and perform custom logic before and after the initialization of beans.
@@ -984,7 +987,7 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
-    
+
     // Getters and setters
 }
 
@@ -1185,7 +1188,7 @@ where you can process it as needed.
 How do you maintain versioning for your REST API?
 
 
-When you're building a web service with Spring Boot, you might want to update or add new features to it over time. But what happens if you need to make changes to 
+When you're building a web service with Spring Boot, you might want to update or add new features to it over time. But what happens if you need to make changes to
 your existing API without breaking the apps that are already using it? That's where versioning comes in.
 
 Versioning is a way to manage changes to your API while ensuring that existing users can still access the old version if they need to.
@@ -1296,7 +1299,7 @@ How will you consume restful API ?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How will you handle exceptions in your project ?
 
-`@RestControllerAdvice` in Spring Boot allows you to globally handle exceptions thrown by your RESTful endpoints. 
+`@RestControllerAdvice` in Spring Boot allows you to globally handle exceptions thrown by your RESTful endpoints.
 
 
 1. Create Custom Exception Class:
@@ -1320,7 +1323,7 @@ How will you handle exceptions in your project ?
 
        // Other exception handlers can be added here
    }
-   
+
 
 3. Create ErrorResponse Class:
 
@@ -1339,7 +1342,7 @@ How will you handle exceptions in your project ?
            this.message = message;
        }
    }
-   
+
 
 4. Usage in Controller:
 
@@ -1352,7 +1355,7 @@ How will you handle exceptions in your project ?
            throw new CustomException("Something went wrong!");
        }
    }
-   
+
 
 With this setup, whenever a `CustomException` is thrown from any controller method, it will be intercepted by the `GlobalExceptionHandler`, which will then return an error
 response with a status code of 400 (Bad Request).
@@ -1438,5 +1441,3 @@ What are different type of advice ?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 use case — can I use AOP to evaluate performance of a method or is this possible to design a logging framework to capture request and response body of a method ?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-JPA and Microservice interview questions needs to be added

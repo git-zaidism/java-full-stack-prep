@@ -24,8 +24,8 @@ class CloneableExample implements Cloneable { // if we remove this market interf
       CloneableExample clonedObj = (CloneableExample) originalObj.clone();
 
       // Output
-      System.out.println("Original Object Data: " + originalObj.getData());
-      System.out.println("Cloned Object Data: " + clonedObj.getData());
+      System.out.println("Original Object Data: " + originalObj.getData()+" - "+originalObj.hashCode());
+      System.out.println("Cloned Object Data: " + clonedObj.getData()+" - "+clonedObj.hashCode());
     } catch (CloneNotSupportedException e) {
       e.printStackTrace();
     }
