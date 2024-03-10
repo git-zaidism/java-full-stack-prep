@@ -20,7 +20,7 @@ but it doesn't wait for daemon threads to complete. If there are only daemon thr
    - They are designed to provide background services and are not critical to the main application.
    - Daemon threads do not prevent the JVM from exiting, even if they are still running.
 
-   **Use Cases:**
+   Use Cases:
      - Garbage Collection (GC): The JVMs garbage collector is often implemented as a daemon thread. It runs in the background to clean up unreferenced objects without blocking
                                 the execution of the main program.
      - Automatic Resource Management: Daemon threads can be used for tasks like automatic resource cleanup, periodic maintenance tasks, or background monitoring.
@@ -95,4 +95,46 @@ inconsistent/wrong.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Which is the best way to use synchronized keyword at method level vs at block level?
 - If we want whole method to be synchronized then synchronized make sense else synchronized block is the better way to go with.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Atomic Integer
+
+In the context of threads, `AtomicInteger` in Java ensures atomicity of operations, meaning that operations performed on it are indivisible and appear to be instantaneous 
+from the perspective of other threads. This ensures thread safety when multiple threads access and modify the same `AtomicInteger` instance concurrently.
+
+Here's how `AtomicInteger` ensures atomicity in the context of threads:
+
+1. Atomic Operations: `AtomicInteger` provides atomic operations like `incrementAndGet()`, `decrementAndGet()`, `addAndGet()`, etc.,
+   which perform their respective operations atomically without the need for explicit synchronization.
+   
+2. Compare-and-Set Operations: Methods like `compareAndSet()` allow threads to update the value of the `AtomicInteger` only if the current value matches
+   the expected value. This ensures that modifications are made only when the AtomicInteger is in the expected state.
+
+3. Lock-Free: `AtomicInteger` operations are implemented using low-level atomic hardware instructions or compare-and-swap (CAS) algorithms, which 
+   do not require locking mechanisms like `synchronized` blocks or `ReentrantLock`. This avoids potential contention and overhead associated with locks.
+
+Here's a simple example demonstrating how `AtomicInteger` ensures atomicity in a multithreaded environment:
+
+
+    AtomicIntegerExample.java
+
+In this example, two threads concurrently increment the `AtomicInteger` `counter` by 1000 each. Due to the atomicity of `incrementAndGet()` method,
+the final counter value will always be 2000, even in a multithreaded environment. This demonstrates the thread safety provided by `AtomicInteger` in Java.
+
+In Java, the `join()` method is used to wait for a thread to finish its execution before proceeding with the execution of the current thread.
+
+In the provided code:
+
+thread1.join();
+thread2.join();
+
+These lines are ensuring that the main thread (the thread that executes the `main()` method) waits for `thread1` and `thread2` to complete their execution before proceeding further.
+
+Here's how it works:
+
+1. When `thread1.join()` is called, the main thread pauses its execution and waits for `thread1` to complete.
+2. Similarly, when `thread2.join()` is called, the main thread pauses again and waits for `thread2` to complete.
+3. Once both `thread1` and `thread2` have finished their execution, the main thread resumes its execution.
+
+By using `join()`, we ensure that the final output is printed only after all the threads (in this case, `thread1` and `thread2`) have finished their respective tasks.
+ This is important for cases where we need to perform some actions after the completion of multiple threads.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
