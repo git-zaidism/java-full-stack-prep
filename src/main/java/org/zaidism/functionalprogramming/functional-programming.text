@@ -57,6 +57,9 @@ Lambda Expression:
 In essence, lambda expressions in Java 8 provide a shorter and more expressive way to implement single-method interfaces, promoting cleaner and more functional programming practices.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Method references allow us to refer to a method without invoking it, making our code cleaner and more readable. They can be used in place of a lambda expression when the lambda
+expression only calls an existing method.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Default and Static methods in functional interface:
 
 - Until java 1.7 only public abstract method were allowed inside the interface which basically means method without body.
