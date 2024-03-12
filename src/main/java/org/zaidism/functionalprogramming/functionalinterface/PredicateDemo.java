@@ -1,5 +1,6 @@
 package org.zaidism.functionalprogramming.functionalinterface;
 
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -15,9 +16,12 @@ public class PredicateDemo {
     System.out.println(nameCheck.test("amina"));
 
     // some extra functionalities of predicate
-    Predicate<String> andPredicate = nameCheck.and(nameLengthCheck); // can be achieved using && operator
-    Predicate<String> orPredicate = nameCheck.or(nameLengthCheck); // can be achived using || operator
-    Predicate<Integer> negatePredicate = evenCheck.negate(); // can be achiveed ! in existing predicate
+    Predicate<String> andPredicate =
+        nameCheck.and(nameLengthCheck); // can be achieved using && operator
+    Predicate<String> orPredicate =
+        nameCheck.or(nameLengthCheck); // can be achived using || operator
+    Predicate<Integer> negatePredicate =
+        evenCheck.negate(); // can be achiveed ! in existing predicate
 
     // is equal method of predicate for all data type
     Predicate<Integer> equalPredicateForInteger = Predicate.isEqual(2);
@@ -27,6 +31,12 @@ public class PredicateDemo {
     Predicate<String> equalPredicateForString = Predicate.isEqual("Jahid");
     System.out.println(equalPredicateForString.test("Jahid"));
     System.out.println(equalPredicateForString.test("jahid"));
+    System.out.println("____________________________________________");
 
+    BiPredicate<Integer, Integer> evenChecks = (x, y) -> x % 2 == 0 && y % 2 == 0;
+    System.out.println(evenChecks.test(4, 8));
+
+    BiPredicate<String, Integer> strCheck = (str, length) -> str.length() == length;
+    System.out.println(strCheck.test("Jahid", 4));
   }
 }

@@ -1,5 +1,6 @@
 package org.zaidism.functionalprogramming.functionalinterface;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class FunctionDemo {
@@ -17,5 +18,13 @@ public class FunctionDemo {
     System.out.println(doubleOperationFunction.apply("Jahid"));
     // another way of doing samething
     System.out.println(upperCaseFunction.andThen(substringFunction).apply("Amina"));
+
+    System.out.println("____________________________________________");
+    BiFunction<String, String, Integer> biFunctionStrLength = (s1,s2)-> s1.length() + s2.length();
+    System.out.println(biFunctionStrLength.apply("Jahid","Amina"));
+
+    BiFunction<String, Integer, Integer> biFunctionStrLength2 = (s1,s2)-> s1.length() + s2;
+    System.out.println(biFunctionStrLength2.apply("Jahid",55));
   }
+
 }
