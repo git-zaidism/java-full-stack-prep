@@ -113,3 +113,68 @@ Terminal Operations are those which returns non stream values as a result like p
  - Example: forEach, toArray, reduce, collect, min, max, count, findFirst, findAny, allMatch
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Predicate:
+   - Explanation: Represents a boolean-valued function that takes one argument and returns true or false.
+   - Methods:
+     - `test(T t)`: Evaluates the predicate on the given argument.
+   - Uses:
+     - Filtering elements based on a given condition.
+     - Checking whether an element satisfies a certain criteria.
+
+2. Function:
+   - Explanation: Represents a function that takes one argument and produces a result.
+   - Methods:
+     - `apply(T t)`: Applies the function to the given argument and produces a result.
+   - Uses:
+     - Transforming or mapping data from one type to another.
+     - Performing calculations or computations on input data.
+
+3. Supplier:
+   - Explanation: Represents a supplier of results.
+   - Methods:
+     - `get()`: Retrieves a result.
+   - Uses:
+     - Providing values or objects without taking any input.
+     - Delayed or lazy initialization of objects.
+
+4. Consumer:
+   - Explanation: Represents an operation that accepts a single input argument and returns no result.
+   - Methods:
+     - `accept(T t)`: Performs the operation on the given argument.
+   - Uses:
+     - Consuming or processing elements from a stream.
+     - Performing side effects like printing, logging, or updating state.
+
+These predefined functional interfaces were introduced in Java to facilitate functional programming paradigms, enabling developers to write more concise, expressive, 
+and flexible code by treating functions as first-class citizens. They are commonly used in conjunction with streams, lambdas, and method references to perform various operations 
+on data collections, such as filtering, mapping, reducing, and iterating, in a more functional and declarative style.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+`BiFunction`, `BiPredicate`, and `BiConsumer`:
+
+1. BiFunction:
+   - Explanation: Represents a function that takes two arguments and produces a result.
+   - Methods:
+     - `apply(T t, U u)`: Applies the function to the given arguments and produces a result.
+   - Uses:
+     - Performing operations that involve two inputs and produce a result.
+     - Combining or merging data from two sources.
+
+2. BiPredicate:
+   - Explanation: Represents a boolean-valued function that takes two arguments and returns true or false.
+   - Methods:
+     - `test(T t, U u)`: Evaluates the predicate on the given arguments.
+   - Uses:
+     - Testing conditions involving two input values.
+     - Filtering elements based on a condition involving two attributes.
+
+3. BiConsumer:
+   - Explanation: Represents an operation that accepts two input arguments and returns no result.
+   - Methods:
+     - `accept(T t, U u)`: Performs the operation on the given arguments.
+   - Uses:
+     - Consuming or processing pairs of elements from a stream.
+     - Performing side effects or actions that involve two inputs.
+
+These interfaces were introduced to extend the functionality of their single-argument counterparts (`Function`, `Predicate`, and `Consumer`) to handle
+operations involving two input values. They provide flexibility and convenience in dealing with pairs of elements or attributes in various scenarios, such
+as data processing, validation, or transformation, in a functional programming paradigm.
