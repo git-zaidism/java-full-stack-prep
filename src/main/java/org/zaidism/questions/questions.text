@@ -42,17 +42,17 @@
 42. @SpringBootApplication annotation explain
 43. Some status code with their meaning 404 (path not found or resource not found), 400, 500, 201, 200, 204 etc etc..
 44. JPA Mapping one to one, one to many, many to one, many to many in detail
-45. Caching in spring boot through in memory and redis explain and also explain @Cacheable and @CacheEvict..
+45. Caching in spring boot through in memory and redis explain and also explain @Cacheable and @CacheEvict..//not imp
 46. Caching in hibernate or internal implementation  //////////
 47. How to implement Spring security, Explain JWT  //////////
-48. OAuth explain (Key clock)
+48. OAuth explain (Key clock) //not imp
 49. why wait and notify methods are in object class?  //////////
 50. Can we overload main method in java?
 51. what is an Immutable class how to create it? when do we use it?
 52. Pagination in spring for performance.  //////////
 52. What are the ways to handle exception in spring and which is better?
 52. What transient keyword what is it's use?
-53. capacity method of hashmap vs size method
+53. capacity method of hashmap vs size method //not imp
 54. calling static method without using class name belongs to same or different package.
 55. Why default and static method introduced in java 8?
 56. What is flatmap()/flattering where can we use it
@@ -73,24 +73,26 @@
 70. Can multiple objects be created due to serializability?
 71. Compare promises and observables in Angular.  //////////
 72. Clarify the differences between ngOnInit and the constructor in Angular.
-73. fail safe and fail fast iterator
-74. Closure in java // https://stackoverflow.com/questions/3805474/what-is-a-closure-does-java-have-closures
+73. fail safe and fail fast iterator //not imp
+74. Closure in java // https://stackoverflow.com/questions/3805474/what-is-a-closure-does-java-have-closures //not imp
 75. Java garbage collection: https://www.youtube.com/watch?v=XXOaCV5xm9s
 76. Life cycle of a bean
-77. Dialect
+77. Dialect ////not imp
 78. Components of MS
 79. Runnable vs Callable in Java MultiThreading
-80. Generics
+80. Generics //not imp
 81. Dependency Inversion principle
-82. AtomicInteger
+82. AtomicInteger //not imp
 83. ACID
 84. CAP theorem
 85. Garbage collection
-86. JIT compiler
-87. Covariance vs invariance in Java
-88. Closure
+86. JIT compiler //not imp
+87. Covariance vs invariance in Java //not imp
+88. Closure //not imp
 89. REST APIs
 90. TDD
 91. SOLID and OOPS
 92. Instant class Java
 93. Method reference
+94. what are indexed and how to create indexes and can we add indexed on primary key column or we can apply index on any column?
+

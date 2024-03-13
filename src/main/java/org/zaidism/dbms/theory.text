@@ -1,0 +1,27 @@
+what are indexed and how to create indexes and can we add indexed on primary key column or we can apply index on any column?
+
+
+Indexes in databases are data structures that improve the speed of data retrieval operations, such as searching, sorting, and joining, by providing quick access to
+rows in a table based on the values of certain columns. When you create an index on a column or a set of columns, the database creates a separate data structure that
+stores the indexed values along with pointers to the corresponding rows in the table.
+
+Creating an index typically involves using a SQL command specific to the database management system (DBMS) you are using. For example, in MySQL, you can create
+an index using the `CREATE INDEX` statement:
+
+CREATE INDEX index_name ON table_name (column1, column2, ...);
+
+Here, `index_name` is the name of the index you want to create, `table_name` is the name of the table on which you want to create the index, and `(column1, column2, ...)`
+specifies the columns on which you want to create the index.
+
+You can add an index to any column or combination of columns in a table, not just primary key columns. However, it's important to consider the queries that will benefit from
+the index when deciding which columns to index. Indexes are most effective on columns that are frequently used in `WHERE`, `JOIN`, and `ORDER BY` clauses of SQL queries.
+
+Adding indexes to primary key columns is a common practice and often recommended, especially if those columns are frequently used for searching or joining tables.
+However, you can also create indexes on other columns that are frequently queried or involved in join operations to improve query performance.
+
+Keep in mind that while indexes can improve read performance by speeding up data retrieval, they can also impact write performance (such as insert, update, and delete operations)
+because the database needs to maintain the index data structure whenever the indexed columns are modified. Therefore, it's important to strike a balance between
+read and write performance when deciding which columns to index.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CAP Theorem: https://www.youtube.com/watch?v=rb2R5I9S5d8&t=325s
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
