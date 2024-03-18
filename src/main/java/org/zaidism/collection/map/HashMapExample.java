@@ -1,6 +1,7 @@
 package org.zaidism.collection.map;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class HashMapExample {
   public static void main(String[] args) {
@@ -30,7 +31,7 @@ public class HashMapExample {
 
   private static void displayHashMapContents(HashMap<String, Integer> hashMap) {
     // Iterate through the entry set
-    for (HashMap.Entry<String, Integer> entry : hashMap.entrySet()) {
+    for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
       String key = entry.getKey();
       Integer value = entry.getValue();
       System.out.println("Key: " + key + ", Value: " + value);

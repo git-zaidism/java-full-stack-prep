@@ -33,15 +33,15 @@ If the strategy is not specified by default AUTO will be used.
 
 GenerationType enum defines four strategies:
 
-GenerationType.SEQUENCE: With this strategy, underlying persistence provider must use a database sequence to get the next unique primary key for the entities.
+GenerationType.SEQUENCE(custom sequence for pk): With this strategy, underlying persistence provider must use a database sequence to get the next unique primary key for the entities.
 
 GenerationType.TABLE: With this strategy, the underlying persistence provider must use a database table to generate/keep the next unique primary key for the entities.
 
-GenerationType.IDENTITY: This GenerationType indicates that the persistence provider must assign primary keys for the entity using a database identity column.
+GenerationType.IDENTITY (database provider assign pk based on it's implementation): This GenerationType indicates that the persistence provider must assign primary keys for the entity using a database identity column.
 IDENTITY column is typically used in SQL Server. This special type column is populated internally by the table itself without using a separate sequence.
 If underlying database doesn't support IDENTITY column or some similar variant then the persistence provider can choose an alternative appropriate strategy.
 
-GenerationType.AUTO: This GenerationType indicates that the persistence provider should automatically pick an appropriate strategy for the particular database.
+GenerationType.AUTO (hibernate assign primary key id based on it's internal implementation):: This GenerationType indicates that the persistence provider should automatically pick an appropriate strategy for the particular database.
 This is the default GenerationType, i.e. if we just use @GeneratedValue annotation then this value of GenerationType will be used.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Constraints: If we want to apply constraints on multiple columns we can use below approach to apply unique and not null constraints.

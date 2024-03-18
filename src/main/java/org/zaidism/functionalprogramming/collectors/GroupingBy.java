@@ -1,4 +1,4 @@
-package org.zaidism.functionalprogramming.groupby;
+package org.zaidism.functionalprogramming.collectors;
 
 import org.zaidism.model.Employee;
 
@@ -26,5 +26,15 @@ public class GroupingBy {
         ));
 
         occrenceMap.entrySet().forEach(System.out::println);
+
+        // even odd using grp by ins single stream
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        // Grouping numbers into even and odd categories using groupingBy collector
+        Map<String, List<Integer>> evenOddMap = list.stream()
+                .collect(Collectors.groupingBy(n -> n % 2 == 0 ? "EVEN" : "ODD"));
+
+        // Outputting the result
+        System.out.println(evenOddMap);
     }
 }
