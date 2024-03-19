@@ -3,6 +3,8 @@ package org.zaidism.interviewprograms;
 //l1 = 1 -> 2 -> 3  --- 123
 //l2 = 1 ->1        ---  11
 //ans = 1 -> 3 -> 4 -- 134 ---  123+11=134
+
+// wrong code
 class ListNode {
     int val;
     ListNode next;
