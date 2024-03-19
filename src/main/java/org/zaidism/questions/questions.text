@@ -95,4 +95,30 @@
 92. Instant class Java
 93. Method reference
 94. what are indexed and how to create indexes and can we add indexed on primary key column or we can apply index on any column?
-
+95. What is IEM (Integrated Environmental Management)?
+96. Can you explain the concept of a Blocking Queue in Java?
+97. What command is used in Maven to perform a release?
+98. Can you describe the life cycle of a Maven project?
+99. What are the different types of directives in Angular?
+100. What are the differences between Observables and Promises in Angular?
+101. How do you handle errors in Angular applications?
+102. What is the difference between AOT (Ahead-of-Time) and JIT (Just-in-Time) compilers in Angular?
+103. What are Angular lifecycle hooks used for?
+104. Can you explain the Hibernate N+1 problem?
+105. Why are stored procedures used in database management?
+106. Could you explain how JWT (JSON Web Tokens) is implemented in Spring Security?
+107. What are the differences between Hibernate Level 1 and Level 2 caching?
+108. Can you explain the different states of an object in Hibernate, including transient, persistent, detached, and removed?
+109. How does the Notify-Wait mechanism work in Java?
+110. Could you provide a detailed explanation of Microservice architecture?
+111. What is the Saga design pattern and how is it used in distributed systems?
+112. Can you explain how garbage collection works in Java?
+113. What is the Circuit Breaker pattern and how does it enhance system resilience?
+114. Why double checking required in singleton desing pattern?
+115. What is abstract factory design pattern or explain design pattern that you have used at lease 4-5
+116. Are enums are singleton?
+117. how to create custom actuator in spring boot?
+118. spring batch
+119. save vs saveOrUpdate method in hibernate
+120. get vs load method in hibernate
+121. save vs save and saveAndFlush method
