@@ -1423,10 +1423,49 @@ will catch the exception and return an appropriate error response.
 
 This approach helps ensure that only valid input data is accepted by your API endpoints, improving the overall reliability and security of your application.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How can you define custom bean validation ?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 use case : let’s say you find a bug in production environment and now you want to debug that scenario ,How can you do that from your local ?
 spring.profiles.active = dev in application.prop file
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Here are the explanations of the listed Maven commands:
+
+- `mvn compile`: Compiles the Java classes (.java files) in the project and generates the corresponding .class files in the `/target/classes` directory.
+
+- `mvn test-compile`: Compiles the Java test class files in the project and generates the corresponding .class files in the `/target/test-classes` directory.
+
+- `mvn clean`: Deletes the `/target` directory, removing any compiled classes, generated files, and artifacts.
+
+- `mvn test`: Executes JUnit test files present in the project.
+
+- `mvn validate`: Validates the project's `pom.xml` file, ensuring it is syntactically correct, adheres to the XML structure, and contains the required dependencies and plugins.
+                  Additionally, it verifies that the project directory structure complies with Maven's standard layout and validates any custom configurations specified in Maven
+                  plugins or build profiles.
+
+- `mvn install`: Validates the `pom.xml` file, compiles the source code, executes JUnit tests, and packages the application as a JAR or WAR file. The resulting artifact is then
+                 installed in the local Maven repository, making it available for use as a dependency in other projects.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Maven life cycle: The Maven lifecycle refers to the sequence of build phases that are executed by Maven when any Maven command is run.
+These phases includes various tasks such as compiling source code, running tests, packaging artifacts, and deploying the project. Each phase represents
+a specific stage in the build process, and Maven plugins can bind to these phases to execute custom actions.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ `mvn deploy` command and its use in real life, presented in bullet points:
+
+- `mvn deploy` is a Maven command used to deploy built artifacts (such as JAR or WAR files) to a remote repository.
+- It is typically used in scenarios where you want to share your project's artifacts with other developers or teams, or when you want to deploy your project to a
+central repository for use in other projects.
+- When executed, `mvn deploy` uploads the built artifact to a remote repository, such as Nexus, Artifactory, or a custom repository manager.
+- This command is commonly used in continuous integration (CI) and continuous deployment (CD) pipelines to automate the deployment process.
+- It ensures that the latest version of your project's artifact is available for consumption by other projects or developers.
+- By deploying artifacts to a remote repository, `mvn deploy` facilitates collaboration and promotes reusability across different projects within an organization.
+- `mvn deploy` can also be integrated with version control systems and build servers to automate the deployment process whenever a new version of the project is built or released.
+- In real-life scenarios, `mvn deploy` is often used in conjunction with other Maven commands, such as `mvn clean install`, to build, test, package, and deploy artifacts in
+ a streamlined and automated manner.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+The `mvn dependency:tree` command in Maven generates a visual representation of the project's dependencies and their transitive dependencies. It helps developers understand, manage,
+ and troubleshoot dependency-related issues by providing a hierarchical tree structure of the project's dependencies.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How can you define custom bean validation ?
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can you enable a specific environment without using profiles? OR what is the alternative to profiles to achieving same use case ?
 
