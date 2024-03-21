@@ -1,1 +1,1 @@
-Personal Java Practice Repository
+Interview Java Practice Repository
