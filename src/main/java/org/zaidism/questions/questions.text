@@ -105,6 +105,8 @@
 102. What is the difference between AOT (Ahead-of-Time) and JIT (Just-in-Time) compilers in Angular?
 103. What are Angular lifecycle hooks used for?
 104. Can you explain the Hibernate N+1 problem?
+(https://www.javacodemonk.com/n-1-problem-in-hibernate-spring-data-jpa-894097b9)
+https://medium.com/geekculture/resolve-hibernate-n-1-problem-f0e049e689ab
 105. Why are stored procedures used in database management?
 106. Could you explain how JWT (JSON Web Tokens) is implemented in Spring Security?
 107. What are the differences between Hibernate Level 1 and Level 2 caching?

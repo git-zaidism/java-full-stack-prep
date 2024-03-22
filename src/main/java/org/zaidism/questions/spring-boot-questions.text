@@ -32,9 +32,9 @@ What is the purpose of the @SpringBootApplication annotation in a Spring Boot ap
   - Meta-annotation that combines `@Configuration`, `@EnableAutoConfiguration`, and `@ComponentScan`.
 
 - Configuration:
-  - Indicates the class is a configuration class.
+  - Indicates the class is a configuration class beans are going to be returned from this class.
   - Allows definition of beans and configuration settings.
-  - On application start up loads all the configuration classes
+  - On application start up loads all the configuration classes through beans
 
 - Auto-Configuration:
   - Enables Spring Boot's automatic configuration.
@@ -131,7 +131,7 @@ dependencies and classpath. It follows the convention over configuration princip
    - Add the `spring-boot-starter-web` dependency to the project.
    - Enable debug mode in the `application.properties` file by adding `debug=true`. (#################)
 
- Execution:d
+ Execution:
    - Start the application.
    - During startup, Spring Boot evaluates conditions and identifies positive and negative matches for auto-configuration.
 
@@ -189,7 +189,8 @@ How Spring boot run() method works internally ?
 
  - Load env and properties from properties file
  - Creates ApplicationContext
- - Register Bean into Context
+ - Register Bean into Context through component scanning
+ - Provide auto configuration based on dependencies in the classpath
  - Start up embedded tomcat container to run the jar/war
 
 Here's a concise breakdown of how the `run()` method works internally in Spring Boot:
@@ -236,13 +237,15 @@ What is Command line runner in spring boot ?
     }
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Can you explain the purpose of Stereotype annotations in the Spring Framework ?
+https://blog.stackademic.com/springs-stereotype-annotations-component-service-repository-and-controller-f278db254225
 
 Stereotype annotations in the Spring Framework are used to indicate the roles of annotated classes in the application.
 These annotations help the Spring container to understand and manage these classes appropriately.
 
 Here are five commonly used Stereotype annotations in Spring:
     1. @Controller:
-       - Purpose: Marks a class as a Spring MVC controller.
+       - Purpose: Marks a class as a Spring MVC controller. Return thi view/ template name which is used by view resolver. If return Object from
+       an endpoint we need to mention @ResponseBody for deserialization.
        - Usage: Used in the presentation layer to handle HTTP requests and generate responses.
     2. @RestController:
        - Purpose: Specialization of `@Controller` for RESTful web services. It combines `@Controller` and `@ResponseBody`.
@@ -391,6 +394,9 @@ Can you provide an example of a real-world use case where @PostConstruct is part
 
 While `CommandLineRunner` is more geared towards command line-related tasks, `@PostConstruct` is part of the broader bean lifecycle and can be used for any initialization
 logic needed for a bean.
+
+if you have a bean with a method annotated with @PostConstruct and a CommandLineRunner implementation in your Spring Boot application, the @PostConstruct method will run first
+during the initialization phase, and then the run() method of the CommandLineRunner will execute after the application context is fully initialized.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can we dynamically load values in a Spring Boot application? //@Value Environment class
 
@@ -527,7 +533,7 @@ Bean scope is a life time/life cycle of a spring bean within the IOC container.
 Singleton (Default): This is the default scope of spring bean. In the singleton scope, Spring Boot creates a single instance of the bean for the entire application context.
 Prototype: A new bean instance is created every time a bean is requested.
 Request: Only a single instance will be created and available during the complete lifecycle of an HTTP request. Only valid in the context of a web-aware Spring ApplicationContext.
-Session: Only a single instance will be created and available during the complete lifecycle of an HTTP Session. Only valid in the context of a web-aware Spring ApplicationContext.
+Session (between login and logout): Only a single instance will be created and available during the complete lifecycle of an HTTP Session. Only valid in the context of a web-aware Spring ApplicationContext.
 Application: Only a single instance will be created and available during the complete lifecycle of ServletContext. Only valid in the context of a web-aware Spring ApplicationContext.
 Websocket: Only a single instance will be created and available during the complete lifecycle of WebSocket. Only valid in the context of a web-aware Spring ApplicationContext.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -732,7 +738,6 @@ public class ElectricityUsageController {
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Scenario : Can you design a rest endpoint , Assume that you have a Product database, and your task is to create an API to filter a list of products by productType ?
 
-
 Here's how you can design a REST endpoint in Spring Boot to filter a list of products by product type:
 
 1. Define a `Product` entity representing your product in the database:
@@ -776,6 +781,7 @@ public class ProductService {
 4. Create a `ProductController` to define the REST endpoint:
 
 @RestController
+@RequestMapping("/amazon")
 public class ProductController {
 
     @Autowired
@@ -787,7 +793,7 @@ public class ProductController {
     }
 }
 
-5. Now, you can send a GET request to `/products?type={productType}` to filter products by their type.
+5. Now, you can send a GET request to `amazon/products?type={productType}` to filter products by their type.
 
 Example request: GET /products?type=electronics
 This will return a list of products with the product type "electronics".
@@ -918,11 +924,10 @@ public class UserController {
 }
 
 #### Server Behavior:
-- With the POST method, each request to update the user profile will create a new resource or modify an existing one if specified.
-- The server may treat each request as independent, potentially leading to duplicate resources or unintended changes.
+- With the POST method, each request to update the user profile will create a new resource.
 
 #### Database Updates:
-- In the database, each POST request to update the user profile may result in the creation of a new record or modification of an existing one, depending on how the service is implemented.
+- In the database, each POST request to update the user profile may result in the creation of a new record, depending on how the service is implemented.
 - There's no guarantee of idempotency, meaning multiple identical requests may lead to different outcomes.
 
 ### Using PUT Method for Update
@@ -1464,6 +1469,15 @@ central repository for use in other projects.
 The `mvn dependency:tree` command in Maven generates a visual representation of the project's dependencies and their transitive dependencies. It helps developers understand, manage,
  and troubleshoot dependency-related issues by providing a hierarchical tree structure of the project's dependencies.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How is a RESTful API different from other APIs?
+- Client server
+- Cacheable
+- Layered
+- Stateless
+- Uniform Interface between client and server
+- Code On Demand (Optional)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 How can you define custom bean validation ?
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
