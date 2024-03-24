@@ -11,10 +11,10 @@ class CloneableExample implements Cloneable { // if we remove this market interf
     return data;
   }
 
-//  @Override
-//  protected Object clone() throws CloneNotSupportedException { //optional
-//    return super.clone();
-//  }
+  @Override
+  protected Object clone() throws CloneNotSupportedException { //not always optional refer this code if we don't override this will get error in this code CloningTechniques.java
+    return super.clone();
+  }
 
   public static void main(String[] args) {
     try {

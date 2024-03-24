@@ -128,6 +128,159 @@ the only statements allowed by JPA are SELECT, UPDATE and DELETE.
       nativeQuery = true)
     void insertUser(@Param("name") String name, @Param("age") Integer age, @Param("status") Integer status, @Param("email") String email);
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Cascade type : all in mapping annotation
-Fetch type: eager or lazy in mapping annotation
+Cascade types :
+
+CascadeType.ALL: cascade type ALL means that all operations (including persisting, merging, removing, and refreshing) on the parent entity will
+be cascaded to its related entities. This includes saving the child objects if they are not already persisted when saving the parent object.
+In short (save child object if already not present while saving parent object).
+
+1. CascadeType.PERSIST: When a parent entity is persisted (saved), all related entities are also persisted. This means that new child entities are also 
+saved along with the parent entity.
+
+2. CascadeType.MERGE: When a parent entity is merged (updated), all related entities are also merged. This means that changes made to child 
+entities are also propagated to the database.
+
+3. CascadeType.REMOVE: When a parent entity is removed (deleted), all related entities are also removed. This means that child entities associated
+ with the parent are also deleted.
+
+4. CascadeType.REFRESH: When a parent entity is refreshed (reloaded from the database), all related entities are also refreshed. This means that changes 
+made to child entities in memory are discarded, and the state of child entities in the database is reloaded.
+
+5. CascadeType.DETACH: When a parent entity is detached (removed from the persistence context), all related entities are also detached. This means that 
+child entities are no longer managed by the persistence context.
+
+6. CascadeType.ALL_SAVE_UPDATE: Deprecated in JPA 2.0. Equivalent to `CascadeType.ALL` in JPA 1.0.
+
+7. CascadeType.ALL_DELETE_ORPHAN: Deprecated in JPA 2.0. Equivalent to `CascadeType.ALL` in JPA 1.0.
+
+These cascade types provide flexibility in managing the persistence of related entities. You can specify multiple cascade types by separating them with commas
+ in the `cascade` attribute of the `@OneToMany`, `@ManyToOne`, or other relationship annotations.
+
+ For example:
+    @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<ChildEntity> children = new ArrayList<>();
+
+This would specify that both `PERSIST` and `MERGE` cascade types should be applied to the relationship between the parent and child entities.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+There are two main fetch types:
+
+1. Eager Fetch Type: With eager fetching, associated entities are loaded immediately along with the owning entity. This means that when you fetch the owning entity,
+ the associated entities are also fetched in the same query.
+
+   - Pseudo code: 
+     @OneToMany(fetch = FetchType.EAGER)
+     private List<ChildEntity> children;
+     
+   - Description: In this example, when you fetch the `ParentEntity`, all associated `ChildEntity` objects will also be fetched eagerly in the same query.
+
+2. Lazy Fetch Type: With lazy fetching, associated entities are not loaded until they are explicitly accessed. This means that when you fetch the owning entity,
+the associated entities are not loaded until you access them.
+
+   - Pseudo code:
+     @OneToMany(fetch = FetchType.LAZY)
+     private List<ChildEntity> children;
+     
+   - Description: In this example, when you fetch the `ParentEntity`, the associated `ChildEntity` objects will not be fetched immediately.
+    They will be fetched from the database only when you access them through getter methods or other means.
+
+Important Points:
+- Eager fetching can lead to performance issues if there are many associated entities, as all related entities are fetched at once.
+- Lazy fetching is more efficient as it only loads associated entities when needed, but it requires careful management to avoid `LazyInitializationException`
+  when accessing them outside the persistence context.
+- You can specify fetch type at the field level or at the association level using annotations such as `@OneToMany(fetch = FetchType.LAZY)` or `@ManyToOne(fetch = FetchType.EAGER)`.
+- Default fetch type is implementation-specific but usually lazy for `@OneToMany` and `@ManyToMany` associations, and eager for `@OneToOne` and `@ManyToOne` associations.
+
+These fetch types provide flexibility in optimizing database access and managing performance in your JPA application.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Hibernate(n+1) problem
+(https://www.javacodemonk.com/n-1-problem-in-hibernate-spring-data-jpa-894097b9)
+https://medium.com/geekculture/resolve-hibernate-n-1-problem-f0e049e689ab
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- save: Used to persist a new entity in the database. It assigns a new identifier to the entity and inserts it into the database.
+        If the entity already exists in the database, it will throw an exception.
+  
+  session.save(entity);
+  
+- saveOrUpdate: Used to either save a new entity or update an existing one. If the entity already exists in the database,
+                it updates it. If it's a new entity, it saves it. It checks the entity's identifier to determine whether it should be saved or updated.
+  
+  session.saveOrUpdate(entity);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- get: Retrieves an entity from the database based on its identifier. It immediately executes the SQL query and returns the entity object.
+       If the entity doesn't exist in the database, it returns null.
+
+  Entity entity = session.get(Entity.class, id);
+
+- load: Retrieves an entity from the database based on its identifier. It returns a proxy object without hitting the database immediately.
+        The actual database query is executed only when you access the properties of the entity. If the entity doesn't exist in the database, it throws an exception.
+
+  Entity entity = session.load(Entity.class, id);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  save vs saveAndFlush method in Hibernate:
+
+- save: Saves the entity to the database, but the changes may not be immediately flushed to the database.
+  It just schedules the entity to be inserted into the database. The actual insertion happens when the transaction is committed or when you explicitly call flush.
+
+  session.save(entity);
+  
+- saveAndFlush: Saves the entity to the database and immediately flushes the changes to the database.
+                This means that the entity will be inserted into the database right away, and any changes will be visible to other transactions.
+
+  session.saveAndFlush(entity);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+States of an object in Hibernate:
+
+ 1. Transient State:
+- Description: Imagine you're creating a new object in Java. Before you save it to the database, it's like a new draft you've written but haven't submitted yet.
+In Hibernate, this is called the transient state. The object is not yet associated with Hibernate, and any changes you make to it won't affect the database.
+
+- Code Example:
+  
+  Entity entity = new Entity(); // Object is like a draft
+  entity.setName("Example"); // Modifying the draft
+  
+
+ 2. Persistent State:
+- Description: Now, let's say you've decided to submit your draft. Once you save the object using Hibernate, it becomes like a submitted document.
+It's associated with Hibernate, and any changes you make to it will be tracked. Hibernate knows about this object and can synchronize its changes with the database.
+
+- Code Example:
+  
+  Session session = sessionFactory.openSession();
+  session.beginTransaction();
+
+  Entity entity = new Entity();
+  entity.setName("Example"); // Object is now associated with Hibernate
+  session.save(entity); // Saving the object, making it persistent
+
+  session.getTransaction().commit();
+  session.close();
+  
+
+ 3. Detached State:
+- Description: Imagine you've submitted your document, but later, you decide to make changes to it offline.
+In Hibernate terms, once an object was persistent but is no longer associated with Hibernate (maybe because the session was closed
+or it was explicitly detached), it's in the detached state. Any changes made to it won't be tracked by Hibernate anymore.
+
+- Code Example:
+  
+  // Detaching object from Hibernate session
+  session.detach(entity); // Object is now detached
+  
+
+ 4. Removed (Deleted) State:
+- Description: Finally, let's say you've decided to discard your submitted document altogether. In Hibernate, when you delete an object using Hibernate's
+`delete()` method, it's marked for deletion. The object is still associated with Hibernate until the transaction is committed, but it will be removed from
+ the database when the transaction is finalized.
+
+- Code Example:
+  
+  Session session = sessionFactory.openSession();
+  session.beginTransaction();
+
+  Entity entity = session.get(Entity.class, id);
+  session.delete(entity); // Object is marked for deletion (removed state)
+
+  session.getTransaction().commit();
+  session.close();
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -30,4 +30,10 @@ public class EmployeeProvider {
 
         System.out.println("----------------------------------------------------------------------------------------");
     }
+
+    public static void printSeparation() {
+        System.out.println();
+        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println();
+    }
 }

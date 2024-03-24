@@ -129,7 +129,7 @@ dependencies and classpath. It follows the convention over configuration princip
 
  Steps:
    - Add the `spring-boot-starter-web` dependency to the project.
-   - Enable debug mode in the `application.properties` file by adding `debug=true`. (#################)
+   - Enable debug mode in the `application.properties` file by adding `debug=true`. ()
 
  Execution:
    - Start the application.
@@ -910,7 +910,7 @@ to the `handleRequest` method.
 Can we perform update operation in POST http method if yes then why do we need Put Mapping or put http method? //
 
 
-### Using POST Method for Update (Not recommended way) (POST is not idempotent)
+ Using POST Method for Update (Not recommended way) (POST is not idempotent)
 
 @RestController
 @RequestMapping("/users")
@@ -923,14 +923,14 @@ public class UserController {
     }
 }
 
-#### Server Behavior:
+ Server Behavior:
 - With the POST method, each request to update the user profile will create a new resource.
 
-#### Database Updates:
+ Database Updates:
 - In the database, each POST request to update the user profile may result in the creation of a new record, depending on how the service is implemented.
 - There's no guarantee of idempotency, meaning multiple identical requests may lead to different outcomes.
 
-### Using PUT Method for Update
+ Using PUT Method for Update
 
 @RestController
 @RequestMapping("/users")
@@ -944,22 +944,22 @@ public class UserController {
     }
 }
 
-#### Server Behavior:
+ Server Behavior:
 - With the PUT method, each request to update the user profile will replace the existing resource or create a new one if it doesn't exist.
 - The server treats each PUT request as idempotent, ensuring that multiple identical requests have the same effect as a single request.
 
-#### Database Updates:
+ Database Updates:
 - In the database, each PUT request to update the user profile typically replaces the existing record with the new data provided.
 - The operation is idempotent, meaning multiple identical PUT requests will result in the same state in the database.
 
-### Idempotency:
+ Idempotency:
 
-- Idempotency means that making the same request multiple times should have the same effect as making it once.
+- Idempotency means that making the same request multiple times should have the same effect as making it for the first time. //important
 - PUT requests are inherently idempotent because they replace the resource's state with the provided data, ensuring that repeating the request won't change the outcome.
 - POST requests, on the other hand, are not idempotent by default because they typically create new resources or modify existing ones without guaranteeing the same outcome
 for identical requests.
 
-#### Real-Life Example:
+ Real-Life Example:
 
 Consider a user management API where clients interact with user resources. When a user wants to update their profile information, using the PUT method ensures that each request
 replaces the existing user profile with the new data, maintaining consistency and predictability in the system. This is crucial for scenarios where data integrity and reliability
@@ -1025,7 +1025,7 @@ In this controller, we use the `@GetMapping` annotation with the `produces` attr
 3. Configure content negotiation in application properties:
 
 properties
-# application.properties
+ application.properties
 spring.mvc.contentnegotiation.favor-path-extension=false
 spring.mvc.contentnegotiation.favor-parameter=true
 spring.mvc.contentnegotiation.defaultContentType=application/json
