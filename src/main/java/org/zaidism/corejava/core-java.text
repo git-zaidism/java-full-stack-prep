@@ -112,12 +112,24 @@ For storing passwords, it's generally recommended to use char[] array over Strin
 - String values can be directly viewed or printed.
 - When accessing a `char[]` array directly, it typically prints the hash code representation of the array object.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How many objects gets created with below statements?
+Cloning shallow vs deep
 
-String s1 = new String("Jahid");
-String s2 = "Jahid";
+In Java, cloning refers to creating a copy of an object. There are two main types of cloning: shallow cloning and deep cloning.
+Let's explain each with clear, easy-to-understand language and code examples: CloningTechniques.java
+
+Shallow Cloning:
+    Description: Shallow cloning creates a new object and copies all the fields of the original object to the new object. However,
+    if the fields of the original object are references to other objects, shallow cloning only copies the references, not the actual objects.
+    As a result, both the original object and the cloned object share references to the same objects. Changes made to the shared objects
+    through one object will affect the other object as well.
+
+
+In your shallowClone method, you clone the Person object using the default clone() method, which performs shallow cloning.
+This means that the address field in both the original Person object and the shallow cloned Person object points to the same Address object in memory.
+As a result, changes made to the address field in the shallow cloned Person object will affect the original Person object as well.
+
+Deep Cloning:
+Description: Deep cloning creates a new object and recursively copies all fields of the original object, including any objects referenced by the fields.
+            This means that all objects within the original object hierarchy are duplicated. As a result, the cloned object and the original object are entirely independent of each other,
+            and changes made to one object won't affect the other.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-How many objects gets created with below statements?
-String s2 = "Jahid";
-String s1 = new String("Jahid");

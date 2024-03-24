@@ -116,7 +116,7 @@ https://medium.com/geekculture/resolve-hibernate-n-1-problem-f0e049e689ab
 111. What is the Saga design pattern and how is it used in distributed systems?
 112. Can you explain how garbage collection works in Java?
 113. What is the Circuit Breaker pattern and how does it enhance system resilience?
-114. Why double checking required in singleton desing pattern?
+114. Why double checking required in singleton design pattern?
 115. What is abstract factory design pattern or explain design pattern that you have used at lease 4-5
 116. Are enums are singleton?
 117. how to create custom actuator in spring boot?
@@ -124,3 +124,6 @@ https://medium.com/geekculture/resolve-hibernate-n-1-problem-f0e049e689ab
 119. save vs saveOrUpdate method in hibernate
 120. get vs load method in hibernate
 121. save vs save and saveAndFlush method
+123. shallow vs deep cloning in java
+124. how to solve producer consumer problem in java using wait and notify
+125. prepare Producer Consumer implementation by both wait / notify and BlockingQueue.

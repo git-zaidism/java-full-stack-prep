@@ -3,7 +3,7 @@ package org.zaidism.interviewprograms;
 //l1 = 1 -> 2 -> 3  --- 123
 //l2 = 1 ->1        ---  11
 //ans = 1 -> 3 -> 4 -- 134 ---  123+11=134
-
+//Add Two Numbers: https://lnkd.in/gzTWKvRx // asked in pubmatic
 // wrong code
 class ListNode {
     int val;
@@ -16,7 +16,7 @@ class ListNode {
 }
 
 
-public class AddTwoLinkedLists {
+public class AddTwoNumberLinkedLists {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(0);
@@ -50,7 +50,7 @@ public class AddTwoLinkedLists {
         ListNode l2 = new ListNode(1);
         l2.next = new ListNode(1);
 
-        AddTwoLinkedLists solution = new AddTwoLinkedLists();
+        AddTwoNumberLinkedLists solution = new AddTwoNumberLinkedLists();
         ListNode result = solution.addTwoNumbers(l1, l2);
 
         // Print the result

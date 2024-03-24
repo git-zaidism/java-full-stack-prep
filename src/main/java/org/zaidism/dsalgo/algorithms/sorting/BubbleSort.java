@@ -1,4 +1,4 @@
-package org.zaidism.algorithms.sorting;
+package org.zaidism.practice.dsa.algorithms.sorting;
 
 import java.util.Arrays;
 
