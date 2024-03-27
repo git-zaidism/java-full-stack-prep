@@ -249,7 +249,7 @@ Here are five commonly used Stereotype annotations in Spring:
        - Usage: Used in the presentation layer to handle HTTP requests and generate responses.
     2. @RestController:
        - Purpose: Specialization of `@Controller` for RESTful web services. It combines `@Controller` and `@ResponseBody`.
-       - Usage: Used to create RESTful web services that return JSON or XML responses.
+       - Usage: Used to create RESTful web services that return  or XML responses.
     3. @Service:
        - Purpose: Marks a class as a service bean in the business layer.
        - Usage: Used to define business logic and transactional methods.
@@ -882,14 +882,14 @@ Here's the difference:
 - @Controller: This annotation is used to mark a class as a controller in Spring MVC. It is typically used to create web applications that return views (HTML pages) to the client.
 
 - @RestController: This annotation is a convenience annotation that combines `@Controller` and `@ResponseBody`. It is used to create RESTful web services that return data
-  (such as JSON, XML, etc.) directly to the client, rather than rendering a view.
+  (such as , XML, etc.) directly to the client, rather than rendering a view.
 
-In the scenario of designing REST endpoints to return JSON or XML data (like in our example of fetching products), it's more appropriate to use `@RestController`
+In the scenario of designing REST endpoints to return  or XML data (like in our example of fetching products), it's more appropriate to use `@RestController`
 because it automatically serializes the return value of the controller methods into the response body. This eliminates the need for an explicit `@ResponseBody` annotation on each method.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How can we deserialize a JSON request payload into an object within a Spring MVC controller ?
+How can we deserialize a  request payload into an object within a Spring MVC controller ?
 
-We can use the `@RequestBody` annotation to deserialize a JSON request payload into an object within a controller method. Here's how you can use it:
+We can use the `@RequestBody` annotation to deserialize a  request payload into an object within a controller method. Here's how you can use it:
 
 
 @RestController
@@ -897,14 +897,14 @@ public class MyController {
 
     @PostMapping("/api/endpoint")
     public ResponseEntity<?> handleRequest(@RequestBody MyRequestObject requestObject) {
-        // Here, requestObject will contain the deserialized JSON payload
+        // Here, requestObject will contain the deserialized  payload
         // You can now process the requestObject and return a response
         return ResponseEntity.ok("Request received successfully");
     }
 }
 
-In this example, `MyRequestObject` is a POJO (Plain Old Java Object) representing the structure of the JSON payload. When a POST request is sent to the `/api/endpoint`
-endpoint with a JSON payload in the request body, Spring automatically deserializes the JSON into an instance of `MyRequestObject` and passes it as an argument
+In this example, `MyRequestObject` is a POJO (Plain Old Java Object) representing the structure of the  payload. When a POST request is sent to the `/api/endpoint`
+endpoint with a  payload in the request body, Spring automatically deserializes the  into an instance of `MyRequestObject` and passes it as an argument
 to the `handleRequest` method.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Can we perform update operation in POST http method if yes then why do we need Put Mapping or put http method? //
@@ -968,11 +968,11 @@ are paramount, such as updating financial records or medical information.
 Can we pass Request Body in GET HTTP Method ?
 Yes, but no recommended as per REST principle.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How can we perform content negotiation (XML/JSON) in Rest endpoint ?
+How can we perform content negotiation (XML/) in Rest endpoint ?
 
 Let's consider a practical example of content negotiation in a Spring Boot RESTful API for a simple bookstore.
 
-Suppose we have a `Book` entity with attributes like `id`, `title`, `author`, and `isbn`. We want our API to support both JSON and XML representations
+Suppose we have a `Book` entity with attributes like `id`, `title`, `author`, and `isbn`. We want our API to support both  and XML representations
 of `Book` objects based on client preferences.
 
 Here's how you can implement content negotiation in such an API:
@@ -1010,7 +1010,7 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION__VALUE, MediaType.APPLICATION_XML_VALUE})
     public List<Book> getAllBooks() {
         // Assume books are fetched from a service or repository
         return Arrays.asList(
@@ -1020,7 +1020,7 @@ public class BookController {
     }
 }
 
-In this controller, we use the `@GetMapping` annotation with the `produces` attribute to specify that this endpoint can produce both JSON and XML responses.
+In this controller, we use the `@GetMapping` annotation with the `produces` attribute to specify that this endpoint can produce both  and XML responses.
 
 3. Configure content negotiation in application properties:
 
@@ -1028,18 +1028,18 @@ properties
  application.properties
 spring.mvc.contentnegotiation.favor-path-extension=false
 spring.mvc.contentnegotiation.favor-parameter=true
-spring.mvc.contentnegotiation.defaultContentType=application/json
-spring.mvc.converters.preferred-json-mapper=jackson
+spring.mvc.contentnegotiation.defaultContentType=application/
+spring.mvc.converters.preferred--mapper=jackson
 spring.jackson.serialization.indent_output=true
 
 
-Here, we configure Spring Boot to prefer content negotiation based on the request parameter (`favor-parameter=true`) and set the default content type to JSON
-(`defaultContentType=application/json`).
+Here, we configure Spring Boot to prefer content negotiation based on the request parameter (`favor-parameter=true`) and set the default content type to 
+(`defaultContentType=application/`).
 
 4. Testing the API:
-Now, clients can request books in either JSON or XML format by specifying the `Accept` header in their requests. For example:
+Now, clients can request books in either  or XML format by specifying the `Accept` header in their requests. For example:
 
-- To get JSON representation: `curl -H "Accept: application/json" http://localhost:8080/books`
+- To get  representation: `curl -H "Accept: application/" http://localhost:8080/books`
 - To get XML representation: `curl -H "Accept: application/xml" http://localhost:8080/books`
 
 By using content negotiation, our API can seamlessly support multiple formats, allowing clients to choose the representation that best suits their needs.
@@ -1477,12 +1477,380 @@ How is a RESTful API different from other APIs?
 - Uniform Interface between client and server
 - Code On Demand (Optional)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is JWT?
 
+JWT, which stands for  Web Token, is a compact and self-contained way to transmit information between parties securely as a  object.
+Let's break down the structure of a JWT in the simplest way possible:
+
+1. Header: The JWT header typically consists of two parts: the type of token (which is JWT) and the signing algorithm being used.
+This part of the token is encoded and used to specify the hashing algorithm used to sign the token.
+
+
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+
+
+2. Payload (Claims): The payload contains the information or claims that you want to transmit. These claims can be any piece of data you want to share.
+There are three types of claims: registered claims, public claims, and private claims. Registered claims are predefined and include information like issuer (iss), subject (sub),
+ expiration time (exp), and more. Public claims are custom claims you define yourself, while private claims are agreed upon between parties.
+
+
+{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "admin": true
+}
+
+
+3. Signature: The signature is created by combining the encoded header, encoded payload, and a secret key (known only to the server) using the specified algorithm from the header.
+This signature is used to verify that the sender of the JWT is who it says it is and to ensure that the message wasn't changed along the way.
+
+The three parts of the JWT (header, payload, and signature) are concatenated together and encoded using Base64url encoding to form the JWT token.
+ This token can be sent over the network or stored in a database.
+
+Here's an example of a JWT token:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+To summarize:
+- Header: Specifies the algorithm and type of token.
+- Payload: Contains claims or information.
+- Signature: Used to verify the authenticity of the token.
+
+JWTs are commonly used for authentication and authorization in web applications and APIs because they are compact, easy to transmit, and can be easily verified.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How to implement JWT authentication and authorization?
+
+1. Setup Dependencies: Add necessary dependencies for Spring Security and JWT to your project.
+
+Add Spring Security and JWT dependencies to pom.xml
+
+2. Configure Security: Create a class to configure Spring Security settings.
+
+Create a class extending WebSecurityConfigurerAdapter
+Override configure(HttpSecurity http) method
+Define which endpoints require authentication and authorization
+
+3. Create JWT Utilities: Implement utility classes to handle JWT token generation, parsing, and validation.
+
+Create a class for JWT utility methods
+Implement methods to generate token, extract user from token, and validate token
+
+4. Create Authentication Filter: Implement a custom filter for JWT-based authentication.
+
+Create a class extending OncePerRequestFilter
+Override doFilterInternal method
+Extract JWT token from request header
+Authenticate user using token
+Set authenticated user in SecurityContext
+
+5. Create Authorization Filter: Implement a custom filter for JWT-based authorization.
+
+Create a class extending OncePerRequestFilter
+Override doFilterInternal method
+Extract JWT token from request header
+Validate token and authorize user
+
+6. Create User Details Service: Implement a custom user details service to load user details from your data source.
+
+Create a class implementing UserDetailsService interface
+Override loadUserByUsername method
+Load user details from database based on username
+
+7. Secure Endpoints: Secure your endpoints using method-level security annotations.
+
+Add @PreAuthorize annotation to controller methods
+Define authorization rules based on user roles or permissions
+
+8. Test: Test your authentication and authorization mechanisms using valid and invalid JWT tokens.
+
+Send requests to secured endpoints with valid JWT tokens
+Verify access to secured endpoints based on user roles
+Test error handling for invalid or expired tokens
+
+That's a high-level overview of the steps involved in implementing JWT-based authentication and authorization in Spring Boot.
+ Each step involves specific coding and configuration tasks, which need to be implemented according to your application's requirements.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Implementing JWT-based authentication and authorization in Spring Boot involves several steps. Here's a simplified, step-by-step guide:
+
+1. Add Dependencies: First, you need to add the necessary dependencies to your Spring Boot project's `pom.xml` file. Include dependencies for Spring Security, JWT,
+and any other dependencies you might need.
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.webtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.9.1</version> <!-- Or the latest version -->
+</dependency>
+<!-- Other dependencies as needed -->
+
+
+2. Configure Spring Security: Create a class that extends `WebSecurityConfigurerAdapter` to configure Spring Security settings. Override the `configure(HttpSecurity http)`x
+ method to define which endpoints require authentication and authorization.
+
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/api/public/").permitAll() // Public endpoints
+            .anyRequest().authenticated()
+            .and()
+            .addFilter(new JwtAuthenticationFilter(authenticationManager())) // Custom JWT filter
+            .addFilter(new JwtAuthorizationFilter(authenticationManager())) // Custom JWT filter
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Stateless session management
+    }
+}
+
+
+3. Create JWT Utilities: Implement utility classes to handle JWT token generation, parsing, and validation.
+
+public class JwtUtils {
+    
+    public static final String SECRET = "your-secret-key";
+    public static final long EXPIRATION_TIME = 86400000; // 1 day
+    public static final String TOKEN_PREFIX = "Bearer ";
+    public static final String HEADER_STRING = "Authorization";
+
+    public static String generateToken(String username) {
+        Date expiryDate = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
+        return Jwts.builder()
+                .setSubject(username)
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .compact();
+    }
+
+    public static Authentication getAuthentication(HttpServletRequest request) {
+        String token = request.getHeader(HEADER_STRING);
+        if (token != null) {
+            String user = Jwts.parser()
+                    .setSigningKey(SECRET)
+                    .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+                    .getBody()
+                    .getSubject();
+
+            if (user != null) {
+                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            }
+            return null;
+        }
+        return null;
+    }
+}
+
+
+4. Create Authentication and Authorization Filters: Implement custom filters to handle JWT-based authentication and authorization.
+
+
+public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+    
+    private AuthenticationManager authenticationManager;
+
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest req,
+                                                HttpServletResponse res) throws AuthenticationException {
+        try {
+            UserCredentials creds = new ObjectMapper()
+                    .readValue(req.getInputStream(), UserCredentials.class);
+
+            return authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            creds.getUsername(),
+                            creds.getPassword(),
+                            new ArrayList<>())
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    protected void successfulAuthentication(HttpServletRequest req,
+                                            HttpServletResponse res,
+                                            FilterChain chain,
+                                            Authentication auth) throws IOException, ServletException {
+        String token = JwtUtils.generateToken(((User) auth.getPrincipal()).getUsername());
+        res.addHeader(JwtUtils.HEADER_STRING, JwtUtils.TOKEN_PREFIX + token);
+    }
+}
+
+public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
+
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager) {
+        super(authenticationManager);
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest req,
+                                    HttpServletResponse res,
+                                    FilterChain chain) throws IOException, ServletException {
+        String header = req.getHeader(JwtUtils.HEADER_STRING);
+
+        if (header == null || !header.startsWith(JwtUtils.TOKEN_PREFIX)) {
+            chain.doFilter(req, res);
+            return;
+        }
+
+        UsernamePasswordAuthenticationToken authentication = JwtUtils.getAuthentication(req);
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        chain.doFilter(req, res);
+    }
+}
+
+
+5. Create User Details Service: Implement a custom user details service to load user details from your data source.
+
+@Service
+public class UserDetailsServiceImpl implements UserDetailsService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(), user.getPassword(), new ArrayList<>());
+    }
+}
+
+
+6. Secure Endpoints: Secure your endpoints by adding `@PreAuthorize` annotations to controller methods.
+
+
+@RestController
+@RequestMapping("/api")
+public class MyController {
+
+    @GetMapping("/secure")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String secureEndpoint() {
+        return "This is a secure endpoint!";
+    }
+
+    // Other endpoints
+}
+
+
+7. Test: Test your authentication and authorization by sending requests with valid and invalid JWT tokens.
+
+That's it! You now have a basic implementation of JWT-based authentication and authorization in your Spring Boot application. Remember to adapt this code to
+fit your specific requirements and security needs.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is DispatcherServlet?
+
+In Spring Boot, the DispatcherServlet is like the traffic controller of your web application. It's a crucial part of the Spring MVC framework
+and plays a significant role in handling incoming requests and routing them to the appropriate components for processing.
+
+Here's a simple way to understand the DispatcherServlet:
+
+1. Traffic Controller: Imagine you're driving on a road with many intersections. The DispatcherServlet acts like a traffic controller at each intersection. 
+When a request (like a car) arrives at the intersection, the DispatcherServlet decides which road (handler) the request should take next.
+
+2. Request Routing: The DispatcherServlet receives incoming requests from clients (like browsers or mobile apps). 
+It looks at the URL of each request to determine where it should be sent next. Based on the URL, it routes the request to the appropriate controller or handler method.
+
+3. Central Hub: The DispatcherServlet is like the central hub of your Spring Boot application. It sits at the heart of the application and manages the flow of requests. 
+It delegates the actual processing of requests to various components, such as controllers, services, or REST endpoints.
+
+4. Configuration: In your Spring Boot application, you can configure the DispatcherServlet to handle different types of requests, map URLs to specific controllers,
+ and customize its behavior using configuration files like `application.properties` or `application.yml`.
+
+In summary, the DispatcherServlet in Spring Boot is responsible for routing incoming requests to the right parts of your application for processing, acting as a traffic controller 
+for your web traffic. It simplifies the handling of HTTP requests and plays a crucial role in the overall functioning of your web application.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Spring bean life cycle:
+
+1. Instantiation:
+   - The lifecycle of a Spring bean begins with its instantiation. 
+   - Spring container creates an instance of the bean using either a no-argument constructor or a constructor with arguments specified in the bean configuration.
+
+2. Initialization: 
+   - After instantiation, Spring container initializes the bean.
+   - If the bean implements the `InitializingBean` interface, the `afterPropertiesSet()` method is called. 
+   - Alternatively, you can define a custom initialization method by annotating a method with `@PostConstruct`.
+
+3. Dependency Injection: 
+   - Once initialization is complete, Spring performs dependency injection by setting the bean's properties and collaborating beans.
+   - Properties are set using setter methods or fields, based on configuration.
+
+4. Custom Init Method (if present):
+   - If you defined a custom initialization method, it's invoked after properties are set.
+   - This method can perform additional initialization logic specific to your bean.
+
+5. Bean Ready for Use:
+   - At this point, the bean is fully initialized and ready for use.
+   - It's available for injection into other beans or for use within your application.
+
+6. Destruction:
+   - When the Spring container shuts down, it calls the bean's destruction methods to release resources and perform cleanup.
+   - If the bean implements the `DisposableBean` interface, the `destroy()` method is called.
+   - Alternatively, you can define a custom destroy method annotated with `@PreDestroy`.
+
+7. Custom Destroy Method (if present):
+   - If you defined a custom destroy method, it's invoked before the bean is destroyed.
+   - This method can perform cleanup tasks such as closing database connections or releasing resources.
+
+In summary, the Spring bean lifecycle involves instantiation, initialization, dependency injection, custom initialization, and destruction phases.
+ Understanding this lifecycle helps you manage the behavior of your beans effectively and perform necessary setup and cleanup tasks.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Creating a custom actuator endpoint in Spring Boot is a useful way to expose custom metrics, health checks, or management endpoints tailored to your application's specific needs.
+Here's a simplified step-by-step guide to create a custom actuator endpoint:
+
+1. Create a Custom Endpoint Class:
+   Create a class that implements the `Endpoint` interface or extends the `AbstractEndpoint` class provided by Spring Boot Actuator.
+   This class will define the behavior and functionality of your custom endpoint.
+
+   import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+   import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+   import org.springframework.stereotype.Component;
+
+   @Component
+   @Endpoint(id = "custom")
+   public class CustomEndpoint {
+
+       @ReadOperation
+       public String customEndpoint() {
+           // Implement custom logic here
+           return "Custom Actuator Endpoint Response";
+       }
+   }
+   
+
+2. Annotate the Class with `@Endpoint`:
+   Annotate your custom endpoint class with `@Endpoint` and specify an `id` attribute to uniquely identify your endpoint.
+
+3. Define Endpoint's Behavior:
+   Implement a method within your endpoint class annotated with `@ReadOperation`, `@WriteOperation`, or `@DeleteOperation`, depending on whether
+   your endpoint is for reading, writing, or deleting data. In this example, we use `@ReadOperation` to define a method that provides information when the endpoint is accessed.
+
+4. Access the Custom Endpoint:
+   Once your application is running, you can access your custom actuator endpoint using the `/actuator/custom` endpoint path. This will trigger the logic
+    defined in your custom endpoint class, and you'll receive the response defined in your method.
+
+That's it! You've created a custom actuator endpoint in Spring Boot. You can extend this example by adding more complex logic, additional endpoints, or integrating
+ with existing metrics and health checks to provide comprehensive monitoring and management capabilities for your application.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can you define custom bean validation ?
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 How can you enable a specific environment without using profiles? OR what is the alternative to profiles to achieving same use case ?
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What is the difference between @Profile & @ConditioOnXXX ?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
