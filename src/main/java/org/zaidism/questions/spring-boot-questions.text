@@ -968,7 +968,7 @@ are paramount, such as updating financial records or medical information.
 Can we pass Request Body in GET HTTP Method ?
 Yes, but no recommended as per REST principle.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How can we perform content negotiation (XML/) in Rest endpoint ?
+How can we perform content negotiation (XML/JSON) in Rest endpoint ?
 
 Let's consider a practical example of content negotiation in a Spring Boot RESTful API for a simple bookstore.
 
