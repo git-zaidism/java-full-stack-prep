@@ -126,4 +126,5 @@ https://medium.com/geekculture/resolve-hibernate-n-1-problem-f0e049e689ab
 121. save vs save and saveAndFlush method
 123. shallow vs deep cloning in java
 124. how to solve producer consumer problem in java using wait and notify
-125. prepare Producer Consumer implementation by both wait / notify and BlockingQueue.
+125. Producer Consumer implementation by both wait / notify and BlockingQueue.
+126. What are the view in database what's their use?

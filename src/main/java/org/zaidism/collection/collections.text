@@ -118,3 +118,33 @@ ConcurrentHashMap: thread safe, fail safe, doesn't allow storing null keys and v
 We Can Synchronize a HashMap using Collections then why can't we use that instead using ConcurrentHashMap?
 Ans : if we used Collections.synchronizedMap(map) it will act as a synchronized Hashtable only where again locking mechanism is different
 Refer: ConcurrentHashMapvsHashTable.jpg
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+The choice between TreeMap and HashMap in Java depends on the specific requirements and characteristics of your application. Here are some considerations:
+
+1. Ordering:
+   - TreeMap: Elements are stored in sorted order based on their keys. If you need the elements to be sorted according to the natural order of the keys or a custom comparator,
+   TreeMap is the appropriate choice.
+   - HashMap: Elements are not ordered. If the order of elements is not important or if you need faster insertion, deletion, and retrieval of elements without considering their order,
+   HashMap is more suitable.
+
+2. Performance:
+   - TreeMap: Insertion, deletion, and retrieval operations have a time complexity of O(log n) due to the underlying Red-Black Tree structure used for maintaining sorted order.
+    This makes TreeMap suitable for scenarios where the number of elements is relatively small or where the need for sorted order outweighs performance concerns.
+   - HashMap: In general, insertion, deletion, and retrieval operations have an average time complexity of O(1) (constant time). HashMap provides better performance for large
+    datasets or scenarios where order is not a concern.
+
+3. Memory Overhead:
+   - TreeMap: Requires additional memory overhead to store the Red-Black Tree structure for maintaining sorted order.
+   - HashMap: Generally has lower memory overhead compared to TreeMap because it doesn't need to maintain any specific order.
+
+4. Key Immutability:
+   - TreeMap: Requires keys to be immutable or at least consistent during the time they are used as keys in the map. This is because the sorting order relies on the keys.
+   - HashMap: More flexible with key mutability because it doesn't rely on sorting keys.
+
+5. Custom Sorting:
+   - TreeMap: Allows you to specify a custom comparator to define the sorting order of keys.
+   - HashMap: Doesn't offer built-in support for custom sorting. If you need custom sorting, you would need to sort the keys externally and then perform operations on the map.
+
+In summary, use TreeMap when you need elements sorted according to their keys, and the additional overhead and slightly slower performance are acceptable.
+ Use HashMap when ordering is not important, and you prioritize faster insertion, deletion, and retrieval operations, especially for large datasets.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
