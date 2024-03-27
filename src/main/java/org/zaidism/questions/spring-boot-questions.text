@@ -249,7 +249,7 @@ Here are five commonly used Stereotype annotations in Spring:
        - Usage: Used in the presentation layer to handle HTTP requests and generate responses.
     2. @RestController:
        - Purpose: Specialization of `@Controller` for RESTful web services. It combines `@Controller` and `@ResponseBody`.
-       - Usage: Used to create RESTful web services that return  or XML responses.
+       - Usage: Used to create RESTful web services that return JSON or XML responses.
     3. @Service:
        - Purpose: Marks a class as a service bean in the business layer.
        - Usage: Used to define business logic and transactional methods.
@@ -882,14 +882,14 @@ Here's the difference:
 - @Controller: This annotation is used to mark a class as a controller in Spring MVC. It is typically used to create web applications that return views (HTML pages) to the client.
 
 - @RestController: This annotation is a convenience annotation that combines `@Controller` and `@ResponseBody`. It is used to create RESTful web services that return data
-  (such as , XML, etc.) directly to the client, rather than rendering a view.
+  (such as JSON, XML, etc.) directly to the client, rather than rendering a view.
 
-In the scenario of designing REST endpoints to return  or XML data (like in our example of fetching products), it's more appropriate to use `@RestController`
+In the scenario of designing REST endpoints to return  JSON or XML data (like in our example of fetching products), it's more appropriate to use `@RestController`
 because it automatically serializes the return value of the controller methods into the response body. This eliminates the need for an explicit `@ResponseBody` annotation on each method.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-How can we deserialize a  request payload into an object within a Spring MVC controller ?
+How can we deserialize a JSON request payload into an object within a Spring MVC controller ?
 
-We can use the `@RequestBody` annotation to deserialize a  request payload into an object within a controller method. Here's how you can use it:
+We can use the `@RequestBody` annotation to deserialize a JSON request payload into an object within a controller method. Here's how you can use it:
 
 
 @RestController
@@ -897,14 +897,14 @@ public class MyController {
 
     @PostMapping("/api/endpoint")
     public ResponseEntity<?> handleRequest(@RequestBody MyRequestObject requestObject) {
-        // Here, requestObject will contain the deserialized  payload
+        // Here, requestObject will contain the deserialized JSON payload
         // You can now process the requestObject and return a response
         return ResponseEntity.ok("Request received successfully");
     }
 }
 
-In this example, `MyRequestObject` is a POJO (Plain Old Java Object) representing the structure of the  payload. When a POST request is sent to the `/api/endpoint`
-endpoint with a  payload in the request body, Spring automatically deserializes the  into an instance of `MyRequestObject` and passes it as an argument
+In this example, `MyRequestObject` is a POJO (Plain Old Java Object) representing the structure of the JSON payload. When a POST request is sent to the `/api/endpoint`
+endpoint with a JSON payload in the request body, Spring automatically deserializes the JSON into an instance of `MyRequestObject` and passes it as an argument
 to the `handleRequest` method.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Can we perform update operation in POST http method if yes then why do we need Put Mapping or put http method? //
@@ -972,7 +972,7 @@ How can we perform content negotiation (XML/) in Rest endpoint ?
 
 Let's consider a practical example of content negotiation in a Spring Boot RESTful API for a simple bookstore.
 
-Suppose we have a `Book` entity with attributes like `id`, `title`, `author`, and `isbn`. We want our API to support both  and XML representations
+Suppose we have a `Book` entity with attributes like `id`, `title`, `author`, and `isbn`. We want our API to support both JSON and XML representations
 of `Book` objects based on client preferences.
 
 Here's how you can implement content negotiation in such an API:
@@ -1010,7 +1010,7 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
 
-    @GetMapping(produces = {MediaType.APPLICATION__VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public List<Book> getAllBooks() {
         // Assume books are fetched from a service or repository
         return Arrays.asList(
@@ -1020,7 +1020,7 @@ public class BookController {
     }
 }
 
-In this controller, we use the `@GetMapping` annotation with the `produces` attribute to specify that this endpoint can produce both  and XML responses.
+In this controller, we use the `@GetMapping` annotation with the `produces` attribute to specify that this endpoint can produce both JSON and XML responses.
 
 3. Configure content negotiation in application properties:
 
@@ -1028,18 +1028,18 @@ properties
  application.properties
 spring.mvc.contentnegotiation.favor-path-extension=false
 spring.mvc.contentnegotiation.favor-parameter=true
-spring.mvc.contentnegotiation.defaultContentType=application/
-spring.mvc.converters.preferred--mapper=jackson
+spring.mvc.contentnegotiation.defaultContentType=application/json
+spring.mvc.converters.preferred-json-mapper=jackson
 spring.jackson.serialization.indent_output=true
 
 
-Here, we configure Spring Boot to prefer content negotiation based on the request parameter (`favor-parameter=true`) and set the default content type to 
-(`defaultContentType=application/`).
+Here, we configure Spring Boot to prefer content negotiation based on the request parameter (`favor-parameter=true`) and set the default content type to JSON
+(`defaultContentType=application/json`).
 
 4. Testing the API:
-Now, clients can request books in either  or XML format by specifying the `Accept` header in their requests. For example:
+Now, clients can request books in either JSON or XML format by specifying the `Accept` header in their requests. For example:
 
-- To get  representation: `curl -H "Accept: application/" http://localhost:8080/books`
+- To get JSON representation: `curl -H "Accept: application/json" http://localhost:8080/books`
 - To get XML representation: `curl -H "Accept: application/xml" http://localhost:8080/books`
 
 By using content negotiation, our API can seamlessly support multiple formats, allowing clients to choose the representation that best suits their needs.
