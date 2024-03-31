@@ -192,7 +192,7 @@ How to design microservices?
  application without affecting the whole thing.
 
 3. Decentralized Setup: In microservices, each service handles its own work without relying too much on others. This prevents one problem from affecting the entire system.
-s
+
 4. Using Different Technologies: It's okay for different microservices to use different programming languages or tools. This lets each service use the best tools for its job.
 
 5. Separate Everything: Each microservice should be developed, deployed, and managed on its own. This makes it easier to work on and change parts of the application without
