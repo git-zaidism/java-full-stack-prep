@@ -128,3 +128,10 @@ https://medium.com/geekculture/resolve-hibernate-n-1-problem-f0e049e689ab
 124. how to solve producer consumer problem in java using wait and notify
 125. Producer Consumer implementation by both wait / notify and BlockingQueue.
 126. What are the view in database what's their use?
+127. How to handle concurrency in distributed system or microservices
+128. PUT vs PATCH
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+good to have question:
+
+Logging in spring boot in details: https://www.youtube.com/watch?v=bphMYrTv8pA
