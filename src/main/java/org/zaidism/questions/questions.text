@@ -140,6 +140,13 @@ https://medium.com/geekculture/resolve-hibernate-n-1-problem-f0e049e689ab
 134. How in your current project configuration in externalize for microservices?
 135. How garbage collector works in java.
 136. What if my thread pool size is 100 and i got 100 request during a time so how my application behave and what will be my approach to solve the issue around this?
+137. How can I ensure immediate response in my microservice or Spring Boot project when using multithreading? I need the response of a thread as soon as its task is
+completed. What approach can be taken to achieve this? Consider the fact that the `run` method of the `Runnable` interface does not return anything.
+ What alternative can be used in this scenario? // ans callable, executor service, completable future
+138. How to map a table many to many like student and course in JPA also highlight use of "Mapped by".
+139. Explain all annotation and properties requires to implement circuit breaker , service registry/discovery and API gateway.
+140. Explain orchestration and choreography.
+141. write a jpa method to fetch list of employees based on their age and salary without any query? //    List<Employee> findByAgeAndSalary(int age, double salary);
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 good to have question:
 
