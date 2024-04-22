@@ -10,12 +10,12 @@
 10. Explain the SOLID principles in software design. //////////
 11. Provide a real-time example while explaining a design pattern. ///
 12. Comment on the differences between JPA queries and native queries. //@Query(native = true)
-13. Describe the use of `@Transactional` in Java.
+13. Describe the use of `@Transactional` with it's propagation types.
 14. Elaborate on Hibernate cache, its types, and benefits.  //////////
 15. Explain the concepts related to access specifiers in Java.
 16. Compare `Comparator` and `Comparable` and discuss which is preferable.
 17. Explain the usage and benefits of the `AtomicInteger` class.  //////////
-18. Define Service registry/discovery and discuss its advantages.  //////////
+18. Define Service registry/discovery and discuss its advantages and how to implement it.  //////////
 19. What is an API gateway, and how does it provide benefits?
 20. Provide a detailed explanation of synchronization in Java.
 21. Compare ArrayList and LinkedList in terms of initial capacity and dynamic resizing.  //////////
@@ -147,6 +147,11 @@ completed. What approach can be taken to achieve this? Consider the fact that th
 139. Explain all annotation and properties requires to implement circuit breaker , service registry/discovery and API gateway.
 140. Explain orchestration and choreography.
 141. write a jpa method to fetch list of employees based on their age and salary without any query? //    List<Employee> findByAgeAndSalary(int age, double salary);
+142. How to implement rate limiter in circuit breaker?
+143. What is the internal data structure of hashmap? // array of Linked List
+144. Explain idempotency in details
+145. Difference between collection and stream
+146. What is the use of parallel stream and how it is different from stream.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 good to have question:
 
