@@ -1,0 +1,204 @@
+Java:
+
+1. What is a marker interface in Java, and why is it used? Provide examples like Serializable and Cloneable.
+2. Explain Object-Oriented Programming (OOP) concepts with real-world examples.
+3. When should you use an abstract class, and when should you use an interface? // abstract classes can have constructors
+4. Discuss the potential issues if HashMap generates the same hashcode for different keys. Provide insights into the internal workings of HashMap.
+5. Elaborate on the roles of `hashCode` and `equals` methods in Java.
+6. Create a thread-safe Singleton class and explain its implementation. When do we use a Singleton class? How to prevent singleton design from reflection, serialization and clone?
+7. Can static methods be overloaded? Can they be overridden?
+8. Explain the Diamond Problem in inheritance.
+9. Explain the concepts related to access specifiers in Java.
+10. Compare `Comparator` and `Comparable` and discuss which is preferable.
+11. Explain the usage and benefits of the `AtomicInteger` class.  //////////
+12. How many way in which synchronization can be achieved in Java.
+13  How many ways by which we can create objects in Java, also explain reflection API.
+14. Compare ArrayList and LinkedList in terms of initial capacity and dynamic resizing.  //////////
+15. Perform a complexity analysis of any given code.
+16. Explain the Optional class in Java 8, its uses, and how it helps avoid null pointer exceptions.
+17. In what situations can we use static and default methods of a functional interface, and what is their purpose?
+18. Why do we use method reference in Java?  //////////
+19. Provide a detailed explanation of lambda expressions in Java.
+20. Elaborate on the usage of `super` and `this` keywords in Java.
+29. Create a reusable predicate in Java
+30. Elaborate functional interface introduced in java 8 with their use in real time.
+31. How to achieve Inter-thread communication why notify and wait methods are in object class  //////////
+32. Explain Static member/function/classes when to use these
+33. Which way of implementing thread is better and why?
+34. CompletableFuture, ExecutorService, Callable why they are being used.
+35. What is an Immutable class how to create it? when do we use it?
+36. Capacity method of hashmap vs size method
+37. Why default and static method introduced in java 8?
+38. What is flatmap()/flattering where can we use it
+39. Can we extend one functional interface into another functional interface
+40. Difference between stream and collections
+41. Terminal and Intermediate operations in java
+42. How to create object in java other than new keyword. How many ways to create object also explain Reflection API.
+42. Explain Exception Hierarchy
+43. How to write join queries in JPA.
+44. Can multiple objects be created due to Serializablity even if class is singleton?
+45. fail safe and fail fast iterator
+46. Explain Java garbage collection: https://www.youtube.com/watch?v=XXOaCV5xm9s
+47. Runnable vs Callable in Java MultiThreading
+48. Explain Generics in Java. Why it is being used and what are the good practices.
+49. Explain date time classes introduced in java 8 also explain Instant class Java
+50. Can you explain the concept of a Blocking Queue in Java?
+51. Why double checking required in singleton design pattern?
+52. What are Enums and why they are being used and enums are singleton?
+53. Shallow vs deep cloning in java
+54. How to solve producer consumer problem in java using wait and notify
+55. Explain pass by value vs pass by reference with respect to objects in java
+56. Explain use of Stack memory vs Heap memory in java.
+57. Why functional interface has only one abstract methods?
+58. Why function, predicate, consumer, bi-function etc these functional interfaces are provided by java if we can create our own?
+59. What is the internal data structure of hashmap? // array of Linked List
+60. Difference between collection and stream
+61. What is the use of parallel stream and how it is different from stream.
+62. Why strings are immutable in Java.
+63. Difference between HashMap vs ConcurrentHashMap vs HashTable
+64. Explain internal working of HashMap
+65. Explain these keywords in java final, super, this with their use
+65. What will happen if i create final array list?
+66. String vs String Builder vs String Buffer
+67. Explain Access modifiers in Java
+68. Composition in Java
+69. What is a Comparable & Comparator in Java
+70. Internal changes in hashmap after java 8
+71. Explain static block.
+72. Why is the remove method faster in the linked list than in an arraylist?
+73. How does the size of Arraylist grow dynamically? And also state how it is implemented internally?
+74. What are the differences between constructor and method of a class in Java.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Spring Boot, JPA, Hibernate, Maven, Security, Rest API & Microservices
+
+1. Discuss the Saga Design pattern and compare orchestration versus choreography.
+2. Comment on the differences between JPA queries and native queries. //@Query(native = true)
+3. Describe the use of `@Transactional` with it's propagation types.
+4. Elaborate on Hibernate cache, its types, and benefits.  //////////
+5. Define Service registry/discovery and discuss its advantages and how to implement it.  //////////
+6. What is an API gateway, and how does it provide benefits?
+7. Explain @Qualifier in spring boot
+8. Spring bean life cycle in detail
+9. What is IOC, DI and why it used.
+10. @Controller vs @RestController. ResponseEntity, RequestBody
+11. @QueryParam vs @RequestParam vs @PathVariable when to use these?
+12. PATCH VS PUT vs POST what is different where can we use these
+13. Dispatcher servlet it's functionality
+14. Actuators what is the use
+15. @SpringBootApplication annotation explain
+16. Some status code with their meaning 404 (path not found or resource not found), 400, 500, 201, 200, 204 etc etc..
+17. JPA Mapping one to one, one to many, many to one, many to many in detail
+18. Caching in spring boot through in memory and redis explain and also explain @Cacheable and @CacheEvict.
+19. Caching in hibernate or internal implementation
+20. How to implement Spring security authentication and authorization, Explain JWT
+21. OAuth explain (Key clock)
+22. Pagination in spring for performance.  //////////
+23. What are the ways to handle exception in spring and which is better?
+24. What transient keyword what is it's use?
+25. Explain Lazy & Eager loading in spring boot
+26. Explain @Valid annotation.
+27. Life cycle of a spring bean
+28. Explain Dialect in used in application.properties/yml in spring boot project
+29. How many way by which we can create bean in spring and which annotation is required to register bean once created.? //component scan
+30. Explain various Components of Microservice architecture.
+31, How the REST APIs are difference from HTTP API?
+32. What command is used in Maven to perform a release?
+33. Can you describe the life cycle of a Maven project?
+34. Can you explain the Hibernate N+1 problem? (https://www.javacodemonk.com/n-1-problem-in-hibernate-spring-data-jpa-894097b9) https://medium.com/geekculture/resolve-hibernate-n-1-problem-f0e049e689ab
+35. What are the differences between Hibernate Level 1 and Level 2 caching?
+36. Can you explain the different states of an object in Hibernate, including transient, persistent, detached, and removed?
+37. Could you explain how JWT (JSON Web Tokens) is implemented in Spring Security?
+38. What is the SAGA design pattern and how is it used in distributed systems?
+39. What is the Circuit Breaker pattern and how does it enhance system resilience?
+40. How to create custom actuator in spring boot?
+41. Explain how to implement spring batch and where it can be used?
+42  save vs saveOrUpdate method in hibernate
+43. get vs load method in hibernate
+44. save vs save and saveAndFlush method
+45. How to handle concurrency in distributed system or microservices
+46. PUT vs PATCH
+47. In a table/entity i want all the audit columns line created by, modified date should get automatically how to achieve this?
+48. How to find out logs for single request in a microservice architecture?
+49. How circuit pattern and CQRS pattern helps in microservice architecture?
+50. How in your current project configuration in externalize for microservices?
+52. How to map a table many to many like student and course in JPA also highlight use of "Mapped by".
+53. Explain all annotation and properties requires to implement circuit breaker, service registry/discovery and API gateway.
+54. Explain orchestration and choreography.
+55. write a jpa method to fetch list of employees based on their age and salary without any query? //    List<Employee> findByAgeAndSalary(int age, double salary);
+56. How to implement rate limiter in circuit breaker?
+57. Explain AOP in details what are the cross cutting concerns that can be added as a part of AOP implementation in your projects.
+58. How to handle exception in spring boot?
+59. How to write API that upload files?
+60. Explain in how many ways we can achieve inter service communication?
+61. Use of spring boot profiles and how it can be implemented.
+62. In mockito or Junit testing tell me about these methods init, setup, any.
+63. Why mockito is used? Write a Junit or a mockito Test
+64. Use of @SpringBootTest and @Test in spring boot.
+65. Explain step by step what happen when we run spring boot app.
+66, How to run spring boot app from command line and how to run spring boot app with multiple instance locally with different port
+67. What should be the response status of delete api if it returns nothing as response or if it return the deleted item as response
+68. How can you enable cross origin ? How to avoid authentication and authorization for specific API
+69. How many ways we can perform dependency injection in spring or spring boot ? (fields, contractor, setter)
+70. Where you would choose to use setter injection over constructor injection, and vice versa ? (immutable, partial injection)
+71. run method of command line runner vs @PostConstruct and @PostConstruct
+72. Explain advantages of yml file over properties file
+73. Explain @Value annotation
+74. Explain bean scopes in spring boot
+75. Can we inject prototype bean in singleton bean ? if yes what will happen if we inject prototype bean in singleton bean ?
+76. Use of @Lookup in spring boot
+77. How can we perform content negotiation (XML/JSON) in Rest endpoint ?
+78. Returning direct java object is better or returning response entity is better and reason why?
+79. What is the difference between @Profile & @ConditioOnXXX ?
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Design and Scenario Based
+
+1. Explain the SOLID principles in software design.
+2. Provide a real-time example while explaining a design pattern.
+3. What is an Immutable class how to create it? when do we use it?
+4. Dependency Inversion principle in SOLID
+5. Explain TDD and BDD
+6. What is abstract factory design pattern or explain design pattern that you have used at least 4-5
+7. What if my thread pool size is 100 and i got 100 request during a time so how my application behave and what will be my approach to solve the issue around this?
+8. How can I ensure immediate response in my microservice or Spring Boot project when using multithreading? I need the response of a thread as soon as its task is
+   completed. What approach can be taken to achieve this? Consider the fact that the `run` method of the `Runnable` interface does not return anything.
+   What alternative can be used in this scenario? // ans callable, executor service, completable future
+9. Explain idempotency in details
+10. Explain AWS services used AWS secret manager, RDS, CloudWatch, Iam, AWS API gateway, ECS, EKS.
+11. Explain Jenkins pipeline of your project how code gets deployed in different environment.
+12. What is docker compose.
+13. How frontend code deployed to production
+14. What is soft deletes and In which scenarios soft deletes are required?
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Frontend/Angular
+
+1. What are the methods for transferring data between parent-child components and non-parent-child components in Angular?  //////////
+2. Discuss the lifecycle hooks in Angular.  //////////
+3. Explain the differences between Node.js and npm.
+4. Compare promises and observables in Angular.  //////////
+5. Clarify the differences between ngOnInit and the constructor in Angular.
+6. What are the different types of directives in Angular?
+7. What are the differences between Observables and Promises in Angular?
+8. How do you handle errors in Angular applications?
+9. What is the difference between AOT (Ahead-of-Time) and JIT (Just-in-Time) compilers in Angular?
+10. What are Angular lifecycle hooks used for?
+11. Which part of angular application do you think would be the best fit for implementing client side caching? //component or service or something else
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Database
+
+1. What are the distinctions between inner queries and joins?
+2. How to write join queries. Explain all joins in SQL.
+3. What are the variances between indexes and primary keys?
+4. Can we apply an index to a primary key, or is it applied by default?  //////////
+5. Explain ACID properties
+6. Explain CAP theorem
+7. What are indexed and how to create indexes and can we add indexed on primary key column or we can apply index on any column? What is the recommended way.
+8. Why are stored procedures used in database management?
+9. What are the view in database what's their use?
+10. Write a query to Find 3rd highest salary from the employee table
+11. DDL vs DML commands
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
