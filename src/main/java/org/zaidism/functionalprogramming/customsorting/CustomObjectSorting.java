@@ -52,7 +52,14 @@ public class CustomObjectSorting {
      dateComparator = Comparator.comparing(Employee::getBirthDate); //java 11 onwards
     Collections.sort(employees, dateComparator);
     printEmployees(employees, "Using comparator with lambda");
-  }
 
+    // multiple sorting criteria
+    employees.stream()
+        .sorted(
+            Comparator.comparing(Employee::getId)
+                .thenComparing(Employee::getName)
+                .thenComparing(Employee::getSalary))
+        .forEach(System.out::println);
+  }
 
 }
