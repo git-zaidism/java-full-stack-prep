@@ -68,6 +68,7 @@ Java:
 72. Why is the remove method faster in the linked list than in an arraylist?
 73. How does the size of Arraylist grow dynamically? And also state how it is implemented internally?
 74. What are the differences between constructor and method of a class in Java.
+75. What are wildcards in java what's their use?
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Spring Boot, JPA, Hibernate, Maven, Security, Rest API & Microservices
@@ -150,6 +151,9 @@ Spring Boot, JPA, Hibernate, Maven, Security, Rest API & Microservices
 77. How can we perform content negotiation (XML/JSON) in Rest endpoint ?
 78. Returning direct java object is better or returning response entity is better and reason why?
 79. What is the difference between @Profile & @ConditioOnXXX ?
+80. Explain profiles in spring boot?
+81. Explain disadvantage of microservice architecture?
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Design and Scenario Based
@@ -170,6 +174,10 @@ Design and Scenario Based
 12. What is docker compose.
 13. How frontend code deployed to production
 14. What is soft deletes and In which scenarios soft deletes are required?
+15. Explain Idempotency in API.
+16. If service A method intiatePayment() calling service B method named as doPayment() which internally call updateLatestBalanceAfterPayment() and i want call
+    from intiatePayment() method to be syncrrnized // need to complete this question
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Frontend/Angular
