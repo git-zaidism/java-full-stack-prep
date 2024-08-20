@@ -136,5 +136,5 @@ In Java concurrency, these concepts are also relevant but are managed differentl
 - **Consistency** is often ensured through proper synchronization to maintain invariants.
 - **Isolation** is achieved through synchronization mechanisms that prevent concurrent threads from interfering with each other's operations.
 - **Durability**, while not directly addressed in Java concurrency, is typically handled at the database level or through other means such as logging and checkpointing.
-```
+
 
