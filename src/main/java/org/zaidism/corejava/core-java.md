@@ -124,4 +124,3 @@ In Java, cloning refers to creating a copy of an object. There are two main type
 - **Description:** Deep cloning creates a
 
  new object and recursively copies all fields of the original object, including any objects referenced by the fields. This means that all objects within the original object hierarchy are duplicated. As a result, the cloned object and the original object are entirely independent of each other, and changes made to one object won't affect the other.
-```
