@@ -66,3 +66,13 @@ It states that "Clients should not be forced to implement unnecessary methods wh
 The Dependency Inversion Principle asserts that rather than real implementations, we should rely on abstractions (interfaces and abstract classes). Details should not be dependent on abstractions; rather, abstractions should be dependent on details.
 
 ---
+
+## Playlists:
+
+➡️ [LLD](https://lnkd.in/dJkgzKxf) (some videos are in Hindi, rest in English)
+
+➡️ [HLD](https://lnkd.in/d8eDwYVA) (some videos are in Hindi, rest in English)
+
+➡️ [Spring Boot](https://lnkd.in/gz2A5ih2) (All videos are in English)
+
+---
