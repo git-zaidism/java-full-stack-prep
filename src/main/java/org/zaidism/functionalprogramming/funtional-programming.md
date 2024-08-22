@@ -206,6 +206,4 @@ These interfaces were introduced to extend the functionality of their single-arg
 
 Refer to `PartitioningBy.java`.
 
-`Collectors.partitioningBy` is a collector that partitions the elements of a stream into two groups based on a boolean condition. It takes a predicate as an argument, which evaluates to true or false for each element in the stream. It returns a `Map<Boolean, List<T
-
->>`, where the keys are true and false, and the values are lists of elements that satisfy the condition (true key) and elements that do not satisfy the condition (false key).
+`Collectors.partitioningBy` is a collector that partitions the elements of a stream into two groups based on a boolean condition. It takes a predicate as an argument, which evaluates to true or false for each element in the stream. It returns a `Map<Boolean, List<T>>`, where the keys are true and false, and the values are lists of elements that satisfy the condition (true key) and elements that do not satisfy the condition (false key).
