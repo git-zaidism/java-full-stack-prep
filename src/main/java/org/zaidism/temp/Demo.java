@@ -8,6 +8,5 @@ public class Demo {
     int arr[] = {2,2,4,24,121,1};
     int[] array = IntStream.of(arr).distinct().toArray();
     System.out.println(Arrays.toString(array));
-
   }
 }
