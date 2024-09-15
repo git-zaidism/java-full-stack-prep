@@ -1,3 +1,5 @@
+package org.zaidism.dsalgo.array;
+
 public class ArraySorted {
     public static void main(String[] args) {
         int[] arr = {0, 0, 12, 13, 14, 14, 15, 16};

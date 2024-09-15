@@ -1,10 +1,10 @@
-package org.zaidism.practice.dsa.array;
+package org.zaidism.dsalgo.array;
 
 import java.util.Arrays;
 
 public class LargestElement {
   public static void main(String[] args) {
-    int arr[] = {1, 43, 90, 98, 100, 239, 1, 0, -1};
+    int[] arr = {1, 43, 90, 98, 100, 239, 1, 0, -1};
     int max1 = getMaximumElements(arr);
     System.out.println("Largest Element from array is " + max1);
     int max2 = getMaximumElementsUsingStream(arr);
