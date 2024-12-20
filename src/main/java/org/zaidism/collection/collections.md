@@ -1,3 +1,27 @@
+
+### Summary Table:
+
+| Collection Type          | Collection Class              | Thread-Safety       | Key Characteristics                                         |
+|--------------------------|-------------------------------|---------------------|-------------------------------------------------------------|
+| **List**                 | `ArrayList`                   | Not thread-safe     | Fast random access, slow insertions/removals                |
+|                          | `LinkedList`                  | Not thread-safe     | Fast insertions/removals at both ends, slow random access   |
+|                          | `Vector`                      | Thread-safe         | Synchronized, slower than `ArrayList`                       |
+|                          | `CopyOnWriteArrayList`        | Thread-safe         | Fail-safe iteration, slow writes, fast reads                |
+| **Set**                  | `HashSet`                     | Not thread-safe     | Unordered, no duplicates                                    |
+|                          | `LinkedHashSet`               | Not thread-safe     | Maintains insertion order, no duplicates                     |
+|                          | `TreeSet`                     | Not thread-safe     | Sorted order, no duplicates                                 |
+|                          | `CopyOnWriteArraySet`         | Thread-safe         | Fail-safe iteration, slow writes, fast reads                |
+| **Map**                  | `HashMap`                     | Not thread-safe     | Unordered, allows null keys/values                          |
+|                          | `LinkedHashMap`               | Not thread-safe     | Maintains insertion order                                   |
+|                          | `TreeMap`                     | Not thread-safe     | Sorted by keys, no null keys                                |
+|                          | `Hashtable`                   | Thread-safe         | Synchronized, no null keys/values                           |
+|                          | `ConcurrentHashMap`           | Thread-safe         | Fine-grained locking, better performance in multi-threading |
+|                          | `WeakHashMap`                 | Not thread-safe     | Uses weak references for keys, suitable for caches          |
+|                          | `IdentityHashMap`             | Not thread-safe     | Compares keys by reference equality                         |
+
+---
+
+
 # Internal Working of HashMap
 
 ## HashMapExample.java
