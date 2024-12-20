@@ -45,13 +45,13 @@ The average case complexity of insertions, updates, and deletions in a HashMap i
 
 ---
 
-## HashMap vs ConcurrentHashMap
+## HashTable vs ConcurrentHashMap
 
-| ConcurrentHashMap                       | Hashtable                                    |
-|----------------------------------------|----------------------------------------------|
-| Multiple Segments for Concurrency      | Single Global Lock for Synchronization       |
-| (Divides Map into Segments, Each        |                                              |
-| with Independent Lock)                  |                                              |
+| ConcurrentHashMap                       | HashTable                              |
+|----------------------------------------|----------------------------------------|
+| Multiple Segments for Concurrency      | Single Global Lock for Synchronization |
+| (Divides Map into Segments, Each        |                                        |
+| with Independent Lock)                  |                                        |
 
 
 ---
