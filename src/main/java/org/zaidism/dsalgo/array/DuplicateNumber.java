@@ -11,6 +11,7 @@ public class DuplicateNumber {
     int[] nums = {3, 1, 4, 9};
     int[] duplicates = findUniqueElements(nums);
     Arrays.stream(duplicates).forEach(System.out::println);
+    System.out.println(isDuplicate(arr));
   }
 
   static int[] findDuplicate(int[] nums) {
@@ -37,5 +38,30 @@ public class DuplicateNumber {
       return uniqueElements;
     }
   }
+
+   private static int isDuplicate(int[] arr) {
+        Set<Integer> numSet = new HashSet<>();
+        for (int i : arr) {
+            if (!numSet.contains(arr[i])) {
+                numSet.add(i);
+            } else {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+     public static int findDuplicate(int[] nums) {
+        Set<Integer> numSet = new HashSet<>();
+
+        for (int num : nums) {
+            if (!numSet.add(num)) {
+                return num;
+            } else {
+                numSet.add(num);
+            }
+        }
+        return -1;
+    }
 }
 
