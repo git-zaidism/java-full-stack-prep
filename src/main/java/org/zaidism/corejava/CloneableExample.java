@@ -11,8 +11,15 @@ class CloneableExample implements Cloneable { // if we remove this market interf
     return data;
   }
 
+  // If you do not override clone(), calling clone() from within the same class works
+  // because Object.clone() is protected and accessible inside the class and its subclasses.
+
+  // If you try to call clone() from another class (like CloningTechniques.java),
+  // you get a compile-time error because clone() is not visible (still protected in Object).
+
+  // Overriding clone() and making it public or protected allows access from outside the class.
   @Override
-  protected Object clone() throws CloneNotSupportedException { //not always optional refer this code if we don't override this will get error in this code CloningTechniques.java
+  protected Object clone() throws CloneNotSupportedException {
     return super.clone();
   }
 
@@ -20,7 +27,7 @@ class CloneableExample implements Cloneable { // if we remove this market interf
     try {
       CloneableExample originalObj = new CloneableExample("Hello, Cloneable!");
 
-      // Cloningv
+      // Cloning
       CloneableExample clonedObj = (CloneableExample) originalObj.clone();
 
       // Output

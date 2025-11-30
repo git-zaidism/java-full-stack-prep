@@ -9,9 +9,9 @@ class CustomException extends Exception {
   }
 
   // optional  Constructor with a message and a cause
-  public CustomException(String message, Throwable cause) {
-    super(message, cause);
-  }
+//  public CustomException(String message, Throwable cause) {
+//    super(message, cause);z
+//  }
 }
 
 public class CustomExceptionExample {

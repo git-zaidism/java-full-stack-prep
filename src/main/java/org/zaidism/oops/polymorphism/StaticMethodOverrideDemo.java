@@ -10,7 +10,8 @@ class Subclass extends Superclass {
 
    // @Override //this will give error as static methods can't be override
     static void staticMethod() {
-        System.out.println("Subclass static method");
+        System.out.println("Subclass static method"); //This behavior is called method hiding, not overriding.
+
     }
 }
 
@@ -28,6 +29,10 @@ public class StaticMethodOverrideDemo {
         // subclass. we will not get option to call any method
     }
 }
+
+
+//Overriding implies runtime polymorphism, where a subclass’s instance method replaces a superclass’s method when invoked on the subclass instance.
+//Static methods are bound at compile time, not at runtime, so true overriding doesn’t apply.
 
 // In the example above, the staticMethod in the Subclass hides the staticMethod in the Superclass.
 // However, when using a reference of the superclass to refer to an object of the subclass, the

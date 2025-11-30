@@ -76,82 +76,82 @@ In Java, both `ConcurrentHashMap` and `Hashtable` are part of the Java Collectio
 ### 1. **Thread Safety**
 
 - **ConcurrentHashMap**:
-   - **Thread-safe** for concurrent operations.
-   - Unlike `Hashtable`, it allows multiple threads to read and write to the map simultaneously, but with a mechanism that ensures thread safety.
-   - **Concurrency Level**: It divides the map into segments (buckets) and allows multiple threads to access different segments simultaneously, improving performance in multi-threaded environments.
-   - Operations like `get()`, `put()`, and `remove()` are thread-safe, but not all operations are synchronized at the same level. This makes `ConcurrentHashMap` more scalable than `Hashtable`.
+    - **Thread-safe** for concurrent operations.
+    - Unlike `Hashtable`, it allows multiple threads to read and write to the map simultaneously, but with a mechanism that ensures thread safety.
+    - **Concurrency Level**: It divides the map into segments (buckets) and allows multiple threads to access different segments simultaneously, improving performance in multi-threaded environments.
+    - Operations like `get()`, `put()`, and `remove()` are thread-safe, but not all operations are synchronized at the same level. This makes `ConcurrentHashMap` more scalable than `Hashtable`.
 
 - **Hashtable**:
-   - **Thread-safe**, but all its methods are synchronized on the entire map, meaning only one thread can access a method at a time.
-   - This can cause performance bottlenecks in highly concurrent environments as the entire map is locked during each operation.
-   - Synchronization occurs at the method level, meaning that when one thread is modifying the map, all other threads are blocked.
+    - **Thread-safe**, but all its methods are synchronized on the entire map, meaning only one thread can access a method at a time.
+    - This can cause performance bottlenecks in highly concurrent environments as the entire map is locked during each operation.
+    - Synchronization occurs at the method level, meaning that when one thread is modifying the map, all other threads are blocked.
 
 ### 2. **Performance**
 
 - **ConcurrentHashMap**:
-   - Generally performs better in multi-threaded scenarios because it allows for concurrent reads and writes (due to its segmented locking mechanism).
-   - It uses **lock-striping** (dividing the map into smaller parts) to ensure that multiple threads can update different parts of the map without interfering with each other.
+    - Generally performs better in multi-threaded scenarios because it allows for concurrent reads and writes (due to its segmented locking mechanism).
+    - It uses **lock-striping** (dividing the map into smaller parts) to ensure that multiple threads can update different parts of the map without interfering with each other.
 
 - **Hashtable**:
-   - Performance can degrade significantly in multi-threaded environments due to its **synchronized method** approach, where only one thread can access the map at a time.
+    - Performance can degrade significantly in multi-threaded environments due to its **synchronized method** approach, where only one thread can access the map at a time.
 
 ### 3. **Null Keys and Values**
 
 - **ConcurrentHashMap**:
-   - **Does not allow null keys or values**. This is because allowing `null` could lead to ambiguities when a key or value is missing or an operation returns `null`.
-   - it throws a `NullPointerException` if you try to insert a `null` key or value.
+    - **Does not allow null keys or values**. This is because allowing `null` could lead to ambiguities when a key or value is missing or an operation returns `null`.
+    - it throws a `NullPointerException` if you try to insert a `null` key or value.
 
 - **Hashtable**:
-   - **Does not allow null keys or values** either. If you try to insert a `null` key or value, it throws a `NullPointerException`.
+    - **Does not allow null keys or values** either. If you try to insert a `null` key or value, it throws a `NullPointerException`.
 
 ### 4. **Iteration**
 
 - **ConcurrentHashMap**:
-   - Iteration over a `ConcurrentHashMap` is **thread-safe**. The collection can be modified by other threads while you are iterating, without causing `ConcurrentModificationException`.
-   - However, the iteration may not reflect all changes, as it provides a **weakly consistent** view of the map.
+    - Iteration over a `ConcurrentHashMap` is **thread-safe**. The collection can be modified by other threads while you are iterating, without causing `ConcurrentModificationException`.
+    - However, the iteration may not reflect all changes, as it provides a **weakly consistent** view of the map.
 
 - **Hashtable**:
-   - Iteration is not thread-safe. If the map is modified by another thread while you're iterating, it may cause inconsistent results or throw a `ConcurrentModificationException`.
+    - Iteration is not thread-safe. If the map is modified by another thread while you're iterating, it may cause inconsistent results or throw a `ConcurrentModificationException`.
 
 ### 5. **Use Cases**
 
 - **ConcurrentHashMap**:
-   - Ideal for situations where you need to perform high-concurrency read and write operations with minimal blocking.
-   - Commonly used in multi-threaded applications where high performance and scalability are important.
+    - Ideal for situations where you need to perform high-concurrency read and write operations with minimal blocking.
+    - Commonly used in multi-threaded applications where high performance and scalability are important.
 
 - **Hashtable**:
-   - Used in legacy applications where thread-safety and synchronization are required but concurrency and performance are not major concerns.
-   - It is now largely considered outdated, and developers typically prefer `ConcurrentHashMap` or other concurrent collections.
+    - Used in legacy applications where thread-safety and synchronization are required but concurrency and performance are not major concerns.
+    - It is now largely considered outdated, and developers typically prefer `ConcurrentHashMap` or other concurrent collections.
 
 ### 6. **API Differences**
 
 - **ConcurrentHashMap**:
-   - Offers additional methods for concurrency, such as:
-      - `putIfAbsent()`
-      - `remove()`
-      - `replace()`
-      - `computeIfAbsent()`
-      - `computeIfPresent()`
-   - These methods help manage concurrent modifications more effectively.
+    - Offers additional methods for concurrency, such as:
+        - `putIfAbsent()`
+        - `remove()`
+        - `replace()`
+        - `computeIfAbsent()`
+        - `computeIfPresent()`
+    - These methods help manage concurrent modifications more effectively.
 
 - **Hashtable**:
-   - Has basic `put()`, `get()`, and `remove()` methods, but lacks the more advanced concurrency features that `ConcurrentHashMap` provides.
+    - Has basic `put()`, `get()`, and `remove()` methods, but lacks the more advanced concurrency features that `ConcurrentHashMap` provides.
 
 ### 7. **Size and Resizing**
 
 - **ConcurrentHashMap**:
-   - It allows fine-grained control over resizing and automatically expands as needed without locking the entire map.
+    - It allows fine-grained control over resizing and automatically expands as needed without locking the entire map.
 
 - **Hashtable**:
-   - Resizing involves locking the entire map, which can impact performance, especially with larger data sets.
+    - Resizing involves locking the entire map, which can impact performance, especially with larger data sets.
 
 ### 8. **Legacy Status**
 
 - **ConcurrentHashMap**:
-   - Part of the **java.util.concurrent** package introduced in Java 5, designed to improve multi-threaded collection handling.
+    - Part of the **java.util.concurrent** package introduced in Java 5, designed to improve multi-threaded collection handling.
 
 - **Hashtable**:
-   - Considered **legacy** and is part of the original Java 1.0. While it is still supported, it is no longer recommended for new projects.
+    - Considered **legacy** and is part of the original Java 1.0. While it is still supported, it is no longer recommended for new projects.
 
 ---
 

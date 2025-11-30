@@ -5,11 +5,17 @@ import static org.zaidism.model.EmployeeProvider.printSeparation;
 
 class Person implements Cloneable {
     private String name;
-    private Address address;
+    private final Address address;
+    private int id;
 
     public Person(String name, Address address) {
         this.name = name;
         this.address = address;
+    }
+
+    public Person(String name, Address address, int id) {
+        this(name, address);
+        this.id = id;
     }
 
     @Override
@@ -85,6 +91,8 @@ public class CloningTechniques {
 
         // Changing city in the cloned object will affect the original object
         shallowClonedPerson.getAddress().setCity("Shallow Clone City");
+        String lowerCase = shallowClonedPerson.getName().toLowerCase();
+        shallowClonedPerson.setName(lowerCase);
         System.out.println("After Shallow Clone after making changes in shallow cloned Person: " + shallowClonedPerson);
         System.out.println("Original Person after shallow clone : " + originalPerson);
     }

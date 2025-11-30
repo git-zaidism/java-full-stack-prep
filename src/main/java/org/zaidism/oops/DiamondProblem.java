@@ -12,7 +12,8 @@ interface Carnivore {
   }
 }
 
-class DiamondProblem implements Herbivore, Carnivore {
+class DiamondProblem implements Herbivore, Carnivore { // Diamond Problem REFER MultipleInheritanceDemo
+
 
   @Override // commenting this entire method will give compilation error
   public void eat() {

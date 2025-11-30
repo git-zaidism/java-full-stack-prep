@@ -29,7 +29,7 @@ public class OptionalDemo {
 
     // Scenario 5: Providing a default name if the name is not present - Way 2
     nameFromDBWithOptional = getNameFromDBWithOptionalOfNullableWithOrElse();
-    String defaultName2 = nameFromDBWithOptional.orElseGet(() -> "default name from or else get");
+    String defaultName2 = nameFromDBWithOptional.orElseGet(() ->"default name from or else get");
     System.out.println("Output from orElseGet method: " + defaultName2.toUpperCase());
 
     // Scenario 6: Providing a default name if the name is not present - Way 3

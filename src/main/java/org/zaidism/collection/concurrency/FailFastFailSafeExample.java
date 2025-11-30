@@ -1,14 +1,12 @@
 package org.zaidism.collection.concurrency;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 public class FailFastFailSafeExample {
     public static void main(String[] args) {
         // Fail-Fast Example with ArrayList
-        CopyOnWriteArrayList<String> arrayList = new CopyOnWriteArrayList<>();
+        List<String> arrayList = new ArrayList<>();
         arrayList.add("item1");
         arrayList.add("item2");
         arrayList.add("item3");
@@ -26,7 +24,7 @@ public class FailFastFailSafeExample {
         }
 
 
-        // Fail-Fast Example with HashSet, FAIL SAFE: CopyOnWriteArraySet
+        // Fail-Fast Example with HashSet
         Set<String> hashSet = new HashSet<>();
         hashSet.add("item1");
         hashSet.add("item2");
@@ -40,11 +38,11 @@ public class FailFastFailSafeExample {
                 // Simulating modification during iteration
                 hashSet.add("item4");
             }
-        } catch (ConcurrentModificationException e) {
+        } catch (Exception e) {
             System.out.println("Fail-Fast with HashSet: " + e);
         }
 
-        // Fail-Fast Example with HashMap, FAIL SAFE: ConcurrentHashMap<>
+        // Fail-Fast Example with HashMap
         Map<String, String> hashMap = new HashMap<>();
         hashMap.put("key1", "value1");
         hashMap.put("key2", "value2");
@@ -58,7 +56,7 @@ public class FailFastFailSafeExample {
                 // Simulating modification during iteration
                 hashMap.put("key4", "value4");
             }
-        } catch (ConcurrentModificationException e) {
+        } catch (Exception e) {
             System.out.println("Fail-Fast with HashMap: " + e);
         }
     }
