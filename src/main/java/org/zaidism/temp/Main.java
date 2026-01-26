@@ -2,5 +2,7 @@ package org.zaidism.temp;
 
 
 public class Main {
-  public static void main(String[] args) {}
+  public static void main(String[] args) {
+      System.out.printf("s");
+  }
 }
