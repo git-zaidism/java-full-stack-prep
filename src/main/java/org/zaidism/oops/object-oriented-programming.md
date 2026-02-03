@@ -186,6 +186,7 @@ public Person(int newAge, String newName) {
 - Scenario 3: Overloading with a different order of parameters.
 - Scenario 4: Overloading with different return types (compilation error).
 - Scenario 5: Overloading static methods.
+- Overloading of final & private methods are allowed
 
 #### Key Rules:
 - Overloaded methods must have the same name.
@@ -193,7 +194,8 @@ public Person(int newAge, String newName) {
 - An attempt to overload the main method shows that only the standard `main(String[] args)` method is recognized as the entry point for the program.
 - Multiple main methods can be declared and overloaded, but only the standard `main(String[] args)` is recognized as the entry point.
 - JVM checks for only the main method which has signature `main(String[] args)` - only that method can be considered as entry point of the program, not the overloaded methods.
-- We can overload static methods but we need to use the class name to call static methods.
+- We can overload static methods, but we need to use the class name to call static methods.
+- Overriding of final & private methods are allowed
 
 ---
 
