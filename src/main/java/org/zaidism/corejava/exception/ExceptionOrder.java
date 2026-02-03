@@ -1,4 +1,4 @@
-package org.zaidism.exception;
+package org.zaidism.corejava.exception;
 
 public class ExceptionOrder {
     public static void main(String[] args) {

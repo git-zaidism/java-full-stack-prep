@@ -53,62 +53,6 @@ Let's break down why `private static final long serialVersionUID = 1L;` is used 
 
 ---
 
-# Why `String` is Immutable
-
-**Key points:**
-
-- String pool is possible only because `String` is immutable in Java. This way, Java Runtime saves a lot of heap space because different `String` variables can refer to the same `String` variable in the pool.
-
-- If `String` were not immutable, it would cause a severe security threat to the application. For example, database usernames and passwords are passed as `String` to get a database connection, and in socket programming, host and port details are passed as `String`. Since `String` is immutable, its value can't be changed; otherwise, any hacker could change the referenced value to cause security issues in the application.
-
-- Since `String` is immutable, it is safe for multithreading. A single `String` instance can be shared across different threads. This avoids the use of synchronization for thread safety.
-
-- Since `String` is immutable, its hash code is cached at the time of creation and doesn't need to be calculated again. This makes it a great candidate for the key in a `Map`, and its processing is faster than other `HashMap` key objects. This is why `String` is the most widely used as `HashMap` keys.
-
----
-
-# `StringBuffer` and `StringBuilder` Classes
-
-- `StringBuffer` and `StringBuilder` classes are mutable and can be used if you want to achieve mutability from `String`.
-- `StringBuffer` is thread-safe, whereas `StringBuilder` is not thread-safe.
-
----
-
-# `intern()` Method:
-
-- The `intern()` method is a method of the `String` class in Java. It returns the canonical representation of the string.
-- It searches the pool for the string with the same content. If the string is found, it returns the reference to that string. If not found, it adds the string to the pool and returns its reference.
-- **Usage example:**
-
-  ```java
-  String s1 = new String("hello").intern(); // Returns the reference to the string "hello" in the string pool
-  ```
-
-# `join()` Method:
-
-- The `join()` method is a method of the `String` class in Java introduced in Java 8. It concatenates the elements of an array or any `Iterable` object into a single string with a specified delimiter between each element.
-- **Usage example:**
-
-  ```java
-  String[] words = {"Java", "is", "awesome"};
-  String result = String.join(" ", words); // Returns "Java is awesome"
-  ```
-
-These are the basic usages of the `intern()` and `join()` methods in Java.
-
----
-
-# `char[]` Array vs `String` for Storing Passwords
-
-For storing passwords, it's generally recommended to use `char[]` array over `String`. Here's why:
-
-- `String` will always be present in the string constant pool until garbage collector cleanup.
-- This increases the risk of exposing the password to unauthorized access via memory dumps or string interning.
-- `String` values can be directly viewed or printed.
-- When accessing a `char[]` array directly, it typically prints the hash code representation of the array object.
-
----
-
 # Cloning: Shallow vs Deep
 
 In Java, cloning refers to creating a copy of an object. There are two main types of cloning: shallow cloning and deep cloning. Let's explain each with clear, easy-to-understand language and code examples: `CloningTechniques.java`
@@ -124,3 +68,45 @@ In Java, cloning refers to creating a copy of an object. There are two main type
 - **Description:** Deep cloning creates a
 
  new object and recursively copies all fields of the original object, including any objects referenced by the fields. This means that all objects within the original object hierarchy are duplicated. As a result, the cloned object and the original object are entirely independent of each other, and changes made to one object won't affect the other.
+
+---
+
+# Exception Handling in Java
+
+## Practical use of finally block
+
+- Finally can be practically used in a code where we create connection to db and then perform insert/update/delete and if any exception occurs then it should go to catch block and after that we always want to close the db connection that code can be implemented inside finally block.
+
+- System.exit can stop finally block execution.
+
+---
+
+## Exception hierarchy in Java
+
+```
+          Object
+            |
+         Throwable
+            |
+      ----------------
+     |                |
+   Error          Exception
+     |                |
+  --------           ---------------------------------------------------------------
+ OutOfMemoryError                      |                                           |
+ StackOverflow                      Checked (Exception class)                     Unchecked (RuntimeException)
+ (Unchecked)                         |                                                    |
+                              -------------                                          ----------------
+                             |    IO      |                                          |    Runtime     |
+                             |  Exceptions |                                         |   Exceptions   |
+                             |(e.g., IOException |                   (e.g., NullPointerException, ArrayIndexOutOfBound, ArithmeticException)
+                              SQLException
+                              FileNotFoundException)
+```
+
+### Key Points:
+
+- `Throwable` is at the top of the hierarchy, acting as the root class after Object.
+- `Error` and `Exception` are the main branches.
+- `Error` represents severe issues that typically cannot be recovered from caused due to lack of resources.
+- `Exception` is further divided into `Checked Exceptions` and `Unchecked Exceptions`.

@@ -1,4 +1,4 @@
-package org.zaidism.exception;
+package org.zaidism.corejava.exception;
 
 // Define a custom exception class by extending Exception
 class CustomException extends Exception {
