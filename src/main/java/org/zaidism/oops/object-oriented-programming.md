@@ -1,141 +1,287 @@
-# Object-Oriented Programming (OOP) Concepts
+# Object-Oriented Programming (OOP) in Java
 
-## ✅ Core OOP Concepts with Real-World Examples
+**Clear theory + examples that interviewers actually accept**
 
-### 1. Encapsulation
+---
 
-**Definition:** Encapsulation is about controlling access to an object's internal state. It hides data using private fields and provides access through public getter and setter methods.
+## 1. Encapsulation
 
-**Real-World Example:** In an e-commerce application, a `Product` class might encapsulate inventory logic so that product quantity can only be changed in controlled ways.
+### What interviewers actually mean
+
+Encapsulation is **not** “private variables with getters/setters”.
+
+Encapsulation means:
+
+> An object **owns its data** and **controls all state changes** so the object is always valid.
+
+If state can be changed freely from outside, encapsulation is broken.
+
+---
+
+### Bad (common but wrong mindset)
 
 ```java
-public class Product {
-    private String name;
+public class Order {
+    public int quantity;   // ❌ anyone can change it
+    public double price;
+}
+```
+
+This is **not encapsulation**.
+
+---
+
+### Good encapsulation example
+
+```java
+public class Order {
+
     private int quantity;
+    private double pricePerItem;
 
-    public Product(String name, int quantity) {
-        this.name = name;
+    public Order(int quantity, double pricePerItem) {
+        if (quantity <= 0 || pricePerItem <= 0) {
+            throw new IllegalArgumentException("Invalid order");
+        }
         this.quantity = quantity;
+        this.pricePerItem = pricePerItem;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public double getTotalPrice() {
+        return quantity * pricePerItem;
     }
 
-    public void reduceQuantity(int amount) {
-        if (amount <= quantity) {
-            quantity -= amount;
-        } else {
-            throw new IllegalArgumentException("Insufficient stock!");
+    public void addItems(int count) {
+        if (count <= 0) {
+            throw new IllegalArgumentException("Count must be positive");
         }
-    }
-
-    public String getName() {
-        return name;
+        quantity += count;
     }
 }
 ```
 
+### Why this is strong
+
+* No external class can corrupt `quantity`
+* All rules are enforced in **one place**
+* Object is always valid
+
+**One-line interview answer:**
+Encapsulation protects object invariants by restricting direct access to state.
+
 ---
 
-### 2. Inheritance
+## 2. Inheritance
 
-**Definition:** Inheritance allows a class to reuse the properties and behavior of another class. This promotes code reusability.
+### What it really is
 
-**Real-World Example:** A `BaseEntity` class that contains common fields for all entities like `id`, `createdAt`, and `updatedAt`.
+Inheritance models a **true is-a relationship**, not “code reuse”.
+
+> If the sentence “X is a Y” sounds forced, inheritance is wrong.
+
+---
+
+### Correct example
 
 ```java
-public class BaseEntity {
-    private Long id;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+public abstract class Employee {
 
-    // Getters and setters
-}
+    protected double baseSalary;
 
-public class User extends BaseEntity {
-    private String name;
-    private String email;
+    public Employee(double baseSalary) {
+        this.baseSalary = baseSalary;
+    }
 
-    // Getters and setters
+    public abstract double calculateSalary();
 }
 ```
-
-**Reference:** [Inheritance in Java](https://www.scaler.com/topics/java/inheritance-in-java/)
-
----
-
-### 3. Abstraction
-
-**Definition:** Abstraction hides complex internal logic and exposes only the necessary functionality to the user.
-
-**Real-World Example:** You can use utility methods like `Math.max()` or collection methods like `Set.remove()` without knowing how they are implemented internally.
 
 ```java
-public class AbstractionExample {
-    public static void main(String[] args) {
-        int max = Math.max(10, 20); // Abstracts the comparison logic
-        Set<String> set = new HashSet<>();
-        set.add("apple");
-        set.remove("apple"); // You don't know if it uses hashing or not
+public class FullTimeEmployee extends Employee {
+
+    public FullTimeEmployee(double baseSalary) {
+        super(baseSalary);
+    }
+
+    @Override
+    public double calculateSalary() {
+        return baseSalary;
     }
 }
 ```
-
----
-
-### 4. Polymorphism
-
-**Definition:** Polymorphism allows one interface to have multiple implementations, and the behavior can vary based on the actual object at runtime.
-
-**Real-World Example:** A `NotificationService` interface with different implementations for Email, SMS, and Push notifications.
 
 ```java
-public interface NotificationService {
-    void sendNotification(String message);
-}
+public class ContractEmployee extends Employee {
 
-public class EmailNotificationService implements NotificationService {
-    public void sendNotification(String message) {
-        System.out.println("Email: " + message);
-    }
-}
+    private int hoursWorked;
+    private double hourlyRate;
 
-public class SMSNotificationService implements NotificationService {
-    public void sendNotification(String message) {
-        System.out.println("SMS: " + message);
-    }
-}
-
-@RestController
-@RequestMapping("/api/notifications")
-public class NotificationController {
-    private final List<NotificationService> notificationServices;
-
-    public NotificationController(List<NotificationService> notificationServices) {
-        this.notificationServices = notificationServices;
+    public ContractEmployee(int hoursWorked, double hourlyRate) {
+        super(0);
+        this.hoursWorked = hoursWorked;
+        this.hourlyRate = hourlyRate;
     }
 
-    @GetMapping("/send")
-    public String sendNotification() {
-        for (NotificationService service : notificationServices) {
-            service.sendNotification("heiiii"); // polymorphic call
-        }
-        return "Notifications sent to all channels!";
+    @Override
+    public double calculateSalary() {
+        return hoursWorked * hourlyRate;
     }
 }
 ```
 
+### Why interviewers like this
+
+* Clear hierarchy
+* Shared abstraction
+* Proper overriding
+
+**One-line interview answer:**
+Inheritance represents an is-a relationship and enables polymorphic behavior.
+
 ---
 
-## ✅ OOP Concepts Summary
+## 3. Abstraction
 
-| Concept       | Purpose                               | Real-World Analogy                                   |
-|---------------|---------------------------------------|------------------------------------------------------|
-| Encapsulation | Protect internal state                | Secure access to product inventory                   |
-| Inheritance   | Reuse code                            | Common entity fields shared across multiple classes  |
-| Abstraction   | Hide complexity, expose functionality | Using `Set.remove()` or `Math.max()`                 |
-| Polymorphism  | One interface, many implementations   | Email/SMS/Push services under `NotificationService` |
+### The correct mental model
+
+Abstraction is about **what operations are available**, not how they are implemented.
+
+It answers:
+
+> “What can this object do?”
+> not
+> “How does it do it?”
+
+---
+
+### Clean abstraction example
+
+```java
+public interface ReportGenerator {
+    String generate();
+}
+```
+
+```java
+public class PdfReportGenerator implements ReportGenerator {
+    @Override
+    public String generate() {
+        return "PDF report generated";
+    }
+}
+```
+
+```java
+public class ExcelReportGenerator implements ReportGenerator {
+    @Override
+    public String generate() {
+        return "Excel report generated";
+    }
+}
+```
+
+```java
+public class ReportService {
+
+    private final ReportGenerator generator;
+
+    public ReportService(ReportGenerator generator) {
+        this.generator = generator;
+    }
+
+    public void createReport() {
+        System.out.println(generator.generate());
+    }
+}
+```
+
+### Key abstraction point
+
+`ReportService`:
+
+* Does not know
+* Does not care
+* Should not care
+
+about report format.
+
+**One-line interview answer:**
+Abstraction exposes behavior while hiding implementation details.
+
+---
+
+## 4. Polymorphism
+
+### What it is (very precisely)
+
+Polymorphism means:
+
+> The same method call results in different behavior based on the runtime object.
+
+Not overloading.
+Not if-else.
+**Runtime dispatch.**
+
+---
+
+### Strong, minimal example
+
+```java
+public interface Discount {
+    double apply(double amount);
+}
+```
+
+```java
+public class FestivalDiscount implements Discount {
+    public double apply(double amount) {
+        return amount * 0.8;
+    }
+}
+```
+
+```java
+public class LoyaltyDiscount implements Discount {
+    public double apply(double amount) {
+        return amount * 0.9;
+    }
+}
+```
+
+```java
+public class BillingService {
+
+    public double finalAmount(double amount, Discount discount) {
+        return discount.apply(amount); // polymorphism
+    }
+}
+```
+
+```java
+BillingService billing = new BillingService();
+billing.finalAmount(1000, new FestivalDiscount());
+billing.finalAmount(1000, new LoyaltyDiscount());
+```
+
+Same call
+Different behavior
+Chosen at runtime
+
+That’s polymorphism.
+
+**One-line interview answer:**
+Polymorphism allows the same interface to have different runtime behavior.
+
+---
+
+## One Table You Can Memorize
+
+| Concept       | Core Idea        | Interview Keyword |
+| ------------- | ---------------- | ----------------- |
+| Encapsulation | Control state    | Invariants        |
+| Inheritance   | Hierarchy        | Is-a              |
+| Abstraction   | Hide details     | What vs How       |
+| Polymorphism  | Dynamic behavior | Runtime dispatch  |
 
 ---
 
