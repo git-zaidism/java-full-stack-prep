@@ -5,12 +5,15 @@ import java.lang.reflect.Constructor;
 
 public class Singleton implements Serializable, Cloneable {
   private static volatile Singleton singletonInstance = null;
+  static int time = 0;
 
   // prevent it from reflection
   private Singleton() throws Exception {
+      time++;
     if (singletonInstance != null) {
       throw new Exception("Singleton Object does not support clone.");
     }
+      System.out.println("construction called "+ time+ " time ");
   }
 
   public static Singleton getSingletonInstance() throws Exception {
