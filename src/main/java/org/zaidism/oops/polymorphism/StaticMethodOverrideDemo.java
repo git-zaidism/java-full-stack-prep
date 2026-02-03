@@ -1,5 +1,17 @@
 package org.zaidism.oops.polymorphism;
 
+//Overriding implies runtime polymorphism, where a subclass’s instance method replaces a superclass’s method when invoked on the subclass instance.
+//Static methods are bound at compile time, not at runtime, so true overriding doesn’t apply.
+
+// In the example above, the staticMethod in the Subclass hides the staticMethod in the Superclass.
+// However, when using a reference of the superclass to refer to an object of the subclass, the
+// compiler binds the call to the superclass's static method at compile time. There is no dynamic
+// dispatch, and the actual type of the object is not considered.
+//
+// In summary, while static methods can be "hidden" by redeclaring them in a subclass, they are not
+// overridden in the traditional sense, and the method to be called is determined at compile time
+// based on the reference type.
+
 class Superclass {
     static void staticMethod() {
         System.out.println("Superclass static method");
@@ -17,8 +29,8 @@ class Subclass extends Superclass {
 
 public class StaticMethodOverrideDemo {
     public static void main(String[] args) {
-        Superclass.staticMethod(); // Calls Superclass static method
-        Subclass.staticMethod();   // Calls Subclass static method
+//        Superclass.staticMethod(); // Calls Superclass static method
+//        Subclass.staticMethod();   // Calls Subclass static method
 
         // Using references to demonstrate compile-time binding
         Superclass reference = new Subclass();
@@ -31,14 +43,4 @@ public class StaticMethodOverrideDemo {
 }
 
 
-//Overriding implies runtime polymorphism, where a subclass’s instance method replaces a superclass’s method when invoked on the subclass instance.
-//Static methods are bound at compile time, not at runtime, so true overriding doesn’t apply.
 
-// In the example above, the staticMethod in the Subclass hides the staticMethod in the Superclass.
-// However, when using a reference of the superclass to refer to an object of the subclass, the
-// compiler binds the call to the superclass's static method at compile time. There is no dynamic
-// dispatch, and the actual type of the object is not considered.
-//
-// In summary, while static methods can be "hidden" by redeclaring them in a subclass, they are not
-// overridden in the traditional sense, and the method to be called is determined at compile time
-// based on the reference type.
