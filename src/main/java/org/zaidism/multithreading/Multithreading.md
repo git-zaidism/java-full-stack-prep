@@ -1,8 +1,4 @@
-# Multithreading in Java
-
-## What is thread?
-
-Thread is small part of a program/process. Threads share data and address space in a multi-threaded environment hence they are light weight.
+# Java Multithreading 
 
 ---
 
@@ -37,14 +33,6 @@ In Java, daemon threads are threads that run in the background and provide servi
 **Example:** See `DaemonThreadExample.java` - you can remove setDaemon to false and see the output difference.
 
 ---
-
-## Which way is the better for implementing thread?
-
-- With Java 8 version we can avoid both and directly use functional interface to implement run method.
-- But if I have to choose between the above two, I will go with Runnable interface. This is because Java doesn't support multiple class inheritance, and I want to avoid restricting my class from extending other classes.
-
----
-
 ## Thread Functionalities in Java
 
 In Java, threads are primarily used for the following functionalities:
@@ -53,6 +41,698 @@ In Java, threads are primarily used for the following functionalities:
 2. Executing a single task using multiple threads.
 3. Executing multiple tasks using a single thread. *(Note: This is not possible; consider the example of a VLC video player where executing only audio, video, and timer on a single thread can lead to inconsistent user experience.)*
 4. Executing multiple tasks using multiple threads.
+
+---
+
+## 1. What is a Thread in Java? How is it different from a Process?
+
+### What it is (Theory)
+- **Process**: An independent program in execution with its own memory space.
+- **Thread**: A lightweight unit of execution inside a process.
+- A process can have **multiple threads** sharing the same memory.
+
+### Key Differences
+
+| Process | Thread |
+|------|------|
+| Heavyweight | Lightweight |
+| Separate memory | Shared memory |
+| Slow context switch | Fast context switch |
+| Communication via IPC | Communication via shared variables |
+
+---
+
+### Real-world analogy
+- Process = Restaurant
+- Threads = Chefs working in the same kitchen
+
+---
+
+### Why it matters
+Threads allow:
+- Better CPU utilization
+- Parallel task execution
+- Faster applications
+
+---
+
+## 2. Different Ways to Create a Thread in Java
+
+Java provides **multiple ways** to create and manage threads. Historically, threads were created manually, but in real-world applications, **ExecutorService is preferred**.
+
+---
+
+### 1. Extending the `Thread` Class
+
+### What it is (Theory)
+You create a thread by extending the `Thread` class and overriding the `run()` method.
+
+---
+
+### Code Example
+```java
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread running using Thread class");
+    }
+
+    public static void main(String[] args) {
+        MyThread t = new MyThread();
+        t.start();
+    }
+}
+````
+
+### Output
+
+```
+Thread running using Thread class
+```
+
+---
+
+### Explanation
+
+* `start()` creates a new thread
+* JVM internally calls `run()`
+* Task and thread logic are tightly coupled
+
+---
+
+### Drawbacks
+
+* Cannot extend another class
+* Not flexible for large applications
+
+---
+
+### 2. Implementing the `Runnable` Interface (Recommended over Thread)
+
+### What it is (Theory)
+
+You define the task separately and pass it to a `Thread` object.
+
+---
+
+### Code Example
+
+```java
+class MyTask implements Runnable {
+    public void run() {
+        System.out.println("Thread running using Runnable");
+    }
+
+    public static void main(String[] args) {
+        Thread t = new Thread(new MyTask());
+        t.start();
+    }
+}
+```
+
+### Output
+
+```
+Thread running using Runnable
+```
+
+---
+
+### Explanation
+
+* Task is separated from thread
+* Supports multiple inheritance
+* Cleaner design
+
+---
+
+### 3. Using Lambda Expression (Runnable)
+
+### What it is
+
+A concise way to create threads using Java 8+ lambdas.
+
+---
+
+### Code Example
+
+```java
+public class LambdaThread {
+    public static void main(String[] args) {
+        Thread t = new Thread(() -> {
+            System.out.println("Thread running using lambda");
+        });
+        t.start();
+    }
+}
+```
+
+### Output
+
+```
+Thread running using lambda
+```
+
+---
+
+### Why it matters
+
+* Less boilerplate
+* Readable and modern Java style
+
+---
+
+### 4. Using `ExecutorService` (BEST PRACTICE)
+
+### What it is (Theory)
+
+`ExecutorService` is part of the **Executor Framework** that manages a **pool of reusable threads**.
+
+Instead of creating threads manually:
+
+* You submit tasks
+* The framework handles thread creation, reuse, and lifecycle
+
+---
+
+### Code Example (Fixed Thread Pool)
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutorDemo {
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        executor.execute(() -> {
+            System.out.println("Task 1 executed by " + Thread.currentThread().getName());
+        });
+
+        executor.execute(() -> {
+            System.out.println("Task 2 executed by " + Thread.currentThread().getName());
+        });
+
+        executor.shutdown();
+    }
+}
+```
+
+### Sample Output
+
+```
+Task 1 executed by pool-1-thread-1
+Task 2 executed by pool-1-thread-2
+```
+
+---
+
+### Explanation
+
+* `newFixedThreadPool(2)` creates two reusable threads
+* `execute()` submits tasks
+* Threads are reused instead of recreated
+* `shutdown()` gracefully stops the executor
+
+---
+
+### Why ExecutorService is Preferred in Real Applications
+
+* Prevents creating too many threads
+* Improves performance and stability
+* Built-in lifecycle management
+* Required for scalable systems
+
+---
+
+### Interview Tip
+
+> **Never say you create threads using `new Thread()` in production.
+> Always say you use `ExecutorService`.**
+
+---
+
+### Summary Table
+
+| Approach        | Recommended | Use Case           |
+| --------------- | ----------- | ------------------ |
+| Thread class    | ❌           | Learning only      |
+| Runnable        | ⚠️          | Small apps         |
+| Lambda Runnable | ⚠️          | Simple tasks       |
+| ExecutorService | ✅           | Real-world systems |
+
+---
+
+### Key Interview Takeaway
+
+Manual thread creation is low-level.
+**ExecutorService is the industry-standard way to create and manage threads in Java.**
+
+## 3. Difference Between start() and run()
+
+### Theory
+
+* `start()` creates a **new thread**
+* `run()` executes like a normal method
+
+### Code Example
+
+```java
+class Test extends Thread {
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+    }
+
+    public static void main(String[] args) {
+        Test t = new Test();
+        t.run();
+        t.start();
+    }
+}
+```
+
+**Output**
+
+```
+main
+Thread-0
+```
+
+---
+
+### Why it matters
+
+Calling `run()` does **not** create a new thread.
+
+---
+
+## 4. Thread Lifecycle and States
+
+### States
+
+1. **New**
+2. **Runnable**
+3. **Running**
+4. **Blocked / Waiting**
+5. **Terminated**
+
+### Flow
+
+```
+New → Runnable → Running → Waiting/Blocked → Runnable → Terminated
+```
+
+---
+
+### Why it matters
+
+Helps debug:
+
+* Deadlocks
+* Performance issues
+* Thread starvation
+
+---
+
+## 5. What is Context Switching?
+
+### Theory
+
+Context switching is when CPU switches from one thread to another.
+
+### Why it happens
+
+* Limited CPU cores
+* Multitasking
+
+### Cost
+
+* Saving thread state
+* Loading another thread state
+
+---
+
+### Why it matters
+
+Too many threads = performance degradation
+
+---
+
+## 6. What are Daemon Threads?
+
+### Theory
+
+* Background service threads
+* JVM exits when only daemon threads remain
+
+### Examples
+
+* Garbage Collector
+* Monitoring threads
+
+### Code Example
+
+```java
+Thread t = new Thread(() -> {
+    while(true) {
+        System.out.println("Running daemon");
+    }
+});
+t.setDaemon(true);
+t.start();
+```
+
+---
+
+### When to use
+
+* Background cleanup
+* Monitoring
+* Logging
+
+---
+
+## 7. What is Synchronization and Why is it Needed?
+
+### Theory
+
+Synchronization ensures **only one thread** accesses a shared resource at a time.
+
+### Problem: Race Condition
+
+```java
+class Counter {
+    int count = 0;
+
+    void increment() {
+        count++;
+    }
+}
+```
+
+Multiple threads → incorrect value.
+
+---
+
+### Solution
+
+```java
+synchronized void increment() {
+    count++;
+}
+```
+
+---
+
+### Why it matters
+
+* Prevents data inconsistency
+* Ensures thread safety
+
+---
+
+## 8. Synchronized Method vs Synchronized Block
+
+### Synchronized Method
+
+```java
+synchronized void print() {}
+```
+
+Locks entire method.
+
+---
+
+### Synchronized Block
+
+```java
+void print() {
+    synchronized(this) {
+        // critical section
+    }
+}
+```
+
+Locks only required code.
+
+---
+
+### Why block is better
+
+* Better performance
+* Fine-grained locking
+
+---
+
+## 9. Object-Level Locking vs Class-Level Locking
+
+### Object-Level Lock
+
+```java
+synchronized(this) {}
+```
+
+* Lock per object
+
+---
+
+### Class-Level Lock
+
+```java
+synchronized(MyClass.class) {}
+```
+
+* Lock shared across all objects
+
+---
+
+### When to use
+
+* Object-level: Instance variables
+* Class-level: Static variables
+
+---
+
+## 10. What is Deadlock? How to Prevent It?
+
+### Theory
+
+Deadlock occurs when two threads wait forever for each other’s locks.
+
+### Example
+
+```java
+Thread A: lock1 → waits for lock2
+Thread B: lock2 → waits for lock1
+```
+
+---
+
+### Prevention
+
+* Avoid nested locks
+* Lock ordering
+* Use tryLock()
+* Use timeout
+
+---
+
+## 11. Difference Between sleep() and wait()
+
+| sleep()               | wait()          |
+| --------------------- | --------------- |
+| Thread class          | Object class    |
+| Does not release lock | Releases lock   |
+| Time-based            | Condition-based |
+
+---
+
+### Code Example
+
+```java
+Thread.sleep(1000);
+```
+
+```java
+synchronized(obj) {
+    obj.wait();
+}
+```
+
+---
+
+## 12. What is the join() Method?
+
+### Theory
+
+Makes one thread wait for another to finish.
+
+### Code Example
+
+```java
+Thread t = new Thread(() -> {
+    System.out.println("Worker");
+});
+
+t.start();
+t.join();
+System.out.println("Main");
+```
+
+**Output**
+
+```
+Worker
+Main
+```
+
+---
+
+## 13. What is a Race Condition?
+
+### Theory
+
+Multiple threads modify shared data without synchronization.
+
+### Avoid using
+
+* synchronized
+* locks
+* atomic classes
+
+---
+
+## 14. What is the volatile Keyword?
+
+### Theory
+
+Ensures visibility of variable changes across threads.
+
+```java
+volatile boolean running = true;
+```
+
+### Difference from synchronization
+
+| volatile        | synchronized           |
+| --------------- | ---------------------- |
+| Visibility only | Visibility + atomicity |
+| Faster          | Slower                 |
+
+---
+
+## 15. What is ThreadLocal?
+
+### Theory
+
+Provides thread-confined variables.
+
+### Example
+
+```java
+ThreadLocal<Integer> tl = new ThreadLocal<>();
+tl.set(10);
+System.out.println(tl.get());
+```
+
+### Use cases
+
+* User sessions
+* Transaction IDs
+* Logging context
+
+---
+
+## 16. Callable vs Runnable
+
+| Runnable                       | Callable            |
+| ------------------------------ | ------------------- |
+| No return value                | Returns value       |
+| Cannot throw checked exception | Can throw exception |
+
+---
+
+### Example
+
+```java
+Callable<Integer> task = () -> 42;
+```
+
+---
+
+## 17. Executor Framework
+
+### Theory
+
+Manages thread pools instead of manual thread creation.
+
+### Example
+
+```java
+ExecutorService es = Executors.newFixedThreadPool(2);
+es.execute(() -> System.out.println("Task"));
+es.shutdown();
+```
+
+---
+
+### Why preferred
+
+* Thread reuse
+* Better resource management
+* Scalable
+
+---
+
+## 18. submit() vs execute()
+
+| execute()     | submit()            |
+| ------------- | ------------------- |
+| No return     | Returns Future      |
+| Runnable only | Runnable & Callable |
+
+---
+
+### Example
+
+```java
+Future<Integer> f = es.submit(() -> 10);
+System.out.println(f.get());
+```
+
+---
+
+## 19. Thread Safety in Concurrent Collections
+
+### How Java ensures it
+
+* Internal locking
+* CAS (Compare-And-Swap)
+* Fine-grained synchronization
+
+### Examples
+
+* ConcurrentHashMap
+* CopyOnWriteArrayList
+
+---
+
+## 20. Fork/Join Framework
+
+### Theory
+
+Designed for divide-and-conquer parallelism.
+
+### Example
+
+```java
+ForkJoinPool pool = new ForkJoinPool();
+```
+
+### Use cases
+
+* Recursive tasks
+* Parallel computation
+* Large data processing
 
 ---
 
