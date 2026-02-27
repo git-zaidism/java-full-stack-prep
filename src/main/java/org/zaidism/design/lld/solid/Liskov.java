@@ -1,4 +1,4 @@
-package org.zaidism.design;
+package org.zaidism.design.lld.solid;
 
 abstract class Shape {
 

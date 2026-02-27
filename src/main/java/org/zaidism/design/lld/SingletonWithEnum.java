@@ -1,4 +1,4 @@
-package org.zaidism.design;
+package org.zaidism.design.lld;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -35,7 +35,7 @@ class TestSingletonEnum {
 
         // Attempting to access Singleton using reflection
         try {
-            Class<?> singletonClass = Class.forName("org.zaidism.design.SingletonWithEnum");
+            Class<?> singletonClass = Class.forName("org.zaidism.design.lld.SingletonWithEnum");
             Constructor<?> constructor = singletonClass.getDeclaredConstructor();
             constructor.setAccessible(true);
             SingletonWithEnum singletonWithEnum = (SingletonWithEnum) constructor.newInstance();

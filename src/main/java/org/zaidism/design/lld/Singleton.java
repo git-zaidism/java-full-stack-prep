@@ -1,4 +1,4 @@
-package org.zaidism.design;
+package org.zaidism.design.lld;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -61,7 +61,7 @@ class SingletonTest {
 
     // Attempting to access Singleton using reflection
     try {
-      Class<?> singletonClass = Class.forName("org.zaidism.design.Singleton");
+      Class<?> singletonClass = Class.forName("org.zaidism.design.lld.Singleton");
       Constructor<?> constructor = singletonClass.getDeclaredConstructor();
       constructor.setAccessible(true);
       Singleton singleton2 = (Singleton) constructor.newInstance();
