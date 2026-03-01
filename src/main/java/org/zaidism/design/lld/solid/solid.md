@@ -7,6 +7,7 @@ The broad goal of the SOLID principles is to reduce dependencies so that enginee
 ## 1. Single Responsibility Principle
 
 The Single Responsibility Principle states that a class should have only one reason to change, meaning it should have only one responsibility.
+The Single Responsibility Principle is important because it ensures a class has only one reason to change. This reduces complexity, makes the code easier to understand and test, and prevents unrelated changes from impacting each other. When responsibilities are clearly separated, the system becomes more maintainable, flexible, and less prone to bugs.
 
 **Example:**
 
@@ -17,37 +18,12 @@ Suppose we have a class `Employee` that manages employee data and also handles e
 ## 2. Open-Closed Principle
 
 Software components should be open for extension, but closed for modification.
-
-```java
-public class Employee {
-    private int id;
-    private String name;
-
-    Employee(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-}
-
-class TrainedEmployees extends Employee {
-    private String trainingAreas;
-
-    TrainedEmployees(int id, String name, String trainingAreas) {
-        super(id, name);
-        this.trainingAreas = trainingAreas;
-    }
-}
-```
-
+The Open–Closed Principle is important because it allows systems to grow by adding new functionality without modifying existing, stable code. This reduces regression risk, improves maintainability, and makes the codebase easier to scale in team environments. Instead of changing tested logic, we extend behavior through new implementations, which keeps the system stable and flexible.
 ---
 
 ## 3. Liskov’s Substitution Principle
 
-The Liskov Substitution Principle essentially states that objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
-
-**Example:** `Liskov.java`
-
-In this example, `Rectangle` and `Square` are subclasses of `Shape`. Both `Rectangle` and `Square` override the `calculateArea()` method to provide their own implementation of calculating the area. According to the LSP, instances of `Rectangle` and `Square` should be able to substitute instances of `Shape` wherever they are expected.
+The Liskov Substitution Principle ensures that objects of a superclass should be replaceable with objects of its subclasses without breaking the application or altering expected behavior. It protects correctness and reliability by maintaining consistent contracts across inheritance hierarchies. This prevents surprising bugs when polymorphism is used.
 
 ---
 
@@ -64,7 +40,7 @@ It states that "Clients should not be forced to implement unnecessary methods wh
 ## 5. Dependency Inversion Principle
 
 The Dependency Inversion Principle asserts that rather than real implementations, we should rely on abstractions (interfaces and abstract classes). Details should not be dependent on abstractions; rather, abstractions should be dependent on details.
-
+The Dependency Inversion Principle ensures that high-level modules depend on abstractions rather than concrete implementations. This reduces tight coupling, improves flexibility, and makes systems easier to test, extend, and maintain.
 ---
 
 ## Playlists:
