@@ -36,7 +36,7 @@ When shipment status changes:
 Shipment should NOT directly call:
 
 ```java
-tracking.update();
+tracking.getUpdate();
 notification.send();
 billing.log();
 ```
@@ -70,7 +70,7 @@ NotificationSystem (Observer)
 package observer;
 
 public interface ShipmentObserver {
-    void update(String status);
+    void getUpdate(String status);
 }
 ```
 
@@ -116,7 +116,7 @@ public class Shipment implements ShipmentObservable {
     @Override
     public void notifyObservers() {
         for (ShipmentObserver observer : observers) {
-            observer.update(status);
+            observer.getUpdate(status);
         }
     }
 
@@ -137,7 +137,7 @@ package observer;
 public class TrackingSystem implements ShipmentObserver {
 
     @Override
-    public void update(String status) {
+    public void getUpdate(String status) {
         System.out.println("Tracking updated: " + status);
     }
 }
@@ -153,7 +153,7 @@ package observer;
 public class NotificationSystem implements ShipmentObserver {
 
     @Override
-    public void update(String status) {
+    public void getUpdate(String status) {
         System.out.println("Customer notified: " + status);
     }
 }
