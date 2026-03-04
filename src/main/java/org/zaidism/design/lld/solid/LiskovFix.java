@@ -1,41 +1,30 @@
 package org.zaidism.design.lld.solid;
 
-abstract class ShipmentV2 {
-    abstract void currentShipmentStatus();
+abstract class Notification {
+    abstract void sendNotification(String msg);
 }
 
-interface AddressDeliverable {
-    void deliverToAddress(String address);
-}
-
-class StandardShipmentV2 extends ShipmentV2 implements AddressDeliverable {
-
+class EmailNotification extends Notification {
     @Override
-    void currentShipmentStatus() {
-        System.out.println("Standard shipment in transit");
-    }
-
-    @Override
-    public void deliverToAddress(String address) {
-        System.out.println("Delivered to " + address);
+    public void sendNotification(String msg) {
+        System.out.println("Email: " + msg);
     }
 }
 
-class HoldAtLocationShipmentV2 extends ShipmentV2 {
-
+class WhatsAppNotification extends Notification {
     @Override
-    void currentShipmentStatus() {
-        System.out.println("Waiting for customer pickup");
+    public void sendNotification(String msg) {
+        System.out.println("WhatsApp: " + msg);
     }
 }
+
 public class LiskovFix {
     public static void main(String[] args) {
-        // this is also possible supports liskov AddressDeliverable standard = new StandardShipmentV2();
-        StandardShipmentV2 standard = new StandardShipmentV2();
-        standard.deliverToAddress("some address");
+        Notification emailNotification = new EmailNotification();
+        emailNotification.sendNotification("email notification...");
 
-        // this is also possible supports liskov ShipmentV2 hold = new HoldAtLocationShipmentV2();
-        HoldAtLocationShipmentV2 hold = new HoldAtLocationShipmentV2();
-        hold.currentShipmentStatus();
+        Notification whatsAppNotification = new WhatsAppNotification();
+        whatsAppNotification.sendNotification("whats app notification..");
+
     }
 }
