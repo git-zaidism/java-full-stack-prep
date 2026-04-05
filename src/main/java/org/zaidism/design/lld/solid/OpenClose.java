@@ -1,43 +1,54 @@
 package org.zaidism.design.lld.solid;
 
-interface ShipmentPriceCalculator {
-    double calculate(double shipmentWeight);
+// ==========================
+// OCP FOLLOWED (GOOD DESIGN)
+// ==========================
+
+interface DiscountStrategy {
+    double calculate(double amount);
 }
 
-class FXEShipment implements ShipmentPriceCalculator {
-
+class CardDiscount implements DiscountStrategy {
     @Override
-    public double calculate(double shipmentWeight) {
-        return shipmentWeight * 9;
+    public double calculate(double amount) {
+        return amount * 0.10;
     }
 }
 
-class FXGShipment implements ShipmentPriceCalculator {
-
+class UPIDiscount implements DiscountStrategy {
     @Override
-    public double calculate(double shipmentWeight) {
-        return shipmentWeight * 5;
+    public double calculate(double amount) {
+        return amount * 0.05;
     }
 }
+
+// ==========================
+// MAIN CLASS (DEMO)
+// ==========================
 
 public class OpenClose {
+
     public static void main(String[] args) {
-        //below direct object creation can be replaced by factory design pattern
-        //ignoring this as this is just a demo
-        ShipmentPriceCalculator groundShipment = new FXGShipment();
-        ShipmentPriceCalculator expressShipment = new FXEShipment();
-        expressShipment.calculate(12);
-        groundShipment.calculate(10);
+
+        // OCP FOLLOWED
+        DiscountStrategy cardDiscount = new CardDiscount();
+        DiscountStrategy upiDiscount = new UPIDiscount();
+
+        System.out.println("Card Discount: " + cardDiscount.calculate(1000));
+        System.out.println("UPI Discount: " + upiDiscount.calculate(1000));
     }
 
-    // violation of ocp above code solves this problem
-    public double calculate(Object shipmentType, double shipmentWeight) {
+    // ==========================
+    // OCP VIOLATION (BAD DESIGN)
+    // ==========================
+    
+    public double calculateDiscount(String paymentType, double amount) {
 
-        if (shipmentType instanceof FXEShipment) {
-            return shipmentWeight * 9;
+        if (paymentType.equals("CARD")) {
+            return amount * 0.10;
 
-        } else if (shipmentType instanceof FXGShipment) {
-            return shipmentWeight * 5;
+        } else if (paymentType.equals("UPI")) {
+            return amount * 0.05;
 
         } else {
             return 0;
