@@ -41,6 +41,7 @@ It states that "Clients should not be forced to implement unnecessary methods wh
 
 The Dependency Inversion Principle asserts that rather than real implementations, we should rely on abstractions (interfaces and abstract classes). Details should not be dependent on abstractions; rather, abstractions should be dependent on details.
 The Dependency Inversion Principle ensures that high-level modules depend on abstractions rather than concrete implementations. This reduces tight coupling, improves flexibility, and makes systems easier to test, extend, and maintain.
+
 ---
 
 ## Playlists:
