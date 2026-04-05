@@ -5,6 +5,13 @@ abstract class Notification {
 }
 
 class EmailNotification extends Notification {
+
+    private String email;
+
+    EmailNotification(String email) {
+        this.email = email;
+    }
+    
     @Override
     public void sendNotification(String msg) {
         System.out.println("Email: " + msg);
@@ -26,7 +33,7 @@ class WhatsAppNotification extends Notification {
 
 public class LiskovFix {
     public static void main(String[] args) {
-        Notification emailNotification = new EmailNotification();
+        Notification emailNotification = new EmailNotification("test@gmail.com");
         emailNotification.sendNotification("email notification...");
 
         Notification whatsAppNotification = new WhatsAppNotification("982013822");
