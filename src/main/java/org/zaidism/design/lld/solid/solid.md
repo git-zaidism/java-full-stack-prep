@@ -17,8 +17,8 @@ Suppose we have a class `Employee` that manages employee data and also handles e
 
 ## 2. Open-Closed Principle
 
-Software components should be open for extension, but closed for modification.
-The Open–Closed Principle is important because it allows systems to grow by adding new functionality without modifying existing, stable code. This reduces regression risk, improves maintainability, and makes the codebase easier to scale in team environments. Instead of changing tested logic, we extend behavior through new implementations, which keeps the system stable and flexible.
+Software components should be open for extension, but closed for modification. The Open–Closed Principle is important because it allows systems to grow by adding new functionality without modifying existing, stable code. This reduces regression risk, improves maintainability, and makes the codebase easier to scale in team environments. Instead of changing tested logic, we extend behavior through new implementations, which keeps the system stable and flexible.
+
 ---
 
 ## 3. Liskov’s Substitution Principle
