@@ -114,7 +114,9 @@ class UPIDiscount implements DiscountStrategy {
 
 ### 💡 Definition
 
-> Subclasses should work without breaking parent behavior
+> Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
+
+
 
 ---
 
@@ -174,7 +176,7 @@ class WhatsAppNotification extends Notification {
 
 ### 💡 Definition
 
-> Don’t force classes to implement unused methods
+> Clients should not be forced to depend on interfaces they do not use.
 
 ---
 
@@ -241,7 +243,7 @@ class Robot implements Workable {
 
 ### 💡 Definition
 
-> Depend on abstractions, not concrete classes
+> Depend on abstractions, not concrete classes (High-level modules should not depend on low-level modules. Both should depend on abstractions)
 
 ---
 
