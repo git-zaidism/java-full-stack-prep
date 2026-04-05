@@ -14,7 +14,7 @@ class EmailNotification extends Notification {
     
     @Override
     public void sendNotification(String msg) {
-        System.out.println("Email: " + msg);
+        System.out.println("Email: " + msg+ "to emai"+ email);
     }
 }
 
