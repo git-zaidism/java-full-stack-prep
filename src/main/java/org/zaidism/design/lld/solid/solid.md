@@ -4,52 +4,311 @@ The broad goal of the SOLID principles is to reduce dependencies so that enginee
 
 ---
 
-## 1. Single Responsibility Principle
+## 🔑 What is SOLID?
 
-The Single Responsibility Principle states that a class should have only one reason to change, meaning it should have only one responsibility.
-The Single Responsibility Principle is important because it ensures a class has only one reason to change. This reduces complexity, makes the code easier to understand and test, and prevents unrelated changes from impacting each other. When responsibilities are clearly separated, the system becomes more maintainable, flexible, and less prone to bugs.
+A set of 5 design principles to write:
 
-**Example:**
-
-Suppose we have a class `Employee` that manages employee data and also handles email notifications. This violates the SRP because it has two responsibilities: managing data and sending notifications.
-
----
-
-## 2. Open-Closed Principle
-
-Software components should be open for extension, but closed for modification. The Open–Closed Principle is important because it allows systems to grow by adding new functionality without modifying existing, stable code. This reduces regression risk, improves maintainability, and makes the codebase easier to scale in team environments. Instead of changing tested logic, we extend behavior through new implementations, which keeps the system stable and flexible.
+* maintainable code
+* scalable systems
+* loosely coupled architecture
 
 ---
 
-## 3. Liskov’s Substitution Principle
+# 🅢 Single Responsibility Principle (SRP)
 
-The Liskov Substitution Principle ensures that objects of a superclass should be replaceable with objects of its subclasses without breaking the application or altering expected behavior. It protects correctness and reliability by maintaining consistent contracts across inheritance hierarchies. This prevents surprising bugs when polymorphism is used.
+### 💡 Definition
 
----
-
-## 4. Interface Segregation Principle (Same as SRP but with Interfaces)
-
-The Interface Segregation Principle is like the Single Responsibility Principle for interfaces. It focuses on keeping interfaces small and focused on specific tasks.
-
-In simple terms, it says: "Don't make anyone use an interface with stuff they don't need."
-
-It states that "Clients should not be forced to implement unnecessary methods which they will not use."
+> A class should have only **one reason to change**
 
 ---
 
-## 5. Dependency Inversion Principle
+### ❌ Violation
 
-The Dependency Inversion Principle asserts that rather than real implementations, we should rely on abstractions (interfaces and abstract classes). Details should not be dependent on abstractions; rather, abstractions should be dependent on details.
-The Dependency Inversion Principle ensures that high-level modules depend on abstractions rather than concrete implementations. This reduces tight coupling, improves flexibility, and makes systems easier to test, extend, and maintain.
+```java
+class OrderManager {
+    void processOrder() {}
+    void saveToDB() {}
+    void sendEmail() {}
+}
+```
+
+👉 Too many responsibilities
 
 ---
 
-## Playlists:
+### ✅ Correct
 
-➡️ [LLD](https://lnkd.in/dJkgzKxf) (some videos are in Hindi, rest in English)
+```java
+class OrderProcessor {
+    void processOrder() {}
+}
 
-➡️ [HLD](https://lnkd.in/d8eDwYVA) (some videos are in Hindi, rest in English)
+class OrderRepository {
+    void save() {}
+}
 
-➡️ [Spring Boot](https://lnkd.in/gz2A5ih2) (All videos are in English)
+class EmailService {
+    void sendEmail() {}
+}
+```
+
+---
+
+### 🎯 Key Idea
+
+> One class = one job
+
+---
+
+# 🅞 Open/Closed Principle (OCP)
+
+### 💡 Definition
+
+> Open for extension, closed for modification
+
+---
+
+### ❌ Violation
+
+```java
+class DiscountCalculator {
+    double calculate(String type, double amount) {
+        if (type.equals("CARD")) return amount * 0.10;
+        if (type.equals("UPI")) return amount * 0.05;
+        return 0;
+    }
+}
+```
+
+---
+
+### ✅ Correct (Strategy Pattern)
+
+```java
+interface DiscountStrategy {
+    double calculate(double amount);
+}
+
+class CardDiscount implements DiscountStrategy {
+    public double calculate(double amount) {
+        return amount * 0.10;
+    }
+}
+
+class UPIDiscount implements DiscountStrategy {
+    public double calculate(double amount) {
+        return amount * 0.05;
+    }
+}
+```
+
+---
+
+### 🎯 Key Idea
+
+> Avoid if-else → use polymorphism
+
+---
+
+# 🅛 Liskov Substitution Principle (LSP)
+
+### 💡 Definition
+
+> Subclasses should work without breaking parent behavior
+
+---
+
+### ❌ Violation (Your Notification Example)
+
+```java
+abstract class Notification {
+    abstract void send(String msg, String email);
+}
+
+class WhatsAppNotification extends Notification {
+    void send(String msg, String email) {
+        throw new UnsupportedOperationException();
+    }
+}
+```
+
+👉 WhatsApp doesn’t support email → breaks contract ❌
+
+---
+
+### ✅ Correct
+
+```java
+abstract class Notification {
+    abstract void send(String msg);
+}
+
+class EmailNotification extends Notification {
+    public void send(String msg) {
+        System.out.println("Email: " + msg);
+    }
+}
+
+class WhatsAppNotification extends Notification {
+    private String phone;
+
+    WhatsAppNotification(String phone) {
+        this.phone = phone;
+    }
+
+    public void send(String msg) {
+        System.out.println("WhatsApp: " + msg + " to " + phone);
+    }
+}
+```
+
+---
+
+### 🎯 Key Idea
+
+> If subclass throws “not supported” → LSP violation
+
+---
+
+# 🅘 Interface Segregation Principle (ISP)
+
+### 💡 Definition
+
+> Don’t force classes to implement unused methods
+
+---
+
+### ❌ Violation
+
+```java
+interface Worker {
+    void work();
+    void eat();
+}
+
+class Robot implements Worker {
+    public void work() {
+        System.out.println("Robot working");
+    }
+
+    public void eat() {
+        throw new UnsupportedOperationException();
+    }
+}
+```
+
+👉 Robot doesn’t eat → forced implementation ❌
+
+---
+
+### ✅ Correct
+
+```java
+interface Workable {
+    void work();
+}
+
+interface Eatable {
+    void eat();
+}
+
+class Human implements Workable, Eatable {
+    public void work() {
+        System.out.println("Human working");
+    }
+
+    public void eat() {
+        System.out.println("Human eating");
+    }
+}
+
+class Robot implements Workable {
+    public void work() {
+        System.out.println("Robot working");
+    }
+}
+```
+
+---
+
+### 🎯 Key Idea
+
+> Split interfaces → avoid unnecessary methods
+
+---
+
+# 🅓 Dependency Inversion Principle (DIP)
+
+### 💡 Definition
+
+> Depend on abstractions, not concrete classes
+
+---
+
+### ❌ Violation
+
+```java
+class EmailService {
+    void send(String msg) {}
+}
+
+class OrderService {
+    private EmailService email = new EmailService();
+
+    void placeOrder() {
+        email.send("Order placed");
+    }
+}
+```
+
+👉 Tight coupling ❌
+
+---
+
+### ✅ Correct
+
+```java
+interface NotificationService {
+    void send(String msg);
+}
+
+class EmailService implements NotificationService {
+    public void send(String msg) {}
+}
+
+class OrderService {
+    private final NotificationService notification;
+
+    OrderService(NotificationService notification) {
+        this.notification = notification;
+    }
+
+    void placeOrder() {
+        notification.send("Order placed");
+    }
+}
+```
+
+---
+
+### 🎯 Key Idea
+
+> Inject dependency, don’t create it
+
+---
+
+# 🧠 Quick Revision (1 min)
+
+* **S** → One class = one responsibility
+* **O** → Extend, don’t modify
+* **L** → Subclass must behave correctly
+* **I** → Small, specific interfaces
+* **D** → Depend on interfaces
+
+---
+
+# 💬 Golden Interview Line
+
+> “SOLID principles help build loosely coupled, scalable, and maintainable systems by enforcing separation of concerns and abstraction-driven design.”
 
 ---
