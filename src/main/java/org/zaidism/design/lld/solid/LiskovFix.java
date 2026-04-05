@@ -12,9 +12,15 @@ class EmailNotification extends Notification {
 }
 
 class WhatsAppNotification extends Notification {
+    private String phone;
+
+    WhatsAppNotification(String phone) {
+        this.phone = phone;
+    }
+    
     @Override
     public void sendNotification(String msg) {
-        System.out.println("WhatsApp: " + msg);
+        System.out.println("WhatsApp: " + msg+ "to phone"+ phone);
     }
 }
 
@@ -23,7 +29,7 @@ public class LiskovFix {
         Notification emailNotification = new EmailNotification();
         emailNotification.sendNotification("email notification...");
 
-        Notification whatsAppNotification = new WhatsAppNotification();
+        Notification whatsAppNotification = new WhatsAppNotification("982013822");
         whatsAppNotification.sendNotification("whats app notification..");
 
     }
