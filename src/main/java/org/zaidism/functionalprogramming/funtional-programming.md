@@ -1,3 +1,136 @@
+# 🧠 Intermediate Operations
+
+## 🔹 Definition
+
+> Operations that return a **new stream** and are **lazy**
+
+---
+
+## 🔍 Examples
+
+```java
+List<Integer> list = List.of(1, 2, 3, 4, 5);
+
+list.stream()
+    .filter(x -> x > 2)      // intermediate
+    .map(x -> x * 2);        // intermediate
+```
+
+👉 Nothing runs yet ❗
+
+---
+
+## 🔥 Common intermediate ops
+
+* `filter()`
+* `map()`
+* `sorted()`
+* `distinct()`
+* `limit()`
+
+---
+
+# 🧠 Terminal Operations
+
+## 🔹 Definition
+
+> Operation that **produces result** and **starts execution**
+
+---
+
+## 🔍 Examples
+
+```java
+List<Integer> result = list.stream()
+    .filter(x -> x > 2)
+    .map(x -> x * 2)
+    .collect(Collectors.toList()); // terminal
+```
+
+👉 Now execution happens
+
+---
+
+## 🔥 Common terminal ops
+
+* `forEach()`
+* `collect()`
+* `count()`
+* `reduce()`
+* `findFirst()`
+
+---
+
+# 🔥 Key concept: Lazy evaluation
+
+```java
+list.stream()
+    .filter(x -> {
+        System.out.println("Filtering " + x);
+        return x > 2;
+    });
+```
+
+👉 No output ❌
+👉 Because no terminal operation
+
+---
+
+## Add terminal:
+
+```java
+list.stream()
+    .filter(x -> {
+        System.out.println("Filtering " + x);
+        return x > 2;
+    })
+    .count();
+```
+
+👉 Now executes ✅
+
+---
+
+
+# 🧠 Optimization (very important)
+
+Streams process **element by element**, not step by step
+
+```java
+list.stream()
+    .filter(x -> x > 2)
+    .map(x -> x * 2)
+    .forEach(System.out::println);
+```
+
+👉 Flow:
+
+```text
+1 → filter → map → print  
+2 → filter → map → print  
+```
+
+👉 Not:
+
+```text
+filter all → map all → print all
+```
+
+---
+
+# 💬 Interview-ready answer
+
+> “Intermediate operations in Java Streams transform the stream and return another stream, and they are lazy, meaning they are not executed until a terminal operation is invoked. Terminal operations produce the final result or side effect and trigger the execution of the stream pipeline.”
+
+---
+
+# 🔥 One-line memory
+
+> Intermediate = lazy transformation
+> Terminal = execution trigger
+
+---
+
 # Functional Interface
 
 Refer to `FunctionalInterface.java`.
