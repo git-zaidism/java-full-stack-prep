@@ -110,3 +110,18 @@ In Java, cloning refers to creating a copy of an object. There are two main type
 - `Error` and `Exception` are the main branches.
 - `Error` represents severe issues that typically cannot be recovered from caused due to lack of resources.
 - `Exception` is further divided into `Checked Exceptions` and `Unchecked Exceptions`.
+
+---
+
+# Stack vs Heap Memory in Java
+
+
+| Feature    | Stack                   | Heap    |
+| ---------- | ----------------------- | ------- |
+| Stores     | Variables, method calls | Objects |
+| Scope      | Thread-specific         | Shared  |
+| Speed      | Fast                    | Slower  |
+| Management | Automatic (method end)  | GC      |
+| Size       | Small                   | Large   |
+
+
