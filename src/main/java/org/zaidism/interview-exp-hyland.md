@@ -8,6 +8,7 @@
 
 3. **Database Selection**
    * What are the primary deciding factors when choosing between a Relational (SQL) and a Non-Relational (NoSQL) database?
+   * Why it is said that NoSQL databases scale better is it true? If flase they why?
 
 4. **Spring Boot App Management**
    * Is it possible to hot-reload a Spring Boot application? 
