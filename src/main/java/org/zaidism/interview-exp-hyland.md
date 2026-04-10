@@ -58,6 +58,7 @@ public String execute(List<Integer> numbers) {
    * If string immutability is the reason, why is that an issue if the Garbage Collector will eventually clean up the unused memory once the function completes?
 
 8. **Java Streams & Parallel Processing**
+   * Why the sequnece/order of above conditions checking matters in the code?
    * How would you convert the above `for` loop to use the Java Streams API?
    * If the number of items in the list increases significantly (e.g., 20,000+), how can you make it more performance-oriented? 
    * *Follow-up:* If you use `parallelStream()`, will it produce a stable/ordered output since multiple threads are processing the list concurrently?
