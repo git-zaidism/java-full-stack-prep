@@ -13,6 +13,7 @@
 4. **Spring Boot App Management**
    * Is it possible to hot-reload a Spring Boot application? 
    * If yes, is it considered a good practice to allow hot-reloading in a production environment?
+   * Why spring beans are by default singleton?
 
 ---
 
